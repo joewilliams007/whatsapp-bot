@@ -16,9 +16,8 @@ client.on('message', msg => {
         case ".bot":
             msg.reply('Hai '+msg.author);
           break;
-        case ".button":
-            let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
-            client.sendMessage(msg.from, button);
+        case ".menu":
+            msg.reply('Menu:\n\n.bot');
           break;
         default:
           // code block
