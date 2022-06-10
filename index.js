@@ -18,7 +18,7 @@ client.on('message', msg => {
 
     switch(msg.body.split(".",2)[1]) {
         case "bot":
-            msg.reply('Hai '+msg.author);
+            msg.reply('Hai '+msg._data.notifyName);
           break;
         case "menu":
             msg.reply('Menu:\n\n.bot');
