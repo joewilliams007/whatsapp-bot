@@ -20,7 +20,7 @@ client.on('message', msg => {
             msg.reply('Menu:\n\n.bot');
           break;
         case ".info":
-            let chat = await msg.getChat();
+            let chat = msg.getChat();
             if (chat.isGroup) {
                 msg.reply(`
                     *Group Details*
