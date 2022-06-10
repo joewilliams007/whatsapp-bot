@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     switch(msg.body) {
         case ".bot":
-            msg.reply('Hai '+msg.getInfo);
+            msg.reply('Hai '+msg.author);
           break;
         case ".button":
             let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
