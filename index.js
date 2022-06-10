@@ -1,9 +1,4 @@
 const qrcode = require('qrcode-terminal');
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr('sportdashIsFireBroThisIsSickHeheheKeepSecret');
-
-const register = require("../plugins/online/account/register.js") 
-
 
 const { Client } = require('whatsapp-web.js');
 const client = new Client();
