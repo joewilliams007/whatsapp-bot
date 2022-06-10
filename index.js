@@ -45,12 +45,17 @@ case "register":
     if (args[0].length<1) {
         msg.reply("please enter a username")
     } else {
+        connection.query( 
+            `SELECT COUNT(*) AS RowCount FROM Plans WHERE number='${msg.author}'`
 
-        connection.query( // register userstuff
-            `SELECT * FROM test WHERE number LIKE '${msg.author}' LIMIT 1`
-            , function (error, results, fields) {
-                if (error) console.log("error");
-                 if (results[0] != undefined) {
+            , function (error, resultsN, fields) {
+            
+                
+
+
+
+
+                 if (Number(resultsN[0].RowCount)>0) {
                     msg.reply("you are already registered")
                  } else {
                     connection.query( // register userstuff
