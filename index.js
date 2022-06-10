@@ -16,7 +16,7 @@ client.on('message', msg => {
 
     if (msg.body.split("")[0]==".") {
 
-    switch(msg.body.split(".",1)[1]) {
+    switch(msg.body.split(".",2)[1]) {
         case "bot":
             msg.reply('Hai '+msg.author);
           break;
