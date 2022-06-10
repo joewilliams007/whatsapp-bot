@@ -14,7 +14,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     switch(msg.body) {
         case ".bot":
-            msg.reply('Hai '+msg.author);
+            msg.reply('Hai '+msg.getInfo+" "+msg.getContact+" "+msg.title);
           break;
         case y:
           // code block
