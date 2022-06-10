@@ -39,7 +39,7 @@ break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
-    
+    if (args[0].length<1) return msg.reply("please enter a username")
 
         connection.query( // register userstuff
             `SELECT * FROM test WHERE text LIKE '${args[0]}' LIMIT 1`
