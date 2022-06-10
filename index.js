@@ -27,8 +27,9 @@ client.on('message', msg => {
     const args = value.split(" ")
 
 if (msg.body.split("")[0]==".") {
-var switch_helper =  msg.body.replace(".","")+"#"
-switch(switch_helper.split("#")[0]) {
+var switch_helper =  msg.body.replace(".","")+" #"
+console.log(switch_helper.split(" ")[0])
+switch(switch_helper.split(" ")[0]) {
 
 case "bot":
             msg.reply('Hai '+msg._data.notifyName);
