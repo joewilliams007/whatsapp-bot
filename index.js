@@ -42,22 +42,29 @@ break;
 case "register":
     console.log(args[0])
     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
-    if (args[0].length<1) return msg.reply("please enter a username")
+    if (args[0].length<1) {
+        msg.reply("please enter a username")
+    } else {
 
         connection.query( // register userstuff
             `SELECT * FROM test WHERE text LIKE '${args[0]}' LIMIT 1`
             , function (error, results, fields) {
                 if (error) console.log("error");
-                console.log(results[0])
+                 if (results[0] != undefined) {
+                    msg.reply("you are already registered")
+                 } else {
+                    connection.query( // register userstuff
+                    `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
+                    VALUES ("${args[0]}","${msg.author}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
+                    , function (error, results, fields) {
+                        if (error) throw error;
+                        console.log('Yey a new registration! >_< ');
+                        msg.reply("registration successfull "+args[0])
+                    });
+                 }
         });
 
-		/*connection.query( // register userstuff
-				`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-				VALUES ("${args[0]}","${args[1]}","${dateInSec}")`
-				, function (error, results, fields) {
-					if (error) throw error;
-					console.log('Yey a new registration! >_< ');
-		});*/
+    }
 break;
 
 default:
