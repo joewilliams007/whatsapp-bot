@@ -14,6 +14,7 @@ client.on('ready', () => {
 client.on('message', msg => {
     if (msg.body == '!ping') {
         msg.reply('pong');
+        reply("test")
     }
 });
 
