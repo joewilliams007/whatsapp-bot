@@ -12,35 +12,23 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    switch(msg.body) {
-        case ".bot":
+    console.log('MESSAGE RECEIVED', msg);
+
+    if (msg.body.split("")[0]==".") {
+
+    switch(msg.body.split(".",1)[1]) {
+        case "bot":
             msg.reply('Hai '+msg.author);
           break;
-        case ".menu":
+        case "menu":
             msg.reply('Menu:\n\n.bot');
           break;
-        case ".info":
-            groupInfo(chat)
-          break;
+
         default:
-          // code block
+          msg.reply("what even is this command")
       }
+    }
 });
 
-function groupInfo(msg) {
-    let chat = await msg.getChat();
-    if (chat.isGroup) {
-        msg.reply(`
-            *Group Details*
-            Name: ${chat.name}
-            Description: ${chat.description}
-            Created At: ${chat.createdAt.toString()}
-            Created By: ${chat.owner.user}
-            Participant count: ${chat.participants.length}
-        `);
-    } else {
-        msg.reply('This command can only be used in a group!');
-    }
-}
 
 client.initialize();
