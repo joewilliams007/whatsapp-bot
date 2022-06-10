@@ -23,21 +23,24 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     console.log('MESSAGE RECEIVED', msg);
-    const value = msg.body.split("")[1]
+    const value = msg.body.split(" ",2)[1]
     const args = value.split(" ")
 
-    if (msg.body.split("")[0]==".") {
+if (msg.body.split("")[0]==".") {
 
-    switch(msg.body.split(".")[1].split(" ")[0]) {
-        case "bot":
+switch(msg.body.split(".")[1].split(" ")[0]) {
+
+case "bot":
             msg.reply('Hai '+msg._data.notifyName);
-          break;
+break;
+
 case "menu":
             msg.reply('Menu:\n\n.bot');
 break;
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
+    console.log(args[0])
     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
     if (args[0].length<1) return msg.reply("please enter a username")
 
