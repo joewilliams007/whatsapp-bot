@@ -1,29 +1,20 @@
-let makeWASocket = require('@adiwajshing/baileys');
+const { Client } = require('whatsapp-web.js');
 
-async function connectToWhatsApp () {
-    const sock = makeWASocket({
-        // can provide additional config here
-        printQRInTerminal: true
-    })
-    sock.ev.on('connection.update', (update) => {
-        const { connection, lastDisconnect } = update
-        if(connection === 'close') {
-            const shouldReconnect = (lastDisconnect.error)?.output?.statusCode !== DisconnectReason.loggedOut
-            console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect)
-            // reconnect if not logged out
-            if(shouldReconnect) {
-                connectToWhatsApp()
-            }
-        } else if(connection === 'open') {
-            console.log('opened connection')
-        }
-    })
-    sock.ev.on('messages.upsert', m => {
-        console.log(JSON.stringify(m, undefined, 2))
+const client = new Client();
 
-        console.log('replying to', m.messages[0].key.remoteJid)
-        sock.sendMessage(m.messages[0].key.remoteJid, { text: 'Hello there!' })
-    })
-}
-// run in main file
-connectToWhatsApp()
+client.on('qr', (qr) => {
+    // Generate and scan this code with your phone
+    console.log('QR RECEIVED', qr);
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.on('message', msg => {
+    if (msg.body == '!ping') {
+        msg.reply('pong');
+    }
+});
+
+client.initialize();
