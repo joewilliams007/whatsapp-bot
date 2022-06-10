@@ -1,1 +1,1 @@
-yarn add @adiwajshing/baileys
+npm i @adiwajshing/baileys

@@ -26,4 +26,4 @@ async function connectToWhatsApp () {
     })
 }
 // run in main file
-connectToWhatsApp()
+
