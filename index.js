@@ -28,7 +28,7 @@ client.on('message', msg => {
 
 if (msg.body.split("")[0]==".") {
 
-switch(msg.body.split(".")[1].split(" ")[0]) {
+switch(msg.body.split(" ")[0].replace(".","")) {
 
 case "bot":
             msg.reply('Hai '+msg._data.notifyName);
