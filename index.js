@@ -47,7 +47,7 @@ case "register":
     } else {
 
         connection.query( // register userstuff
-            `SELECT * FROM test WHERE text LIKE '${args[0]}' LIMIT 1`
+            `SELECT * FROM test WHERE number LIKE '${msg.author}' LIMIT 1`
             , function (error, results, fields) {
                 if (error) console.log("error");
                  if (results[0] != undefined) {
