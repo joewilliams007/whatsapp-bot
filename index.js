@@ -12,10 +12,16 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if (msg.body == '!ping') {
-        msg.reply('pong');
-        msg.star;
-    }
+    switch(msg.body) {
+        case ".bot":
+            msg.reply('Hai '+msg.author);
+          break;
+        case y:
+          // code block
+          break;
+        default:
+          // code block
+      }
 });
 
 client.initialize();
