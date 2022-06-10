@@ -1,0 +1,65 @@
+{
+	"name": "Bottus",
+	"description": " Whatsapp bot.",
+	"keywords": [
+		"whatsapp",
+		"bot"
+	],
+	"repository": "https://github.com/lyfe0010/whatsapp-bot-md",
+	"stack": "container",
+	"env": {
+		"ALWAYS_ONLINE": {
+			"description": "show bot number last seen as online",
+			"required": false,
+			"value": "false"
+		},
+		"LOG_MSG": {
+			"description": "Show whatsapp msgs in log",
+			"required": false,
+			"value": "false"
+		},
+		"SUDO": {
+			"description": "admin",
+			"required": true,
+			"value": "null"
+		},
+		"PREFIX": {
+			"description": "prefix, check for more",
+			"required": true,
+			"value": "."
+		},
+		"SESSION_ID": {
+			"description": "session id",
+			"required": true,
+			"value": ""
+		},
+		"STICKER_PACKNAME": {
+			"description": "sticker pack info",
+			"required": true,
+			"value": "❤️,LyFE"
+		},
+		"HEROKU_APP_NAME": {
+			"description": "Heroku app name, same as above entered",
+			"required": true
+		},
+		"HEROKU_API_KEY": {
+			"description": "Heroku account api key, https://dashboard.heroku.com/account",
+			"required": true
+		},
+		"RMBG_KEY": {
+			"description": "API key from remove.bg, required for plugin rmbg",
+			"required": true,
+			"value": "null"
+		},
+		"LANGUAG": {
+			"description": "Default Language for tts or trt",
+			"required": false,
+			"value": "en"
+		}
+	},
+	"addons": [
+		{
+			"plan": "heroku-postgresql"
+		}
+	]
+}
