@@ -1,0 +1,20 @@
+DROP DATABASE db_main;
+CREATE DATABASE db_main;
+ALTER DATABASE db_main CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+USE db_main;
+
+CREATE TABLE Users (
+user_id INT NOT NULL AUTO_INCREMENT,
+username varchar(255),
+xp int,
+number varchar(2000),
+coins int,
+bio varchar(2000),
+style varchar(2000),
+age int,
+date int,
+messages int,
+PRIMARY KEY ( user_id )
+);
+
+ALTER TABLE Users CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
