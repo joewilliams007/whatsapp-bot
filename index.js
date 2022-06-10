@@ -14,10 +14,11 @@ client.on('ready', () => {
 client.on('message', msg => {
     switch(msg.body) {
         case ".bot":
-            msg.reply('Hai '+msg.getInfo+" "+msg.getContact+" "+msg.title);
+            msg.reply('Hai '+msg.getInfo);
           break;
-        case y:
-          // code block
+        case ".button":
+            let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
+            client.sendMessage(msg.from, button);
           break;
         default:
           // code block
