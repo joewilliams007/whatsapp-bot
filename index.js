@@ -1,5 +1,4 @@
-import makeWASocket, { DisconnectReason } from '@adiwajshing/baileys'
-import { Boom } from '@hapi/boom'
+let makeWASocket = require('@adiwajshing/baileys');
 
 async function connectToWhatsApp () {
     const sock = makeWASocket({
