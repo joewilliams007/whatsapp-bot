@@ -97,6 +97,10 @@ try {
 var commands; 
 commands = res[0].messages
 } catch (err) {}
+try {
+var id; 
+id = res[0].user_id
+} catch (err) {}
 
 switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,11 +113,12 @@ case "menu":
     if (!isRegister) return reply(registerMessage);
 reply(
     
-`Menu:
+style+` Menu:
 
 .bot
 .me
-.register`);
+.register
+.style`);
 break;
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,7 +156,7 @@ if(time/60/60/24>364) {
 } else {
     finalTime = time+".. second(s) ago"
 }
-var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
+var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
 
     reply(style+" username: "+username
@@ -161,6 +166,7 @@ var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
     +"\n"+style+" number: +"+number.split("@")[0]
+    +"\n"+style+" userid: "+id
     +"\n"+style+" account created: "+finalTime1)
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
