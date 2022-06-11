@@ -125,6 +125,8 @@ style+` Menu:
 .register
 .style
 .info
+.users
+.leaderboard
 .delete`);
 break;
 case "delete":
@@ -254,8 +256,7 @@ connection.query(
     ORDER BY xp DESC`
     , function (error, results, fields) {
         if (error) console.log(error.message);
-        reply(leaderboard(JSON.parse(JSON.stringify(results))))
-
+        leaderboard(JSON.parse(JSON.stringify(results)))
         async function leaderboard(res){
                 var leaderboard = "LEADERBOARD";
                 var position = 0	
@@ -264,7 +265,7 @@ connection.query(
                     leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.xp)+" xp"
                 }
                     
-        return leaderboard;
+         reply(leaderboard);
         }
     });
 break;
