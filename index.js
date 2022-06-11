@@ -46,7 +46,7 @@ const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
 const number = msg.from
 const isGroup = msg.isGroup
-
+const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 
 if (msg.body.split("")[0]==".") {
 switch(msg.body.slice(1).split(" ")[0]) {
@@ -56,7 +56,13 @@ case "bot":
 break;
 
 case "menu":
-            msg.reply('Menu:\n\n.bot');
+msg.reply(
+    
+`Menu:
+
+.bot
+.me
+.register`);
 break;
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +82,6 @@ case "register":
                 if (Number(results1[0].RowCount)>0) {
                     msg.reply("you are already registered")
                  } else {
-                    var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
                     connection.query( // register userstuff
                     `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
                     VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
@@ -107,6 +112,26 @@ case "me":
                 , function (error, results, fields) {
                     if (error) serverInfo(error.message);
                     var res = JSON.parse(JSON.stringify(results))
+
+
+                    var finalTime;
+                    var time = (dateInSec - Number(res[0].date))
+                
+                        if(time/60/60/24>364) {                
+                            finalTime = time/60/60/24/365+". year(s) ago"                
+                        } else if(time/60/60/24>30) {               
+                            finalTime = time/60/60/24/30+". month(s) ago"                
+                        } else if (time/60/60/24>1){              
+                            finalTime = time/60/60/24+". day(s) ago"            
+                        } else if (time/60/60>1){         
+                            finalTime = time/60/60+". hour(s) ago"        
+                        } else if (time/60>1) {        
+                            finalTime = time/60+". minute(s) ago"      
+                        } else {
+                            finalTime = time+".. second(s) ago"
+                        }
+                        var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]
+
                     
                     msg.reply(res[0].style+" username: "+res[0].username
                     +"\n"+res[0].style+" xp: "+res[0].xp
@@ -114,6 +139,8 @@ case "me":
                     +"\n"+res[0].style+" style: "+res[0].style
                     +"\n"+res[0].style+" bio: "+res[0].bio
                     +"\n"+res[0].style+" number: "+res[0].number.split("@")[0]
+                    +"\n"+res[0].style+" account created: "+finalTime1
+
                     )
                 });
             } 
