@@ -7,6 +7,9 @@ const _gay = JSON.parse(fs.readFileSync('./result/ranswer/gaymeter.json'));
 const _love = JSON.parse(fs.readFileSync('./result/ranswer/lovemeter.json'));
 const _animal = JSON.parse(fs.readFileSync('./result/ranswer/animal.json'));
 const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
+const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
+
+
 
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
@@ -159,6 +162,12 @@ style+` Menu:
 .echo
 .users
 .resend
+.pokemon
+.fact
+.gay
+.love
+.dare
+.animal
 .leaderboard
 .delete`);
 break;
