@@ -123,7 +123,7 @@ if (args.length<2) return reply("please enter a username")
 
 connection.query( // register userstuff
 `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
+VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0)`
 , function (error, results, fields) {
         if (error) throw error;
         console.log('Yey a new registration! >_< ');
@@ -133,7 +133,6 @@ VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
 break;
 // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "me":
-          
 if (!isRegister) return reply(registerMessage)
 
 var finalTime;
@@ -166,12 +165,13 @@ var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "style":
-if (isRegister) return reply(style+" you are already registered")
-if (args.length<2) return reply("please enter a style")
+if (!isRegister) return reply(registerMessage)
+if (args.length<2) return reply(style+" please enter a style")
     set(style, args[1])
 break;
 default:
-        reply("what even is this command")
+    if (!isRegister) return reply(registerMessage)
+        reply(style+" what even is this command")
                         }
                      }
     )}
