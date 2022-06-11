@@ -297,10 +297,11 @@ case "resend":
     }
 break;
 case "sticker":
-
+    sticker()
+    async function sticker(){
         let encmedia = await quoted.downloadMedia()
         client.sendMessage(m.from, encmedia, { quotedMessageId: m.id._serialized, sendMediaAsSticker: true, stickerName: global.packname, stickerAuthor: global.author, stickerCategories: ['😎','😾','🗿'] })
-
+    }
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
