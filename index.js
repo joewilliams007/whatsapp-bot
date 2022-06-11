@@ -48,6 +48,8 @@ if(msg.author=="undefined") {
     number = msg.from
 } else if (msg.author==undefined) {
     number = msg.from
+} else {
+    number = msg.author
 }
 
 console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
