@@ -179,8 +179,8 @@ default:
                                     `UPDATE Users
                                     SET messages = messages + 1,
                                     WHERE number = "${number}"`
-                                    if (error) serverInfo(error.message);
                                     , function (error, results, fields) {
+                                        if (error) serverInfo(error.message);
                             });
                         }
 
