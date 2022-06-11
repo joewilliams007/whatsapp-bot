@@ -67,20 +67,13 @@ case "register":
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT FROM Users WHERE number='${number}'`
-
+            `SELECT EXISTS(SELECT * FROM Users WHERE number='${number}');`
             , function (error, resultsN, fields) {
             
                 console.log(resultsN)
 
-                    accounts = "";
-                    try {
-                        accounts = JSON.parse(JSON.stringify(resultsN)).length
-                    } catch (err) {
-                        accounts = 0
-                    }
 
-                if (Number(accounts)>0) {
+             /*   if (Number(accounts)>0) {
                     msg.reply("you are already registered")
                  } else {
                     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
@@ -92,7 +85,7 @@ case "register":
                         console.log('Yey a new registration! >_< ');
                         msg.reply("registration successfull "+args[1])
                     });
-                }
+                } */
         });
 
     }
