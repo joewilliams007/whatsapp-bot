@@ -67,7 +67,7 @@ case "register":
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT FROM Plans WHERE number='${msg.author}'`
+            `SELECT FROM Users WHERE number='${number}'`
 
             , function (error, resultsN, fields) {
             
