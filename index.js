@@ -247,7 +247,7 @@ connection.query(
                     leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                 }
                     
-         reply(leaderboard);
+         reply(leaderboard.replace(/["]+/g, ''));
         }
     });
 break;
@@ -266,15 +266,9 @@ connection.query(
                 for (const item of res.values()) {  
                         user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)
                 }        
-         reply(user);
+         reply(user.replace(/["]+/g, ''));
         }
     });
-break;
-case"image":
-        console.log('Sending attachment');
-        const data = "./image.png"
-        media = new MessageMedia(Image, data);
-        client.sendMessage(media);
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
