@@ -390,7 +390,7 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     async function img(){
     try  {
         const media = MessageMedia.fromFilePath('./image.png');
-        chat.sendMessage(media);
+        client.sendMessage(media);
 
     } catch (err){
         reply(style+" there was an error. Solution: send the image you want to convert again")
