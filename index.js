@@ -39,7 +39,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-console.log('MESSAGE RECEIVED', msg);
+// console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
 var number;
@@ -49,6 +49,7 @@ if (isGroup) {
 } else {
     number = msg.from
 }
+console.log("NUMBER IS "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
