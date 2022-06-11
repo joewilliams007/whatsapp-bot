@@ -126,6 +126,10 @@ try {
 var id; 
 id = res[0].user_id
 } catch (err) {}
+var last_claim;
+try {
+last_claim = res[0].last_claim
+} catch (err) {}
 
 if (isRegister) {
     connection.query(
