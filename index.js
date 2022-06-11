@@ -41,13 +41,15 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     console.log('MESSAGE RECEIVED', msg);
-    const value = msg.body.split(" ",2)[1]+" "
-    const args = value.split(" ")
+
+const command = msg.body.slice(1).trim().split(/ +/).shift().toLowerCase()
+const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
+const args = msg.body.trim().split(/ +/).slice(1)
+const value = args.join(' ')
 
 if (msg.body.split("")[0]==".") {
-var switch_helper =  msg.body.replace(".","")+" #"
-console.log(switch_helper.split(" ")[0])
-switch(switch_helper.split(" ")[0]) {
+
+switch(command) {
 
 case "bot":
             msg.reply('Hai '+msg._data.notifyName);
@@ -60,20 +62,29 @@ break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
     console.log(args[0])
-    var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
+    
     if (args[0].length<1) {
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT COUNT(*) AS RowCount FROM Plans WHERE number='${msg.author}'`
+            `SELECT FROM Plans WHERE number='${msg.author}'`
 
             , function (error, resultsN, fields) {
             
                 console.log(resultsN)
-    
-               /*  if (Number(resultsN[0].RowCount)>0) {
+
+                    accounts = "";
+                    try {
+                        accounts = JSON.parse(JSON.stringify(resultsN)).length
+                    } catch (err) {
+                        accounts = 0
+                    }
+
+
+                if (Number(accounts)>0) {
                     msg.reply("you are already registered")
                  } else {
+                    var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
                     connection.query( // register userstuff
                     `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
                     VALUES ("${args[0]}","${msg.author}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
@@ -82,7 +93,7 @@ case "register":
                         console.log('Yey a new registration! >_< ');
                         msg.reply("registration successfull "+args[0])
                     });
-                 }*/
+                }
         });
 
     }
