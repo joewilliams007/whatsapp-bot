@@ -267,9 +267,24 @@ ${slot4}${slot5}${slot6}
 - - - - - - - - - \n${slot1}${slot2}${slot3} ☜︎ ${winmsg} ♕︎
 - - - - - - - - - \n${slot7}${slot8}${slot9}
 
-you ${looseorwin} $${winAmount}!
+you ${looseorwin} ${winAmount}$!
 you have $${coins+winAmount} left!`)
 
+break;
+// claim ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "claim":
+if (!isRegister) return reply(registerMessage)
+if (last_claim==WithoutTime()) return reply (style+" already claimed today")
+
+connection.query(
+    `UPDATE Users
+    SET coins = coins + 25, xp = xp + 10
+    WHERE number='${number}'`
+    , function (error, results, fields) {
+        if (error) console.log(error.message);
+    });
+
+    reply(style+" claimed 25$")
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
@@ -569,6 +584,12 @@ default:
                                 , function (error, results, fields) {
                                     if (error) console.log(error.message);
                                 });
+                        }
+
+                        function WithoutTime(dateTime) {
+                            var date = new Date(dateTime.getTime());
+                            date.setHours(0, 0, 0, 0);
+                            return date;
                         }
                         
         }

@@ -17,4 +17,6 @@ messages int,
 PRIMARY KEY ( user_id )
 );
 
+ALTER TABLE Users ADD last_claim VARCHAR(255) DEFAULT "today";
+
 ALTER TABLE Users CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
