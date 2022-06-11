@@ -1,7 +1,15 @@
 const qrcode = require('qrcode-terminal');
 
-const { Client } = require('whatsapp-web.js');
-const client = new Client();
+// const { Client } = require('whatsapp-web.js');
+const { Client, Location, List, Buttons, LocalAuth } = require('./index');
+
+const client = new Client({
+    authStrategy: new LocalAuth(),
+    puppeteer: { headless: false }
+});
+
+
+
 mysql = require('mysql'); 
 const { exec } = require('child_process');
 var connection = mysql.createConnection({
