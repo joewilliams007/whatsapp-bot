@@ -45,7 +45,9 @@ const args = msg.body.split(" ")
 var number;
 const isGroup = msg.isGroup
 number = msg.author
-if (number = undefined) {
+if (number = "undefined") {
+    number = msg.from
+} else if (number = undefined) {
     number = msg.from
 }
 
