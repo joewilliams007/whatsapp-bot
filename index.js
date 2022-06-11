@@ -73,7 +73,7 @@ case "register":
                 console.log(results1[0].RowCount)
 
 
-             /*   if (Number(accounts)>0) {
+                if (Number(results1[0].RowCount)>0) {
                     msg.reply("you are already registered")
                  } else {
                     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
@@ -85,7 +85,7 @@ case "register":
                         console.log('Yey a new registration! >_< ');
                         msg.reply("registration successfull "+args[1])
                     });
-                } */
+                } 
         });
 
     }
