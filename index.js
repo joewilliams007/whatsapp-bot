@@ -37,7 +37,7 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
-client.on('message', msg => {
+client.on('message', async msg => {
 
 console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
@@ -72,6 +72,12 @@ if (Number(results1[0].RowCount)<1) {
     isRegister = true;
 }
 });
+
+console.log('Sending attachment');
+media = new MessageMedia(data.mime, data.file);
+client.sendMessage(media);
+
+
 // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( // get the users stuff
 `SELECT * FROM Users
@@ -267,6 +273,12 @@ connection.query(
          reply(user);
         }
     });
+break;
+case"image":
+        console.log('Sending attachment');
+        const data = "./image.png"
+        media = new MessageMedia(data.mime, data.file);
+        client.sendMessage(media);
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
