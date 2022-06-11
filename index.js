@@ -41,9 +41,12 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-    console.log('MESSAGE RECEIVED', msg);
-    const value = removeFirstWord(msg.body)
-    const args = msg.body.split(" ")
+console.log('MESSAGE RECEIVED', msg);
+const value = removeFirstWord(msg.body)
+const args = msg.body.split(" ")
+const number = msg.body.from
+
+console
 
 if (msg.body.split("")[0]==".") {
 switch(msg.body.slice(1).split(" ")[0]) {
@@ -77,14 +80,13 @@ case "register":
                         accounts = 0
                     }
 
-
                 if (Number(accounts)>0) {
                     msg.reply("you are already registered")
                  } else {
                     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
                     connection.query( // register userstuff
                     `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-                    VALUES ("${args[1]}","${msg.author}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
+                    VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
                     , function (error, results, fields) {
                         if (error) throw error;
                         console.log('Yey a new registration! >_< ');
