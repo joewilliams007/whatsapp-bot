@@ -23,7 +23,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     console.log('MESSAGE RECEIVED', msg);
-    const value = msg.body.split(" ",2)[1]
+    const value = msg.body.split(" ",2)[1]+" "
     const args = value.split(" ")
 
 if (msg.body.split("")[0]==".") {
