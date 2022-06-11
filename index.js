@@ -52,7 +52,7 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
-console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
+reply("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
