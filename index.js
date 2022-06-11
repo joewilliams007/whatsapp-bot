@@ -1,6 +1,6 @@
 const qrcode = require('qrcode-terminal');
 
-const { Client, LocalAuth, Location, List, Buttons, MessageMedia } = require('whatsapp-web.js');
+const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
 const client = new Client({
@@ -44,9 +44,13 @@ const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
 var number;
 const isGroup = msg.isGroup
-number = msg.author
+if(msg.author=="undefined") {
+    number = msg.from
+} else if (msg.author==undefined) {
+    number = msg.from
+}
 
-console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from)
+console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
