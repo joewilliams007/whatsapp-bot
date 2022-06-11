@@ -90,7 +90,35 @@ case "register":
 
     }
 break;
+case "me":
+    connection.query( 
+        `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
+        , function (error, results1, fields) {
+            if (error) throw error;
+            console.log(results1[0].RowCount)
 
+
+            if (Number(results1[0].RowCount)<1) {
+                msg.reply("you are not registered. To register send the message: .register +yourname")
+             } else {
+                connection.query( // get the users stuff
+                `SELECT * FROM Users
+                WHERE number="${number}"`
+                , function (error, results, fields) {
+                    if (error) serverInfo(error.message);
+                    var res = JSON.parse(JSON.stringify(results))
+                    
+                    msg.reply(res[0].style+" username: "+res[0].username
+                    +"\n"+res[0].style+" xp: "+res[0].xp
+                    +"\n"+res[0].style+" money: "+res[0].coins
+                    +"\n"+res[0].style+" style: "+res[0].style
+                    +"\n"+res[0].style+" bio: "+res[0].bio
+                    +"\n"+res[0].style+" number: "+res[0].number.split("@")[0]
+                    )
+                });
+            } 
+    });
+break;
 default:
           msg.reply("what even is this command")
       }
