@@ -290,7 +290,7 @@ case "resend":
     async function quote(){
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
-          const attachmentData = await quotedMsg.downloadMedia();
+            const attachmentData = await quotedMsg.downloadMedia();
           client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
     
         }
@@ -300,7 +300,7 @@ case "sticker":
     sticker()
     async function sticker(){
         const quotedMsg = await msg.getQuotedMessage();
-        let encmedia = await quotedMsg.downloadMedia();
+        const encmedia = await quotedMsg.downloadMedia();
         client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: msg.author, stickerCategories: ['😎','😾','🗿'] })
     }
 break;
