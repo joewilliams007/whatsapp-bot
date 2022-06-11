@@ -67,10 +67,10 @@ case "register":
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT EXISTS(SELECT * FROM Users WHERE number='${number}');`
+            `SELECT AS Exist EXISTS(SELECT * FROM Users WHERE number='${number}');`
             , function (error, resultsN, fields) {
             
-                console.log(resultsN)
+                console.log(resultsN[0].Exist)
 
 
              /*   if (Number(accounts)>0) {
