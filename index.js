@@ -112,8 +112,8 @@ break;
 case "delete":
     if (!isRegister) return reply(registerMessage);
 
-    deleteMsg(msg)
-    async function deleteMsg(msg) {
+    deleteMsg(msg,style)
+    async function deleteMsg(msg, style) {
     const quotedMsg = await msg.getQuotedMessage();
         if (msg.hasQuotedMsg) {
             if (quotedMsg.fromMe) {
@@ -124,6 +124,23 @@ case "delete":
         }
     }
 break;
+case "info":
+    info()
+async function info() {
+    let chat = await msg.getChat();
+    if (!isRegister) return reply(registerMessage);
+    if (chat.isGroup) {
+
+reply(style+` *Group Details*
+Name: ${chat.name}
+Description: ${chat.description}
+Created At: ${chat.createdAt.toString()}
+Created By: ${chat.owner.user}
+Participant count: ${chat.participants.length}`);
+    } else {
+            reply(style+' This command can only be used in a group!');
+}
+}
 case "menu":
     if (!isRegister) return reply(registerMessage);
 reply(
@@ -133,7 +150,8 @@ style+` Menu:
 .bot
 .me
 .register
-.style`);
+.style
+.delete`);
 break;
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
