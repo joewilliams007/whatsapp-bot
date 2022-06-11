@@ -225,23 +225,47 @@ const slot8 = _slot[Math.floor(Math.random() * _slot.length)]
 const slot9 = _slot[Math.floor(Math.random() * _slot.length)]
 
 var winmsg;
+var winAmount;
+var looseorwin
 if ((slot1 == slot2) && slot2 == slot3) {	
     winmsg = "jackpot"
+    winAmount = 100
 } else if (slot1 == slot2) {
     winmsg = "small win"
+    winAmount = 13
 } else if (slot2 == slot3) {	
     winmsg = "small win"
+    winAmount = 13
 } else if (slot1 == slot3) {	
     winmsg = "small win"
+    winAmount = 13
 } else {
     winmsg = "you lost"
+    winAmount = -16
 }
+
+if (winAmount<0) {
+    looseorwin = "lost"
+} else {
+    looseorwin = "won"
+}
+
+    connection.query(
+        `UPDATE Users
+        SET coins = "${coins+winAmount}"
+        WHERE number='${number}'`
+        , function (error, results, fields) {
+            if (error) console.log(error.message);
+        });
 
 reply(style+` 𝚂𝚕𝚘𝚝
 
 ${slot4}${slot5}${slot6}
 - - - - - - - - - \n${slot1}${slot2}${slot3} ☜︎ ${winmsg} ♕︎
-- - - - - - - - - \n${slot7}${slot8}${slot9}`)
+- - - - - - - - - \n${slot7}${slot8}${slot9}
+
+you ${looseorwin} $${winAmount}!
+you have $${coins+winAmount} left!`)
 
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -324,7 +348,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
     reply(style+" username: "+username
     +"\n"+style+" xp: "+xp
-    +"\n"+style+" money: "+coins
+    +"\n"+style+" money: $"+coins
     +"\n"+style+" style: "+style
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
@@ -359,7 +383,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
     reply(style+" username: "+username
     +"\n"+style+" xp: "+xp
-    +"\n"+style+" money: "+coins
+    +"\n"+style+" money: $"+coins
     +"\n"+style+" style: "+style
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
