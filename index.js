@@ -4,8 +4,8 @@ const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = req
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: { headless: false }
+   // authStrategy: new LocalAuth(),
+   // puppeteer: { headless: false }
 });
 
 mysql = require('mysql'); 
