@@ -44,7 +44,7 @@ client.on('message', msg => {
 console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
-const number = msg.number
+const number = msg.from
 const isGroup = msg.isGroup
 
 
