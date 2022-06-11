@@ -223,7 +223,7 @@ VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0
 
 break;
 // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-case "me":
+case "user":
 if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply("enter the users id")
 connection.query( // get the users stuff
@@ -298,7 +298,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 });
 break;
 // profile ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-case "user":
+case "me":
 if (!isRegister) return reply(registerMessage)
 
 var finalTime;
