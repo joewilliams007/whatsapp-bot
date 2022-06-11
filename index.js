@@ -160,7 +160,7 @@ var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" style: "+style
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
-    +"\n"+style+" number: "+number.split("@")[0]
+    +"\n"+style+" number: +"+number.split("@")[0]
     +"\n"+style+" account created: "+finalTime1)
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -168,6 +168,7 @@ case "style":
 if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply(style+" please enter a style")
     set("style", args[1])
+    reply(args[1]+" style has been updated")
 break;
 default:
     if (!isRegister) return reply(registerMessage)
