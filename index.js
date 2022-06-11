@@ -47,8 +47,6 @@ const isGroup = msg.isGroup
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
-const quotedMsg = await msg.getQuotedMessage();
-
 
 if (msg.body.split("")[0]==".") {
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,11 +111,16 @@ case "bot":
 break;
 case "delete":
     if (!isRegister) return reply(registerMessage);
-    if (msg.hasQuotedMsg) {
-        if (quotedMsg.fromMe) {
-            quotedMsg.delete(true);
-        } else {
-            reply(style+' I can only delete my own messages');
+
+    deleteMsg(msg)
+    async function deleteMsg(msg) {
+    const quotedMsg = await msg.getQuotedMessage();
+        if (msg.hasQuotedMsg) {
+            if (quotedMsg.fromMe) {
+                quotedMsg.delete(true);
+            } else {
+                reply(style+' I can only delete my own messages');
+            }
         }
     }
 break;
