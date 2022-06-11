@@ -102,7 +102,7 @@ switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
     if (!isRegister) return reply(registerMessage);
-        msg.reply('Hai '+username);
+       reply(style+' Hai '+username);
 break;
 
 case "menu":
@@ -167,7 +167,7 @@ break;
 case "style":
 if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply(style+" please enter a style")
-    set(style, args[1])
+    set("style", args[1])
 break;
 default:
     if (!isRegister) return reply(registerMessage)
