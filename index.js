@@ -212,6 +212,7 @@ case "join":
 break;
 // slot ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "slot":
+if (!isRegister) return reply(registerMessage);
 if (coins < 9) return reply(`${style} You dont have enough money`)
 const slot1 = _slot[Math.floor(Math.random() * _slot.length)]
 const slot2 = _slot[Math.floor(Math.random() * _slot.length)]
@@ -236,9 +237,11 @@ if ((slot1 == slot2) && slot2 == slot3) {
     winmsg = "you lost"
 }
 
-reply(style+` 𝚂𝚕𝚘𝚝\n\n${slot4}${slot5}${slot6}
-\n- - - - - - - - - \n${slot1}${slot2}${slot3} ☜︎ ${winmsg} ♕︎
-\n- - - - - - - - - \n${slot7}${slot8}${slot9}`)
+reply(style+` 𝚂𝚕𝚘𝚝
+
+${slot4}${slot5}${slot6}
+- - - - - - - - - \n${slot1}${slot2}${slot3} ☜︎ ${winmsg} ♕︎
+- - - - - - - - - \n${slot7}${slot8}${slot9}`)
 
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
