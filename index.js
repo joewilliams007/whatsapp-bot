@@ -303,7 +303,7 @@ case "sticker":
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
         const encmedia = await quotedMsg.downloadMedia();
-        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: msg.author, stickerCategories: ['😎','😾','🗿'] })
+        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
         } else {
             reply(style+" reply to a picture")
         }
