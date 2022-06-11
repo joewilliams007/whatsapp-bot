@@ -63,11 +63,11 @@ break;
 case "register":
     console.log(args[0])
     
-    if (args[1].length<1) {
+    if (args.length<2) {
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}')`
+            `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
             , function (error, results1, fields) {
                 if (error) throw error;
                 console.log(results1[0].RowCount)
