@@ -291,7 +291,7 @@ case "resend":
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
             const attachmentData = await quotedMsg.downloadMedia();
-            client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
+          //  client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
             client.sendMessage(msg.from, "./image.png", { caption: 'Here\'s your requested media.' });
         }
     }
