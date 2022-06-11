@@ -134,7 +134,7 @@ case "bot":
 break;
 case "echo":
     if (!isRegister) return reply(registerMessage);
-    if (args[1].length<1) return reply ("enter a message")
+    if (args.length<2) return reply ("enter a message")
        client.sendMessage(msg.from,value);
 break;
 case "menu":
