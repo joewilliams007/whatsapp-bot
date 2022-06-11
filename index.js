@@ -259,8 +259,15 @@ break;
 case "style":
 if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply(style+" please enter a style")
-    set("style", args[1])
-    reply(args[1]+" style has been updated")
+    set("style", value)
+    reply(value+" style has been updated")
+break;
+// set bio ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "bio":
+if (!isRegister) return reply(registerMessage)
+if (args.length<2) return reply(style+" please enter a biography")
+    set("bio", value)
+    reply(style+" bio has been updated")
 break;
 // leaderboard ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "leaderboard":
