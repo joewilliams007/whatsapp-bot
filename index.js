@@ -184,6 +184,17 @@ default:
                                         if (error) serverInfo(error);
                             });
                         }
+
+                        function set(target, replacement) {
+                            connection.query(
+                                `UPDATE Users
+                                SET ${target} = "${replacement}"
+                                WHERE number = "${number}"`
+                                , function (error, results, fields) {
+                                    if (error) serverInfo("error updating "+target);
+                                });
+                        }
+                        
         }
     )}
 });
@@ -199,13 +210,4 @@ function removeFirstWord(str) {
     }
   
     return str.substring(indexOfSpace + 1);
-}
-function set(target, replacement) {
-    connection.query(
-        `UPDATE Users
-        SET ${target} = "${replacement}"
-        WHERE number = "${number}"`
-        , function (error, results, fields) {
-            if (error) serverInfo("error updating "+target);
-        });
 }
