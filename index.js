@@ -278,11 +278,15 @@ break;
 // claim ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "claim":
 if (!isRegister) return reply(registerMessage)
-if (last_claim==WithoutTime()) return reply (style+" already claimed today")
+
+let yourDate = new Date()
+
+
+if (last_claim==yourDate.toISOString().split('T')[0]) return reply (style+" already claimed today")
 
 connection.query(
     `UPDATE Users
-    SET coins = coins + 25, xp = xp + 10
+    SET coins = coins + 25, xp = xp + 10, last_date = "${yourDate.toISOString().split('T')[0]}"
     WHERE number='${number}'`
     , function (error, results, fields) {
         if (error) console.log(error.message);
@@ -588,36 +592,6 @@ default:
                                 , function (error, results, fields) {
                                     if (error) console.log(error.message);
                                 });
-                        }
-
-                        function WithoutTime() {
-                            let date_ob = new Date();
-
-                            // current date
-                            // adjust 0 before single digit date
-                            let date = ("0" + date_ob.getDate()).slice(-2);
-                            
-                            // current month
-                            let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-                            
-                            // current year
-                            let year = date_ob.getFullYear();
-                            
-                            // current hours
-                            let hours = date_ob.getHours();
-                            
-                            // current minutes
-                            let minutes = date_ob.getMinutes();
-                            
-                            // current seconds
-                            let seconds = date_ob.getSeconds();
-                            
-                            // prints date in YYYY-MM-DD format
-                            console.log(year + "-" + month + "-" + date);
-                            
-                            // prints date & time in YYYY-MM-DD HH:MM:SS format
-                            console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
-                            return(year + "-" + month + "-" + date)
                         }
                         
         }
