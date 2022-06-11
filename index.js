@@ -40,7 +40,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    
+
     console.log('MESSAGE RECEIVED', msg);
     const value = removeFirstWord(msg.body)
     const args = msg.body.split(" ")
@@ -60,7 +60,7 @@ break;
 case "register":
     console.log(args[0])
     
-    if (args[0].length<1) {
+    if (args[1].length<1) {
         msg.reply("please enter a username")
     } else {
         connection.query( 
@@ -84,7 +84,7 @@ case "register":
                     var dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
                     connection.query( // register userstuff
                     `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-                    VALUES ("${args[0]}","${msg.author}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
+                    VALUES ("${args[1]}","${msg.author}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
                     , function (error, results, fields) {
                         if (error) throw error;
                         console.log('Yey a new registration! >_< ');
