@@ -66,7 +66,7 @@ connection.query( // get the users stuff
 `SELECT * FROM Users
 WHERE number="${number}"`
 , function (error, results, fields) {
-if (error) serverInfo(error.message);
+if (error) console.log(error.message);
 var res = JSON.parse(JSON.stringify(results))
 
 var style; 
@@ -180,7 +180,7 @@ default:
                                     SET messages = messages + 1,
                                     WHERE number = "${number}"`
                                     , function (error, results, fields) {
-                                        if (error) serverInfo(error.message);
+                                        if (error) console.log(error.message);
                             });
                         }
 
@@ -190,7 +190,7 @@ default:
                                 SET ${target} = "${replacement}"
                                 WHERE number = "${number}"`
                                 , function (error, results, fields) {
-                                    if (error) serverInfo(error.message);
+                                    if (error) console.log(error.message);
                                 });
                         }
                         
