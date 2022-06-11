@@ -68,9 +68,8 @@ case "register":
     } else {
         connection.query( 
             `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}')`
-
             , function (error, results1, fields) {
-            
+                if (error) throw error;
                 console.log(results1[0].RowCount)
 
 
