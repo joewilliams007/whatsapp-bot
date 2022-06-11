@@ -155,8 +155,10 @@ style+` Menu:
 
 .bot
 .me
+.user
 .register
 .style
+.bio
 .sticker
 .echo
 .users
@@ -207,6 +209,37 @@ case "join":
             reply('That invite code seems to be invalid.');
         }
     }
+break;
+// slot ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "slot":
+if (coins < 9) return reply(`${style} You dont have enough money`)
+const slot1 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot2 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot3 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot4 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot5 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot6 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot7 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot8 = _slot[Math.floor(Math.random() * _slot.length)]
+const slot9 = _slot[Math.floor(Math.random() * _slot.length)]
+
+var winmsg;
+if ((slot1 == slot2) && slot2 == slot3) {	
+    winmsg = "jackpot"
+} else if (slot1 == slot2) {
+    winmsg = "small win"
+} else if (slot2 == slot3) {	
+    winmsg = "small win"
+} else if (slot1 == slot3) {	
+    winmsg = "small win"
+} else {
+    winmsg = "you lost"
+}
+
+reply(style+` 𝚂𝚕𝚘𝚝\n\n${slot4}${slot5}${slot6}
+\n- - - - - - - - - \n${slot1}${slot2}${slot3} ☜︎ ${winmsg} ♕︎
+\n- - - - - - - - - \n${slot7}${slot8}${slot9}`)
+
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
