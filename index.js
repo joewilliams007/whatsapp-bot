@@ -267,7 +267,7 @@ connection.query(
                 var position = 0	
                 for (const item of res.values()) {  
                     position++
-                    leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.xp)+" xp"
+                    leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                 }
                     
          reply(leaderboard);
