@@ -42,8 +42,13 @@ client.on('message', msg => {
 console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
-const number = msg.from
+var number;
 const isGroup = msg.isGroup
+if (isGroup) {
+    number = msg.author
+} else {
+    number = msg.from
+}
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
@@ -252,7 +257,6 @@ connection.query(
         reply(leaderboard(JSON.parse(JSON.stringify(results))))
 
         async function leaderboard(res){
-            result = "";
                 var leaderboard = "LEADERBOARD";
                 var position = 0	
                 for (const item of res.values()) {  
