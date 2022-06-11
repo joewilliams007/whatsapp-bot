@@ -69,12 +69,8 @@ case "register":
 
             , function (error, resultsN, fields) {
             
-                
-
-
-
-
-                 if (Number(resultsN[0].RowCount)>0) {
+                console.log(resultsN[0].RowCount)
+               /*  if (Number(resultsN[0].RowCount)>0) {
                     msg.reply("you are already registered")
                  } else {
                     connection.query( // register userstuff
@@ -85,7 +81,7 @@ case "register":
                         console.log('Yey a new registration! >_< ');
                         msg.reply("registration successfull "+args[0])
                     });
-                 }
+                 }*/
         });
 
     }
