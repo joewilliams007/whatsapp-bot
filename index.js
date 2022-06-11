@@ -390,9 +390,9 @@ break;
 case "img":
     img()
     async function img(){
-        try {
-        const encmedia = await fs.readFileSync('./image.png')
-        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
+    try  {
+        const media = MessageMedia.fromFilePath('./image.png');
+        chat.sendMessage(media);
 
     } catch (err){
         reply(style+" there was an error. Solution: send the image you want to convert again")
