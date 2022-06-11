@@ -253,21 +253,37 @@ connection.query(
     FROM Users
     ORDER BY xp DESC`
     , function (error, results, fields) {
-        if (error) serverInfo(error.message);
+        if (error) console.log(error.message);
         reply(leaderboard(JSON.parse(JSON.stringify(results))))
 
         async function leaderboard(res){
                 var leaderboard = "LEADERBOARD";
                 var position = 0	
                 for (const item of res.values()) {  
-                    if (Number(JSON.stringify(item.xp))<1){
-                    } else {
                     position++
-                        leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.xp)+" xp"
-                    }
+                    leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.xp)+" xp"
                 }
                     
         return leaderboard;
+        }
+    });
+break;
+// users ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "users":
+if (!isRegister) return reply(registerMessage)
+connection.query(
+    `SELECT *
+    FROM Users`
+    , function (error, results, fields) {
+        if (error) console.log(error.message);
+        users(JSON.parse(JSON.stringify(results)))
+
+        async function users(res){
+                var user = "";	
+                for (const item of res.values()) {  
+                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)
+                }        
+         reply(user);
         }
     });
 break;
