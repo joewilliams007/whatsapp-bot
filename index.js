@@ -274,12 +274,7 @@ connection.query(
         }
     });
 break;
-case"image":
-        console.log('Sending attachment');
-        const data = "./image.png"
-        media = new MessageMedia(Image,data);
-        client.sendMessage(media);
-break;
+
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
     if (!isRegister) return reply(registerMessage)
