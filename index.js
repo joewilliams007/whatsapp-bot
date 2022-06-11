@@ -225,6 +225,81 @@ break;
 // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "me":
 if (!isRegister) return reply(registerMessage)
+if (args.length<2) return reply("enter the users id")
+connection.query( // get the users stuff
+`SELECT * FROM Users
+WHERE user_id="${args[1]}"`
+, function (error, results, fields) {
+if (error) console.log(error.message);
+var res = JSON.parse(JSON.stringify(results))
+
+var style; 
+try {
+style = res[0].style
+} catch (err) {}
+try {
+var username; 
+username = res[0].username
+} catch (err) {}
+try {
+var xp; 
+xp = res[0].xp
+} catch (err) {}
+try {
+var coins; 
+coins = res[0].coins
+} catch (err) {}
+try {
+var bio; 
+bio = res[0].bio
+} catch (err) {}
+try {
+var date; 
+date = res[0].date
+} catch (err) {}
+try {
+var commands; 
+commands = res[0].messages
+} catch (err) {}
+try {
+var id; 
+id = res[0].user_id
+} catch (err) {}
+
+var finalTime;
+var time = (dateInSec - Number(date))
+
+if(time/60/60/24>364) {                
+    finalTime = time/60/60/24/365+". year(s) ago"                
+} else if(time/60/60/24>30) {               
+    finalTime = time/60/60/24/30+". month(s) ago"                
+} else if (time/60/60/24>1){              
+    finalTime = time/60/60/24+". day(s) ago"            
+} else if (time/60/60>1){         
+    finalTime = time/60/60+". hour(s) ago"        
+} else if (time/60>1) {        
+    finalTime = time/60+". minute(s) ago"      
+} else {
+    finalTime = time+".. second(s) ago"
+}
+var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
+
+
+    reply(style+" username: "+username
+    +"\n"+style+" xp: "+xp
+    +"\n"+style+" money: "+coins
+    +"\n"+style+" style: "+style
+    +"\n"+style+" bio: "+bio
+    +"\n"+style+" commands: "+commands
+    +"\n"+style+" number: +"+number.split("@")[0]
+    +"\n"+style+" userid: "+id
+    +"\n"+style+" account created: "+finalTime1)
+
+});
+break;
+// profile ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "user":
+if (!isRegister) return reply(registerMessage)
 
 var finalTime;
 var time = (dateInSec - Number(date))
@@ -356,7 +431,7 @@ connection.query(
         async function users(res){
                 var user = "";	
                 for (const item of res.values()) {  
-                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)
+                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" ID: "+JSON.stringify(item.user_id)
                 }        
          reply(user.replace(/["]+/g, ''));
         }
