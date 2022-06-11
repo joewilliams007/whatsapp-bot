@@ -149,31 +149,6 @@ case "delete":
         }
     }
 break;
-case "info":
-    info()
-async function info() {
-    let chat = await msg.getChat();
-    if (!isRegister) return reply(registerMessage);
-    if (chat.isGroup) return reply(style+' This command can only be used in a group!');
-
-reply(style+` *Group Details*
-Name: 
-
-${chat.name}
-
-Description: 
-
-${chat.description}
-
-Created At: 
-
-${chat.createdAt.toString()}
-
-Participant count: 
-
-${chat.participants.length}`);
-}
-break;
 case "button":
 let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
 client.sendMessage(msg.from, button);
