@@ -8,8 +8,6 @@ const client = new Client({
     puppeteer: { headless: false }
 });
 
-
-
 mysql = require('mysql'); 
 const { exec } = require('child_process');
 var connection = mysql.createConnection({
@@ -95,17 +93,21 @@ try {
 var date; 
 date = res[0].date
 } catch (err) {}
+try {
+var commands; 
+commands = res[0].messages
+} catch (err) {}
 
 switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
-    if (!isRegister) return msg.reply(registerMessage);
-        msg.reply('Hai '+msg._data.notifyName);
+    if (!isRegister) return reply(registerMessage);
+        msg.reply('Hai '+username);
 break;
 
 case "menu":
-    if (!isRegister) return msg.reply(registerMessage);
-msg.reply(
+    if (!isRegister) return reply(registerMessage);
+reply(
     
 `Menu:
 
@@ -116,71 +118,63 @@ break;
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
-    console.log(args[0])
-    
-    if (args.length<2) {
-        msg.reply("please enter a username")
-    } else {
-        connection.query( 
-            `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
-            , function (error, results1, fields) {
-                if (error) throw error;
-                console.log(results1[0].RowCount)
+if (isRegister) return reply(style+" you are already registered")
+if (args.length<2) return reply("please enter a username")
 
+connection.query( // register userstuff
+`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
+VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
+, function (error, results, fields) {
+        if (error) throw error;
+        console.log('Yey a new registration! >_< ');
+    reply("registration successfull "+args[1])
+});
 
-                if (Number(results1[0].RowCount)>0) {
-                    msg.reply("you are already registered")
-                 } else {
-                    connection.query( // register userstuff
-                    `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-                    VALUES ("${args[1]}","${number}","${dateInSec}",100,0,">_<",0,"hey its me", 0)`
-                    , function (error, results, fields) {
-                        if (error) throw error;
-                        console.log('Yey a new registration! >_< ');
-                        msg.reply("registration successfull "+args[1])
-                    });
-                } 
-        });
-
-    }
 break;
+// account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "me":
           
-if (!isRegister) return msg.reply(registerMessage)
+if (!isRegister) return reply(registerMessage)
 
-                    var finalTime;
-                    var time = (dateInSec - Number(date))
-                
-                        if(time/60/60/24>364) {                
-                            finalTime = time/60/60/24/365+". year(s) ago"                
-                        } else if(time/60/60/24>30) {               
-                            finalTime = time/60/60/24/30+". month(s) ago"                
-                        } else if (time/60/60/24>1){              
-                            finalTime = time/60/60/24+". day(s) ago"            
-                        } else if (time/60/60>1){         
-                            finalTime = time/60/60+". hour(s) ago"        
-                        } else if (time/60>1) {        
-                            finalTime = time/60+". minute(s) ago"      
-                        } else {
-                            finalTime = time+".. second(s) ago"
-                        }
-                        var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
+var finalTime;
+var time = (dateInSec - Number(date))
 
-                    
-                        msg.reply(style+" username: "+username
-                        +"\n"+style+" xp: "+xp
-                        +"\n"+style+" money: "+coins
-                        +"\n"+style+" style: "+style
-                        +"\n"+style+" bio: "+bio
-                        +"\n"+style+" number: "+number.split("@")[0]
-                        +"\n"+style+" account created: "+finalTime1)
+if(time/60/60/24>364) {                
+    finalTime = time/60/60/24/365+". year(s) ago"                
+} else if(time/60/60/24>30) {               
+    finalTime = time/60/60/24/30+". month(s) ago"                
+} else if (time/60/60/24>1){              
+    finalTime = time/60/60/24+". day(s) ago"            
+} else if (time/60/60>1){         
+    finalTime = time/60/60+". hour(s) ago"        
+} else if (time/60>1) {        
+    finalTime = time/60+". minute(s) ago"      
+} else {
+    finalTime = time+".. second(s) ago"
+}
+var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
+
+
+    reply(style+" username: "+username
+    +"\n"+style+" xp: "+xp
+    +"\n"+style+" money: "+coins
+    +"\n"+style+" style: "+style
+    +"\n"+style+" bio: "+bio
+    +"\n"+style+" commands: "+commands
+    +"\n"+style+" number: "+number.split("@")[0]
+    +"\n"+style+" account created: "+finalTime1)
 break;
-
+// set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "style":
+if (isRegister) return reply(style+" you are already registered")
+if (args.length<2) return reply("please enter a style")
+    set(style, args[1])
+break;
 default:
-                msg.reply("what even is this command")
+        reply("what even is this command")
                         }
                      }
-            )}
+    )}
 });
 
 
@@ -194,4 +188,24 @@ function removeFirstWord(str) {
     }
   
     return str.substring(indexOfSpace + 1);
-  }
+}
+function set(target, replacement) {
+    connection.query(
+        `UPDATE Users
+        SET ${target} = "${replacement}"
+        WHERE number = "${number}"`
+        , function (error, results, fields) {
+            if (error) serverInfo("error updating "+target);
+        });
+}
+function reply(message){
+    msg.reply(message)
+    connection.query(
+            `UPDATE Users
+            SET messages = messages + 1,
+            WHERE number = "${number}"`
+
+            , function (error, results, fields) {
+                if (error) serverInfo(error);
+    });
+}
