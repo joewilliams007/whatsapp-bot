@@ -9,8 +9,6 @@ const _animal = JSON.parse(fs.readFileSync('./result/ranswer/animal.json'));
 const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
 const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
 
-
-
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
