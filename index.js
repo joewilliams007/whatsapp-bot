@@ -273,7 +273,7 @@ break;
 case"image":
         console.log('Sending attachment');
         const data = "./image.png"
-        media = new MessageMedia(data.mime, data.file);
+        media = new MessageMedia(Image, data);
         client.sendMessage(media);
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
