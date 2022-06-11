@@ -308,7 +308,7 @@ case "sticker":
             reply(style+" reply to a picture")
         }
     } catch (err){
-        reply(style+" there was an error")
+        reply(style+" there was an error. Solution: send the image you want to convert again")
     }
     }
 break;
