@@ -286,7 +286,7 @@ if (last_claim==yourDate.toISOString().split('T')[0]) return reply (style+" alre
 
 connection.query(
     `UPDATE Users
-    SET coins = coins + 25, xp = xp + 10, last_date = "${yourDate.toISOString().split('T')[0]}"
+    SET coins = coins + 25, xp = xp + 10, last_claim = "${yourDate.toISOString().split('T')[0]}"
     WHERE number='${number}'`
     , function (error, results, fields) {
         if (error) console.log(error.message);
