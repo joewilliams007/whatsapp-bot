@@ -73,10 +73,6 @@ if (Number(results1[0].RowCount)<1) {
 }
 });
 
-console.log('Sending attachment');
-media = new MessageMedia(data.mime, data.file);
-client.sendMessage(media);
-
 
 // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( // get the users stuff
@@ -274,7 +270,12 @@ connection.query(
         }
     });
 break;
-
+case"image":
+        console.log('Sending attachment');
+        const data = "./image.png"
+        media = new MessageMedia(data.mime, data.file);
+        client.sendMessage(media);
+break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
     if (!isRegister) return reply(registerMessage)
