@@ -1,6 +1,7 @@
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 
+const _slot = JSON.parse(fs.readFileSync('./result/games/slot.json'));
 const _truth = JSON.parse(fs.readFileSync('./result/ranswer/truth.json'));
 const _dare = JSON.parse(fs.readFileSync('./result/ranswer/dare.json'));
 const _gay = JSON.parse(fs.readFileSync('./result/ranswer/gaymeter.json'));
