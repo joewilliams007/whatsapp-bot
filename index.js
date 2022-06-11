@@ -117,6 +117,15 @@ var id;
 id = res[0].user_id
 } catch (err) {}
 
+if (isRegister) {
+    connection.query(
+        `UPDATE Users
+        SET messages = messages + 1
+        WHERE number='${number}'`
+        , function (error, results, fields) {
+            if (error) console.log(error.message);
+});
+}
 switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
@@ -276,26 +285,23 @@ case "resend":
     if (!isRegister) return reply(registerMessage)
     if (!isQuote) return reply("please quote a media")
 
-    const quotedMsg = await msg.getQuotedMessage();
-    if (quotedMsg.hasMedia) {
-        const attachmentData = await quotedMsg.downloadMedia();
-        client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
+    quote()
+    async function quote(){
+        const quotedMsg = await msg.getQuotedMessage();
+        if (quotedMsg.hasMedia) {
+            const attachmentData = await quotedMsg.downloadMedia();
+            client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
+        }
     }
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
     if (!isRegister) return reply(registerMessage)
-        reply(style+" what even is this command")
-            }
+    reply(style+" what even is this command")
+    }
                         function reply(message){
                             msg.reply(message)
-                            connection.query(
-                                    `UPDATE Users
-                                    SET messages = messages + 1
-                                    WHERE number='${number}'`
-                                    , function (error, results, fields) {
-                                        if (error) console.log(error.message);
-                            });
+  
                         }
 
                         function set(target, replacement) {
