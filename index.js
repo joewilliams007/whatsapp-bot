@@ -213,7 +213,7 @@ break;
 // slot ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "slot":
 if (!isRegister) return reply(registerMessage);
-if (coins < 9) return reply(`${style} You dont have enough money`)
+if (coins < 5) return reply(`${style} You dont have enough money`)
 const slot1 = _slot[Math.floor(Math.random() * _slot.length)]
 const slot2 = _slot[Math.floor(Math.random() * _slot.length)]
 const slot3 = _slot[Math.floor(Math.random() * _slot.length)]
@@ -241,7 +241,7 @@ if ((slot1 == slot2) && slot2 == slot3) {
     winAmount = 13
 } else {
     winmsg = "you lost"
-    winAmount = -16
+    winAmount = -5
 }
 
 if (winAmount<0) {
