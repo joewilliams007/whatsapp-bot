@@ -1,7 +1,7 @@
 const qrcode = require('qrcode-terminal');
 
-// const { Client } = require('whatsapp-web.js');
-const { Client, Location, List, Buttons, LocalAuth } = require('./index');
+const { Client, LocalAuth, Location, List, Buttons } = require('whatsapp-web.js');
+// const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
 const client = new Client({
     authStrategy: new LocalAuth(),
