@@ -258,7 +258,7 @@ if (!isRegister) return reply(registerMessage)
 connection.query(
     `SELECT *
     FROM Users
-    ORDER BY xp DESC`
+    ORDER BY messages DESC`
     , function (error, results, fields) {
         if (error) console.log(error.message);
         leaderboard(JSON.parse(JSON.stringify(results)))
