@@ -39,7 +39,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-// console.log('MESSAGE RECEIVED', msg);
+console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
 var number;
