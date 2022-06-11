@@ -228,7 +228,7 @@ if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply("enter the users id")
 connection.query( // get the users stuff
 `SELECT * FROM Users
-WHERE user_id="${args[1]}"`
+WHERE user_id=${args[1]}`
 , function (error, results, fields) {
 if (error) console.log(error.message);
 var res = JSON.parse(JSON.stringify(results))
