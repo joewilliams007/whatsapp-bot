@@ -172,8 +172,19 @@ break;
 default:
     if (!isRegister) return reply(registerMessage)
         reply(style+" what even is this command")
+            }
+                        function reply(message){
+                            msg.reply(message)
+                            connection.query(
+                                    `UPDATE Users
+                                    SET messages = messages + 1,
+                                    WHERE number = "${number}"`
+                        
+                                    , function (error, results, fields) {
+                                        if (error) serverInfo(error);
+                            });
                         }
-                     }
+        }
     )}
 });
 
@@ -197,15 +208,4 @@ function set(target, replacement) {
         , function (error, results, fields) {
             if (error) serverInfo("error updating "+target);
         });
-}
-function reply(message){
-    msg.reply(message)
-    connection.query(
-            `UPDATE Users
-            SET messages = messages + 1,
-            WHERE number = "${number}"`
-
-            , function (error, results, fields) {
-                if (error) serverInfo(error);
-    });
 }
