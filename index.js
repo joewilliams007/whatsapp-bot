@@ -136,6 +136,7 @@ case "echo":
     if (!isRegister) return reply(registerMessage);
     if (args[1].length<1) return reply ("enter a message")
        reply(value);
+       client.sendMessage(msg.from,message);
 break;
 case "menu":
     if (!isRegister) return reply(registerMessage);
