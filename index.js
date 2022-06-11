@@ -153,8 +153,17 @@ case "echo":
 break;
 case "menu":
     if (!isRegister) return reply(registerMessage);
+    var yourDate = new Date()
+    var claim;
+    if (last_claim==yourDate.toISOString().split('T')[0]) {
+        claim = "already claimed today"
+    } else {
+        claim = ".claim for free $$"
+    }
+
 reply(
-    
+
+
 style+` Menu:
 
 .bot
@@ -178,7 +187,9 @@ style+` Menu:
 .animal
 .leaderboard
 .users
-.delete`);
+.delete
+`
++claim);
 break;
 case "delete":
     if (!isRegister) return reply(registerMessage);
@@ -279,9 +290,7 @@ break;
 case "claim":
 if (!isRegister) return reply(registerMessage)
 
-let yourDate = new Date()
-
-
+var yourDate = new Date()
 if (last_claim==yourDate.toISOString().split('T')[0]) return reply (style+" already claimed today")
 
 connection.query(
