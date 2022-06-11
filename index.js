@@ -46,7 +46,7 @@ var number;
 const isGroup = msg.isGroup
 number = msg.author
 
-console.log("NUMBER IS "+number)
+console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
