@@ -177,7 +177,7 @@ default:
                             msg.reply(message)
                             connection.query(
                                     `UPDATE Users
-                                    SET messages = messages + 1,
+                                    SET messages = messages + 1
                                     WHERE number='${number}'`
                                     , function (error, results, fields) {
                                         if (error) console.log(error.message);
