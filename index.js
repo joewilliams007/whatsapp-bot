@@ -69,7 +69,8 @@ case "register":
 
             , function (error, resultsN, fields) {
             
-                console.log(resultsN[0].RowCount)
+                console.log(resultsN)
+    
                /*  if (Number(resultsN[0].RowCount)>0) {
                     msg.reply("you are already registered")
                  } else {
