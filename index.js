@@ -179,9 +179,8 @@ default:
                                     `UPDATE Users
                                     SET messages = messages + 1,
                                     WHERE number = "${number}"`
-                        
+                                    if (error) serverInfo(error.message);
                                     , function (error, results, fields) {
-                                        if (error) serverInfo(error);
                             });
                         }
 
@@ -191,7 +190,7 @@ default:
                                 SET ${target} = "${replacement}"
                                 WHERE number = "${number}"`
                                 , function (error, results, fields) {
-                                    if (error) serverInfo("error updating "+target);
+                                    if (error) serverInfo(error.message);
                                 });
                         }
                         
