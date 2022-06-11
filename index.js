@@ -47,15 +47,46 @@ const args = msg.body.split(" ")
 const number = msg.from
 const isGroup = msg.isGroup
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
-
+const registerMessage = "you are not registered. To register send the message: .register +yourname"
+var isRegister = false;
 if (msg.body.split("")[0]==".") {
-switch(msg.body.slice(1).split(" ")[0]) {
+// register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+connection.query( 
+    `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
+    , function (error, results1, fields) {
+        if (error) throw error;
+        console.log(results1[0].RowCount)
 
+if (Number(results1[0].RowCount)<1) {
+    isRegister = false;
+} else {
+    isRegister = true;
+}
+});
+// user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+connection.query( // get the users stuff
+`SELECT * FROM Users
+WHERE number="${number}"`
+, function (error, results, fields) {
+if (error) serverInfo(error.message);
+var res = JSON.parse(JSON.stringify(results))
+
+var style = res[0].style
+var username = res[0].username
+var xp = res[0].xp
+var coins = res[0].coins
+var bio = res[0].bio
+var date = res[0].date
+
+switch(msg.body.slice(1).split(" ")[0]) {
+// cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
-            msg.reply('Hai '+msg._data.notifyName);
+    if (!isRegister) return msg.reply(registerMessage);
+        msg.reply('Hai '+msg._data.notifyName);
 break;
 
 case "menu":
+    if (!isRegister) return msg.reply(registerMessage);
 msg.reply(
     
 `Menu:
@@ -96,26 +127,11 @@ case "register":
     }
 break;
 case "me":
-    connection.query( 
-        `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
-        , function (error, results1, fields) {
-            if (error) throw error;
-            console.log(results1[0].RowCount)
-
-
-            if (Number(results1[0].RowCount)<1) {
-                msg.reply("you are not registered. To register send the message: .register +yourname")
-             } else {
-                connection.query( // get the users stuff
-                `SELECT * FROM Users
-                WHERE number="${number}"`
-                , function (error, results, fields) {
-                    if (error) serverInfo(error.message);
-                    var res = JSON.parse(JSON.stringify(results))
-
+          
+if (!isRegister) return msg.reply(registerMessage)
 
                     var finalTime;
-                    var time = (dateInSec - Number(res[0].date))
+                    var time = (dateInSec - Number(date))
                 
                         if(time/60/60/24>364) {                
                             finalTime = time/60/60/24/365+". year(s) ago"                
@@ -130,26 +146,23 @@ case "me":
                         } else {
                             finalTime = time+".. second(s) ago"
                         }
-                        var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]
+                        var finalTime1 = finalTime.split(".")[0]+finalTime.split(" ")[1]+" ago"
 
                     
-                    msg.reply(res[0].style+" username: "+res[0].username
-                    +"\n"+res[0].style+" xp: "+res[0].xp
-                    +"\n"+res[0].style+" money: "+res[0].coins
-                    +"\n"+res[0].style+" style: "+res[0].style
-                    +"\n"+res[0].style+" bio: "+res[0].bio
-                    +"\n"+res[0].style+" number: "+res[0].number.split("@")[0]
-                    +"\n"+res[0].style+" account created: "+finalTime1
-
-                    )
-                });
-            } 
-    });
+                        msg.reply(style+" username: "+username
+                        +"\n"+style+" xp: "+xp
+                        +"\n"+style+" money: "+coins
+                        +"\n"+style+" style: "+style
+                        +"\n"+style+" bio: "+bio
+                        +"\n"+style+" number: "+number.split("@")[0]
+                        +"\n"+style+" account created: "+finalTime1)
 break;
+
 default:
-          msg.reply("what even is this command")
-      }
-    }
+                msg.reply("what even is this command")
+                        }
+                     }
+            )}
 });
 
 
