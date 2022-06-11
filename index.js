@@ -158,6 +158,7 @@ style+` Menu:
 .user
 .register
 .style
+.username
 .bio
 .sticker
 .echo
@@ -167,10 +168,12 @@ style+` Menu:
 .fact
 .gay
 .love
+.slot
 .truth
 .dare
 .animal
 .leaderboard
+.users
 .delete`);
 break;
 case "delete":
@@ -397,6 +400,14 @@ if (!isRegister) return reply(registerMessage)
 if (args.length<2) return reply(style+" please enter a style")
     set("style", value)
     reply(value+" style has been updated")
+break;
+// set username ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "username":
+if (!isRegister) return reply(registerMessage)
+if (args.length<2) return reply(style+" please enter a username")
+if (args.length>200) return reply(style+" to long")
+    set("username", args[1])
+    reply(value+" username has been updated")
 break;
 // set bio ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bio":
