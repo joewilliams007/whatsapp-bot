@@ -132,6 +132,11 @@ case "bot":
     if (!isRegister) return reply(registerMessage);
        reply(style+' Hai '+username);
 break;
+case "echo":
+    if (!isRegister) return reply(registerMessage);
+    if (args[1].length<1) return reply ("enter a message")
+       reply(value);
+break;
 case "menu":
     if (!isRegister) return reply(registerMessage);
 reply(
@@ -143,6 +148,7 @@ style+` Menu:
 .register
 .style
 .sticker
+.echo
 .users
 .resend
 .leaderboard
