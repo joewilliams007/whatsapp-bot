@@ -178,7 +178,7 @@ default:
                             connection.query(
                                     `UPDATE Users
                                     SET messages = messages + 1,
-                                    WHERE number = "${number}"`
+                                    WHERE number='${number}'`
                                     , function (error, results, fields) {
                                         if (error) console.log(error.message);
                             });
@@ -188,7 +188,7 @@ default:
                             connection.query(
                                 `UPDATE Users
                                 SET ${target} = "${replacement}"
-                                WHERE number = "${number}"`
+                                WHERE number='${number}'`
                                 , function (error, results, fields) {
                                     if (error) console.log(error.message);
                                 });
