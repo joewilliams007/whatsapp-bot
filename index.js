@@ -269,6 +269,55 @@ connection.query(
         }
     });
 break;
+//-- truth
+case 'truth':				
+if (!isRegister) return reply(registerMessage)
+  const truth = _truth[Math.floor(Math.random() * _truth.length)]
+  reply(`${style} 𝑌𝑜𝑢𝑟 𝑡𝑟𝑢𝑡ℎ\n- - - - - - - - - - - - - - - - - -\n${truth}\n- - - - - - - - - - - - - - - - - -\n✅ StarDash`)
+break
+//-- Tod dare
+case 'dare':
+    if (!isRegister) return reply(registerMessage)
+  const dare = _dare[Math.floor(Math.random() * _dare.length)]
+  reply(`${style} 𝑌𝑜𝑢𝑟 𝑑𝑎𝑟𝑒\n- - - - - - - - - - - - - - - - - -\n${dare}\n- - - - - - - - - - - - - - - - - -\n✅ StarDash`)
+break
+//-- Facts
+case 'fact':
+    if (!isRegister) return reply(registerMessage)
+  const fact = _facts[Math.floor(Math.random() * _facts.length)]
+  reply(`${style} 𝑌𝑜𝑢𝑟 𝑓𝑎𝑐𝑡\n- - - - - - - - - - - - - - - - - -\n${fact}\n- - - - - - - - - - - - - - - - - -\n✅ StarDash`)
+break
+//-- pokemon
+case 'pokemon':
+    if (!isRegister) return reply(registerMessage)
+  const pokemon = _pokemon[Math.floor(Math.random() * _pokemon.length)]
+  reply(`${style} 𝑌𝑜𝑢𝑟 𝑃𝑜𝑘𝑒𝑚𝑜𝑛\n- - - - - - - - - - - - - - - - - -\n${pokemon}\n- - - - - - - - - - - - - - - - - -\n✅ StarDash`)
+break
+//-- animal
+case 'animal':
+    if (!isRegister) return reply(registerMessage)
+  const animal = _animal[Math.floor(Math.random() * _animal.length)]
+  reply(`${style} 𝑌𝑜𝑢𝑟 𝑎𝑛𝑖𝑚𝑎𝑙\n- - - - - - - - - - - - - - - - - -\n${animal}\n- - - - - - - - - - - - - - - - - -\n✅ StarDash`)
+break
+case 'gay':
+case 'gaymeter':
+    if (!isRegister) return reply(registerMessage)
+  if (args.length > 0) {
+  const gay = _gay[Math.floor(Math.random() * _gay.length)]
+  reply(`𓂸 𝑇ℎ𝑖𝑠 𝑝𝑒𝑟𝑠𝑜𝑛 𝑖𝑠 ${gay}% 𝑔𝑎𝑦.`)
+  }
+  else { 
+	const gay = _gay[Math.floor(Math.random() * _gay.length)]
+	  reply(`𓂸 𝑌𝑜𝑢𝑟 𝑎𝑟𝑒 ${gay}% 𝑔𝑎𝑦.`)
+  }
+break
+//-- love
+case 'love':
+    if (!isRegister) return reply(registerMessage)
+	  if (args.length < 2) return reply(`${style} 𝑃𝑙𝑒𝑎𝑠𝑒 𝑎𝑑𝑑 𝑡𝑤𝑜 𝑛𝑎𝑚𝑒 𝑡𝑜 𝑓𝑖𝑛𝑑 𝑜𝑢𝑡 𝑡ℎ𝑒𝑖𝑟 𝑙𝑜𝑣𝑒.`)		  
+  const love = _love[Math.floor(Math.random() * _love.length)]
+  reply(`${love}`)
+break
 // users ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "users":
 if (!isRegister) return reply(registerMessage)
