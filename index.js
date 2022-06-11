@@ -132,14 +132,26 @@ async function info() {
     if (chat.isGroup) {
 
 reply(style+` *Group Details*
-Name: ${chat.name}
-Description: ${chat.description}
-Created At: ${chat.createdAt.toString()}
-Participant count: ${chat.participants.length}`);
+Name: 
+
+${chat.name}
+
+Description: 
+
+${chat.description}
+
+Created At: 
+
+${chat.createdAt.toString()}
+
+Participant count: 
+
+${chat.participants.length}`);
     } else {
             reply(style+' This command can only be used in a group!');
 }
 }
+break;
 case "menu":
     if (!isRegister) return reply(registerMessage);
 reply(
