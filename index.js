@@ -142,7 +142,7 @@ style+` Menu:
 .me
 .register
 .style
-.info
+.sticker
 .users
 .resend
 .leaderboard
@@ -307,6 +307,18 @@ case "sticker":
         } else {
             reply(style+" reply to a picture")
         }
+    } catch (err){
+        reply(style+" there was an error. Solution: send the image you want to convert again")
+    }
+    }
+break;
+case "img":
+    img()
+    async function img(){
+        try {
+        const encmedia = await fs.readFileSync('./image.png')
+        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
+
     } catch (err){
         reply(style+" there was an error. Solution: send the image you want to convert again")
     }
