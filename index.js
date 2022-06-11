@@ -10,6 +10,7 @@ const client = new Client({
 
 mysql = require('mysql'); 
 const { exec } = require('child_process');
+const { read } = require('fs');
 var connection = mysql.createConnection({
 host     : 'localhost',
 user     : 'root',
@@ -57,6 +58,7 @@ if(msg.author=="undefined") {
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
 var isRegister = false;
+var isQuote = msg.hasQuotedMsg
 
 if (msg.body.split("")[0]==".") {
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -269,6 +271,16 @@ connection.query(
          reply(user.replace(/["]+/g, ''));
         }
     });
+break;
+case "resend":
+    if (!isRegister) return reply(registerMessage)
+    if (!isQuote) return reply("please quote a media")
+
+    const quotedMsg = await msg.getQuotedMessage();
+    if (quotedMsg.hasMedia) {
+        const attachmentData = await quotedMsg.downloadMedia();
+        client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
+    }
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
