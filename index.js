@@ -40,16 +40,13 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+    
     console.log('MESSAGE RECEIVED', msg);
-
-const command = msg.body.slice(1).trim().split(/ +/).shift().toLowerCase()
-const is = budy.slice(0).trim().split(/ +/).shift().toLowerCase()
-const args = msg.body.trim().split(/ +/).slice(1)
-const value = args.join(' ')
+    const value = removeFirstWord(msg.body)
+    const args = msg.body.split(" ")
 
 if (msg.body.split("")[0]==".") {
-
-switch(command) {
+switch(msg.body.slice(1).split(" ")[0]) {
 
 case "bot":
             msg.reply('Hai '+msg._data.notifyName);
@@ -91,7 +88,7 @@ case "register":
                     , function (error, results, fields) {
                         if (error) throw error;
                         console.log('Yey a new registration! >_< ');
-                        msg.reply("registration successfull "+args[0])
+                        msg.reply("registration successfull "+args[1])
                     });
                 }
         });
@@ -107,3 +104,13 @@ default:
 
 
 client.initialize();
+
+function removeFirstWord(str) {
+    const indexOfSpace = str.indexOf(' ');
+  
+    if (indexOfSpace === -1) {
+      return '';
+    }
+  
+    return str.substring(indexOfSpace + 1);
+  }
