@@ -387,7 +387,7 @@ case "sticker":
     }
     }
 break;
-case "img":
+case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     img()
     async function img(){
     try  {
