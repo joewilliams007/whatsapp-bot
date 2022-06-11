@@ -45,11 +45,6 @@ const args = msg.body.split(" ")
 var number;
 const isGroup = msg.isGroup
 number = msg.author
-if (number = "undefined") {
-    number = msg.from
-} else if (number = undefined) {
-    number = msg.from
-}
 
 console.log("NUMBER IS "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
