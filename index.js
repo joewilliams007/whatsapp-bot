@@ -71,12 +71,30 @@ WHERE number="${number}"`
 if (error) serverInfo(error.message);
 var res = JSON.parse(JSON.stringify(results))
 
-var style = res[0].style
-var username = res[0].username
-var xp = res[0].xp
-var coins = res[0].coins
-var bio = res[0].bio
-var date = res[0].date
+var style; 
+try {
+style = res[0].style
+} catch (err) {}
+try {
+var username; 
+username = res[0].username
+} catch (err) {}
+try {
+var xp; 
+xp = res[0].xp
+} catch (err) {}
+try {
+var coins; 
+coins = res[0].coins
+} catch (err) {}
+try {
+var bio; 
+bio = res[0].bio
+} catch (err) {}
+try {
+var date; 
+date = res[0].date
+} catch (err) {}
 
 switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
