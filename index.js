@@ -67,10 +67,11 @@ case "register":
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT EXISTS(SELECT * AS Exist FROM Users WHERE number='${number}');`
-            , function (error, resultsN, fields) {
+            `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}')`
+
+            , function (error, results1, fields) {
             
-                console.log(resultsN[0].Exist)
+                console.log(results1[0].RowCount)
 
 
              /*   if (Number(accounts)>0) {
