@@ -1,6 +1,6 @@
 const qrcode = require('qrcode-terminal');
 
-const { Client, LocalAuth, Location, List, Buttons } = require('whatsapp-web.js');
+const { Client, LocalAuth, Location, List, Buttons, MessageMedia } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
 const client = new Client({
@@ -178,9 +178,9 @@ case "join":
     async function join() {
         try {
             await client.acceptInvite(inviteCode);
-            msg.reply('Joined the group!');
+            reply('Joined the group!');
         } catch (e) {
-            msg.reply('That invite code seems to be invalid.');
+            reply('That invite code seems to be invalid.');
         }
     }
 break;
