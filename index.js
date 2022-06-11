@@ -1,5 +1,5 @@
 const qrcode = require('qrcode-terminal');
-
+const fs = require('fs');
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
@@ -291,7 +291,7 @@ case "resend":
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
            // const attachmentData = await quotedMsg.downloadMedia();
-            var imageFile = await fs.readFileSync('./image.png')
+            var imageFile = await fs.readFileSync('./image.png').toString('base64')
           //  client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
             client.sendMessage(msg.from, imageFile, { caption: 'Here\'s your requested media.' });
         }
