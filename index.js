@@ -109,6 +109,19 @@ case "bot":
     if (!isRegister) return reply(registerMessage);
        reply(style+' Hai '+username);
 break;
+case "menu":
+    if (!isRegister) return reply(registerMessage);
+reply(
+    
+style+` Menu:
+
+.bot
+.me
+.register
+.style
+.info
+.delete`);
+break;
 case "delete":
     if (!isRegister) return reply(registerMessage);
 
@@ -129,7 +142,7 @@ case "info":
 async function info() {
     let chat = await msg.getChat();
     if (!isRegister) return reply(registerMessage);
-    if (chat.isGroup) {
+    if (chat.isGroup) return reply(style+' This command can only be used in a group!');
 
 reply(style+` *Group Details*
 Name: 
@@ -147,23 +160,19 @@ ${chat.createdAt.toString()}
 Participant count: 
 
 ${chat.participants.length}`);
-    } else {
-            reply(style+' This command can only be used in a group!');
-}
 }
 break;
-case "menu":
-    if (!isRegister) return reply(registerMessage);
-reply(
-    
-style+` Menu:
+case "button":
+let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
+client.sendMessage(msg.from, button);
+break;
+case "list":
+let sections = [{title:'sectionTitle',rows:[{title:'ListItem1', description: 'desc'},{title:'ListItem2'}]}];
+let list = new List('List body','btnText',sections,'Title','footer');
+client.sendMessage(msg.from, list);
+break;
 
-.bot
-.me
-.register
-.style
-.delete`);
-break;
+
 
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
