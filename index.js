@@ -67,7 +67,7 @@ case "register":
         msg.reply("please enter a username")
     } else {
         connection.query( 
-            `SELECT AS Exist EXISTS(SELECT * FROM Users WHERE number='${number}');`
+            `SELECT EXISTS(SELECT * AS Exist FROM Users WHERE number='${number}');`
             , function (error, resultsN, fields) {
             
                 console.log(resultsN[0].Exist)
