@@ -239,6 +239,35 @@ if (args.length<2) return reply(style+" please enter a style")
     set("style", args[1])
     reply(args[1]+" style has been updated")
 break;
+// leaderboard ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "leaderboard":
+case "leader":
+if (!isRegister) return reply(registerMessage)
+connection.query(
+    `SELECT *
+    FROM Users
+    ORDER BY xp DESC`
+    , function (error, results, fields) {
+        if (error) serverInfo(error.message);
+        reply(leaderboard(JSON.parse(JSON.stringify(results))))
+
+        async function leaderboard(res){
+            result = "";
+                var leaderboard = "LEADERBOARD";
+                var position = 0	
+                for (const item of res.values()) {  
+                    if (Number(JSON.stringify(item.xp))<1){
+                    } else {
+                    position++
+                        leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.xp)+" xp"
+                    }
+                }
+                    
+        return leaderboard;
+        }
+    });
+break;
+// default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
     if (!isRegister) return reply(registerMessage)
         reply(style+" what even is this command")
