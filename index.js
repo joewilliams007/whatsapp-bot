@@ -171,9 +171,19 @@ let sections = [{title:'sectionTitle',rows:[{title:'ListItem1', description: 'de
 let list = new List('List body','btnText',sections,'Title','footer');
 client.sendMessage(msg.from, list);
 break;
-
-
-
+case "join":
+    if (!isRegister) return reply(registerMessage);
+    const inviteCode = args[1];
+    join()
+    async function join() {
+        try {
+            await client.acceptInvite(inviteCode);
+            msg.reply('Joined the group!');
+        } catch (e) {
+            msg.reply('That invite code seems to be invalid.');
+        }
+    }
+break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
 if (isRegister) return reply(style+" you are already registered")
