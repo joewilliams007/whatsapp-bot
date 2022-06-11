@@ -299,8 +299,9 @@ break;
 case "sticker":
     sticker()
     async function sticker(){
-        let encmedia = await msg.getQuotedMessage();
-        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: msg.packname, stickerAuthor: msg.author, stickerCategories: ['😎','😾','🗿'] })
+        const quotedMsg = await msg.getQuotedMessage();
+        let encmedia = await quotedMsg.downloadMedia();
+        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: msg.author, stickerCategories: ['😎','😾','🗿'] })
     }
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
