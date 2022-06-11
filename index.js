@@ -166,6 +166,7 @@ style+` Menu:
 .fact
 .gay
 .love
+.truth
 .dare
 .animal
 .leaderboard
