@@ -185,6 +185,7 @@ style+` Menu:
 .truth
 .dare
 .animal
+.transfer
 .leaderboard
 .users
 .delete
