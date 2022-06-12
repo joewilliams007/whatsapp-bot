@@ -68,6 +68,8 @@ if(msg.author=="undefined") {
 // console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
 const registerMessage = "you are not registered. To register send the message: .register +yourname"
+const vipMessage = "this command is only for vip users"
+const ownerMessage = "this command is only for the owner"
 var isRegister = false;
 var isQuote = msg.hasQuotedMsg
 
@@ -131,6 +133,27 @@ var last_claim;
 try {
 last_claim = res[0].last_claim
 } catch (err) {}
+var status;
+try {
+status = res[0].status
+} catch (err) {}
+
+var isNormal = false;
+var isVip = false;
+var isOwner = false;
+
+if (status == "normal") {
+    isNormal = true;
+} else if (status == "vip") {
+    isNormal = true;
+    isVip = true;
+} else if (status == "owner") {
+    isNormal = true;
+    isVip = true;
+    isOwner = true;
+} else if (status == "banned") {
+    
+}
 
 if (isRegister) {
     connection.query(
@@ -497,6 +520,34 @@ if (args.length<2) return reply(style+" please enter a biography")
     set("bio", value)
     reply(style+" bio has been updated")
 break;
+// make vip ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "vip":
+if (!isRegister) return reply(registerMessage)
+if (!isOwner) return reply(ownerMessage)
+if (args.length<2) return reply(style+" please enter a user id")
+    connection.query(
+    `UPDATE Users
+    SET status = "vip"
+    WHERE user_id=${args[1]}`
+    , function (error, results, fields) {
+        if (error) reply(error.message);
+    });
+    reply(style+" the user with the id "+args[1]+" has been promoted to VIP!")
+break;
+// make vip ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "removevip":
+if (!isRegister) return reply(registerMessage)
+if (!isOwner) return reply(ownerMessage)
+if (args.length<2) return reply(style+" please enter a user id")
+    connection.query(
+    `UPDATE Users
+    SET status = "normal"
+    WHERE user_id=${args[1]}`
+    , function (error, results, fields) {
+        if (error) reply(error.message);
+    });
+    reply(style+" the user with the id "+args[1]+" has been demoted!")
+break;
 // leaderboard ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "leaderboard":
 case "leader":
@@ -712,6 +763,7 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 break;
 case "tagall":
     if (!isRegister) return reply(registerMessage)
+    if (!isVip) return reply(vipMessage)
     tagall()
     async function tagall() {
     const chat = await msg.getChat();

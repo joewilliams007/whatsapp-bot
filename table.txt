@@ -18,5 +18,6 @@ PRIMARY KEY ( user_id )
 );
 
 ALTER TABLE Users ADD last_claim VARCHAR(255) DEFAULT "today";
+ALTER TABLE Users ADD status VARCHAR(255) DEFAULT "normal";
 
 ALTER TABLE Users CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
