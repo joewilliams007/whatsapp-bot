@@ -323,7 +323,7 @@ var amount = args[1]
             connection.query(
                 `UPDATE Users
                 SET coins = coins + ${amount}
-                WHERE number='${args[2].replace("@","")}%'`
+                WHERE number='${args[2]}@c.us'`
                 , function (error, results, fields) {
 
                     if (error) {
