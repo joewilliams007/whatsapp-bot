@@ -634,7 +634,7 @@ search()
 async function search() {
     var yt = require('youtube-search-without-api-key');
     var videos = await yt.search(`${value}`);
-    var results;
+    var results = "found "+videos.length+" results";
 
     for (const item of videos.values()) {  
         results+="\n- - - - - - - - - - - - - - - - - -\n"+style+" "
