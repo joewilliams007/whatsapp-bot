@@ -633,12 +633,22 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
 break;
 case "song": 
+if (!isRegister) return reply(registerMessage)
+if (args.length < 2) return reply(`${style} Please enter song name`)	
 
-async function sendMediaAudio(link,number,text) {
-    const Audio = await MessageMedia.fromFilePath('clouds.mp3'); 
-    client.sendMessage(number, Audio, {caption: text}).then(function(res){}).catch(function(err){});
-}
-sendMediaAudio(msg.from, 'Hi').then(function (){});
+reply(`${style} Sending...`)														
+ran= getRandom('.opus')
+exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (err) => {
+                                    
+        if (err) return reply(`${style} Error\n\n\n`+err.message)
+        
+        sendMediaAudio(ran,msg.from, style+' Heres your song').then(function (){});
+
+        async function sendMediaAudio(path,number,text) {
+            const Audio = await MessageMedia.fromFilePath(path); 
+            client.sendMessage(number, Audio, {caption: text}).then(function(res){}).catch(function(err){});
+        }
+    })	
 
 
 break;
