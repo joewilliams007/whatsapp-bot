@@ -303,6 +303,49 @@ connection.query(
 
     reply(style+" claimed 25$")
 break;
+// transfer ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "transfer":
+if (!isRegister) return reply(registerMessage)
+if (args.length<3) return reply("please tag the person you want to send money and enter amount. Example: .transfer 50 @stardash")
+if (Number(args[1])<1||Number(args[1])==NaN) return reply("please enter a valid amount")
+
+var amount = args[1]
+
+    connection.query(
+    `UPDATE Users
+    SET coins = coins - ${amount}
+    WHERE number='${args[2].replace("@","")}'`
+    , function (error, results, fields) {
+        if (error) {
+            console.log(error.message);
+            reply(style+" there was an error transfering your money+\n\n"+error.message)
+        } else {
+            connection.query(
+                `UPDATE Users
+                SET coins = coins + ${amount}
+                WHERE number='${number}'`
+                , function (error, results, fields) {
+
+                    if (error) {
+                        console.log(error.message);
+                        reply(style+" there was an error with the account you targeted. cancelling the transfer+\n\n"+error.message)
+
+                        connection.query(
+                            `UPDATE Users
+                            SET coins = coins + ${amount}
+                            WHERE number='${args[2].replace("@","")}%'`
+                            , function (error, results, fields) {
+
+                        });
+
+                    } else {
+                        reply(style+" successfully transfered "+amount+"$")
+                    }   
+            });
+        }
+    });
+
+break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
 if (isRegister) return reply(style+" you are already registered")
