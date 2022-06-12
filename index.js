@@ -625,26 +625,22 @@ case "sticker":
 
 break;
 case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
-   /* img()
-    async function img(){
-    try  {
-        const media = await MessageMedia.fromFilePath('./image.png');
-        client.sendMessage(media);
-
-    } catch (err){
-        reply(style+" there was an error. Solution: send the image you want to convert again")
-    }
-    }*/
 
     async function sendMedia(link,number,text) {
-        const mediaLink = await MessageMedia.fromFilePath('./image.png');
+        const mediaLink = await MessageMedia.fromUrl(link); // await MessageMedia.fromFilePath('./image.png');
         client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     }
     sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
 break;
 case "song": 
-        let media = MessageMedia.fromFilePath('mp4/ytmp3.ogg');
-        chat.sendMessage(media,{ sendAudioAsVoice: true });
+
+async function sendMedia(link,number,text) {
+    const Audio = await MessageMedia.fromFilePath('clouds.mp3'); // await MessageMedia.fromFilePath('./image.png');
+    client.sendMessage(number, Audio, {caption: text}).then(function(res){}).catch(function(err){});
+}
+sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
+
+
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
