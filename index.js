@@ -671,7 +671,7 @@ var yt = require('youtube-search-without-api-key');
 var videos = await yt.search(`${value}`);
 
 reply(
-`${style} _${videos[0].title_}
+`${style} _${videos[0].title}_
 💎 _${videos[0].duration_raw}_ min`)
 }
 
