@@ -716,7 +716,7 @@ case "video":
     async function ytb() {
 
         const media = MessageMedia.fromFilePath('./sending.mp4');
-        chat.sendMessage(number,media);
+        client.sendMessage(number,media);
 
 
     const Innertube = require('youtubei.js');
