@@ -636,6 +636,10 @@ case "song":
 if (!isRegister) return reply(registerMessage)
 if (args.length < 2) return reply(`${style} Please enter song name`)	
 
+var getRandom = (ext) => {
+	return `${Math.floor(Math.random() * 10000)}${ext}`;
+};
+
 reply(`${style} Sending...`)														
 ran= getRandom('.opus')
 exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (err) => {
