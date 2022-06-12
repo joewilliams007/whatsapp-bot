@@ -725,7 +725,7 @@ case "tagall":
         text += `@${participant.id.user} `;
     }
 
-    await client.sendMessage(number, text, { mentions });
+    await client.sendMessage(msg.from, text, { mentions });
 
 }
 break;
