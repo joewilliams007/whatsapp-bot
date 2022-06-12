@@ -712,11 +712,11 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 break;
 // video ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "video":
-    ytb()
-    async function ytb() {
+    ytb(msg)
+    async function ytb(msg) {
 
         const media = await MessageMedia.fromFilePath('./sending.mp4');
-        client.sendMessage(number,media, {caption: "text"}).then(function(res){}).catch(function(err){});
+        client.sendMessage(msg.from,media, {caption: "text"}).then(function(res){}).catch(function(err){});
 
 
   /*  const Innertube = require('youtubei.js');
