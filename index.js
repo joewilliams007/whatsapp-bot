@@ -512,9 +512,9 @@ connection.query(
                     position++
                     if (position == 1) {
                         leaderboard+="\n 🥇 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
-                    } else if (postion == 2) {
+                    } else if (position == 2) {
                         leaderboard+="\n 🥈 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
-                    } else if (postion == 3) {
+                    } else if (position == 3) {
                         leaderboard+="\n 🥉 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     } else {
                      leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
