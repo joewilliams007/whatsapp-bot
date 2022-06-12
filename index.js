@@ -664,6 +664,8 @@ var getRandom = (ext) => {
 };
 
 	
+songData()
+async function songData() {
 
 var yt = require('youtube-search-without-api-key');
 var videos = await yt.search(`${value}`);
@@ -685,6 +687,8 @@ reply(
 👍 _Likes ${likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_
 👎 _Dislikes ${dislikes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_`)
 })
+
+}
 
 ran= getRandom('.opus')
 exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (err) => {
