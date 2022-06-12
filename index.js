@@ -339,7 +339,7 @@ var amount = args[1]
                         });
 
                     } else {
-                        reply(style+" successfully transfered "+amount+"$ to number "+args[2].replace("@",""))
+                        reply(style+" successfully transfered "+amount+"$ to user"+args[2])
                     }   
             });
         }
