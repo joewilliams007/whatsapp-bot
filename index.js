@@ -639,8 +639,8 @@ async function search() {
         results+="\n- - - - - - - - - - - - - - - - - -\n"+style+" "
         +JSON.stringify(item.title)+"\n🕰️ "
         +JSON.stringify(item.duration_raw)+"\n📦 "
-        +JSON.stringify(item.videos[0].snippet.publishedAt)+"\n📡"
-        +JSON.stringify(item.videos[0].url)
+        +JSON.stringify(item.snippet.publishedAt)+"\n📡"
+        +JSON.stringify(item.url)
     }
     reply(results)
 }
