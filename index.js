@@ -140,7 +140,7 @@ if (isRegister) {
             if (error) console.log(error.message);
 });
 }
-switch(msg.body.slice(1).split(" ")[0].toLocaleLowerCase) {
+switch(msg.body.slice(1).split(" ")[0]) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
     if (!isRegister) return reply(registerMessage);
