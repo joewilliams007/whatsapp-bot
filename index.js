@@ -748,7 +748,7 @@ case "video":
       console.info('[YOUTUBE.JS]', 'Done!');
 
       async function sendVid(link,number,text) {
-        const mediaLink = await MessageMedia.fromFilePath('./sending.mp4');
+        const MessageMedia = await MessageMedia.fromFilePath('./sending.mp4');
         client.sendMessage(number, MessageMedia, {caption: text}).then(function(res){}).catch(function(err){});
     }
     sendVid('./sending.mp4', msg.from, 'Hi').then(function (){});
