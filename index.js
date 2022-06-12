@@ -711,11 +711,12 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 
 break;
 case "tagall":
+    if (!isRegister) return reply(registerMessage)
     tagall()
     async function tagall() {
     const chat = await msg.getChat();
         
-    let text = "";
+    let text = "\n - ";
     let mentions = [];
 
     for(let participant of chat.participants) {
