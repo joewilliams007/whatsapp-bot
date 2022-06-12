@@ -430,7 +430,6 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" style: "+style
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
-    +"\n"+style+" number: +"+number.split("@")[0]
     +"\n"+style+" userid: "+id
     +"\n"+style+" account created: "+finalTime1)
 
