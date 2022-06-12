@@ -314,7 +314,7 @@ var amount = args[1]
     connection.query(
     `UPDATE Users
     SET coins = coins - ${amount}
-    WHERE number='${args[2].replace("@","")}'`
+    WHERE number='${number}'`
     , function (error, results, fields) {
         if (error) {
             console.log(error.message);
@@ -323,7 +323,7 @@ var amount = args[1]
             connection.query(
                 `UPDATE Users
                 SET coins = coins + ${amount}
-                WHERE number='${number}'`
+                WHERE number='${args[2].replace("@","")}%'`
                 , function (error, results, fields) {
 
                     if (error) {
@@ -333,7 +333,7 @@ var amount = args[1]
                         connection.query(
                             `UPDATE Users
                             SET coins = coins + ${amount}
-                            WHERE number='${args[2].replace("@","")}%'`
+                            WHERE number='${number}%'`
                             , function (error, results, fields) {
 
                         });
