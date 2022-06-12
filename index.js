@@ -140,7 +140,7 @@ if (isRegister) {
             if (error) console.log(error.message);
 });
 }
-switch(msg.body.slice(1).split(" ")[0]) {
+switch(msg.body.slice(1).split(" ")[0].toLocaleLowerCase) {
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
     if (!isRegister) return reply(registerMessage);
@@ -600,13 +600,20 @@ case "resend":
     }
 break;
 case "sticker":
-    sticker()
-    async function sticker(){
+    if (!isRegister) return reply(registerMessage)
+    if (!isQuote) return reply("please quote a media")
+    
+    if (args.length > 1) {
+        sticker(args[1])
+    } else {
+        sticker("StarDash")
+    }
+    async function sticker(name){
         try {
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
         const encmedia = await quotedMsg.downloadMedia();
-        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: "StarDash", stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
+        client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: name, stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
         } else {
             reply(style+" reply to a picture")
         }
@@ -614,6 +621,8 @@ case "sticker":
         reply(style+" there was an error. Solution: send the image you want to convert again")
     }
     }
+
+
 break;
 case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     img()
