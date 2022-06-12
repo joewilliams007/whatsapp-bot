@@ -510,11 +510,11 @@ connection.query(
                 var position = 0	
                 for (const item of res.values()) {  
                     position++
-                    if ( position = 1) {
+                    if (position == 1) {
                         leaderboard+="\n 🥇 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
-                    } else if (postion = 2) {
+                    } else if (postion == 2) {
                         leaderboard+="\n 🥈 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
-                    } else if (postion = 3) {
+                    } else if (postion == 3) {
                         leaderboard+="\n 🥉 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     } else {
                      leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
