@@ -339,7 +339,8 @@ var amount = args[1]
                         });
 
                     } else {
-                        reply(style+" successfully transfered "+amount+"$ to user"+args[2])
+                        var urNEw = Number(coins)-Number(amount)
+                        reply(style+" successfully transfered "+amount+"$ to user with id "+args[2]+" you now have "+urNEw+"$ left")
                     }   
             });
         }
