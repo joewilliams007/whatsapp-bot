@@ -669,22 +669,10 @@ async function songData() {
 
 var yt = require('youtube-search-without-api-key');
 var videos = await yt.search(`${value}`);
-var getJSON = require('get-json')
-
-getJSON(`https://returnyoutubedislike.com/votes?videoId=${videos[0].id.videoId}`, function(error, resyt){
-
-var likes = resyt.likes
-var dislikes = resyt.dislikes
-var views = resyt.viewCount
 
 reply(
 `${style} _${videos[0].title_}
-💎 _${videos[0].duration_raw}_ min
-📷 _${views.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} Views_
-👍 _Likes ${likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_
-👎 _Dislikes ${dislikes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_`)
-})
-
+💎 _${videos[0].duration_raw}_ min`)
 }
 
 ran= getRandom('.opus')
