@@ -618,7 +618,7 @@ case "sticker":
             reply(style+" reply to a picture")
         }
     } catch (err){
-        reply(style+" there was an error lol\n\nerror message: \n"+err.message)
+        reply(style+" there was an error lol cryptic details:\n\n\n"+err.message)
     }
     }
 
