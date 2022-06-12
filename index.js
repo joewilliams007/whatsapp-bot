@@ -710,6 +710,25 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 }
 
 break;
+case "tagall":
+    tagall()
+    async function tagall() {
+    const chat = await msg.getChat();
+        
+    let text = "";
+    let mentions = [];
+
+    for(let participant of chat.participants) {
+        const contact = await client.getContactById(participant.id._serialized);
+        
+        mentions.push(contact);
+        text += `@${participant.id.user} `;
+    }
+
+    await client.sendMessage(text, { mentions });
+
+}
+break;
 // video ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "video":
     ytb(msg)
