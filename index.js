@@ -168,6 +168,7 @@ style+` Menu:
 
 .bot
 .me
+.search
 .song
 .user
 .register
@@ -642,7 +643,7 @@ async function search() {
         +JSON.stringify(item.snippet.publishedAt)+"\n📡"
         +JSON.stringify(item.url)
     }
-    reply(results)
+    reply(results.replace(/["]+/g, ''));
 }
 
 break;
