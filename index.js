@@ -637,10 +637,10 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     }*/
 
     async function sendMedia(link,number,text) {
-        const mediaLink = await MessageMedia.fromUrl(link);
+        const mediaLink = await MessageMedia.fromFilePath('./image.png');
         client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     }
-    sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', '79999999999@c.us', 'Hi').then(function (){});
+    sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
 break;
 case "song": 
         let media = MessageMedia.fromFilePath('mp4/ytmp3.ogg');
