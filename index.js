@@ -625,6 +625,27 @@ case "sticker":
 
 
 break;
+case "search":
+if (!isRegister) return reply(registerMessage)
+if (args.length < 2) return reply(`${style} Please enter search name`)
+
+search()
+async function search() {
+    var yt = require('youtube-search-without-api-key');
+    var videos = await yt.search(`${value}`);
+    var results;
+
+    for (const item of videos.values()) {  
+        results+="\n- - - - - - - - - - - - - - - - - -\n"+style+" "
+        +JSON.stringify(item.title)+"\n🕰️ "
+        +JSON.stringify(item.duration_raw)+"\n📦 "
+        +JSON.stringify(item.videos[0].snippet.publishedAt)+"\n📡"
+        +JSON.stringify(item.videos[0].url)
+    }
+    reply(results)
+}
+
+break;
 case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
 
     async function sendMedia(link,number,text) {
