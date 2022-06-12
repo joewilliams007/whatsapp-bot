@@ -716,10 +716,10 @@ case "video":
     async function ytb() {
 
         const media = await MessageMedia.fromFilePath('./sending.mp4');
-        client.sendMessage(number,media);
+        client.sendMessage(number,media, {caption: "text"}).then(function(res){}).catch(function(err){});
 
 
-    const Innertube = require('youtubei.js');
+  /*  const Innertube = require('youtubei.js');
     
 
     const youtube = await new Innertube();
@@ -761,7 +761,7 @@ case "video":
     });
       
     stream.on('error', (err) => console.error('[ERROR]', err)); 
-
+        */
 }
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
