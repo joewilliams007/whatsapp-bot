@@ -628,13 +628,17 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     img()
     async function img(){
     try  {
-        const media = MessageMedia.fromFilePath('./image.png');
+        const media = await MessageMedia.fromFilePath('./image.png');
         client.sendMessage(media);
 
     } catch (err){
         reply(style+" there was an error. Solution: send the image you want to convert again")
     }
     }
+break;
+case "song": 
+        let media = MessageMedia.fromFilePath('mp4/ytmp3.ogg');
+        chat.sendMessage(media,{ sendAudioAsVoice: true });
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 default:
