@@ -21,6 +21,7 @@ const client = new Client({
 mysql = require('mysql'); 
 const { exec } = require('child_process');
 const { read } = require('fs');
+const { title } = require('process');
 var connection = mysql.createConnection({
 host     : 'localhost',
 user     : 'root',
@@ -725,7 +726,7 @@ case "video":
       type: 'videoandaudio' 
     });
       
-    stream.pipe(fs.createWriteStream(`./${search.videos[0].id}.mp4`));
+    stream.pipe(fs.createWriteStream(`./sending.mp4`));
      
     stream.on('start', () => {
       console.info('[YOUTUBE.JS]', 'Starting now!');
@@ -745,6 +746,13 @@ case "video":
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
       console.info('[YOUTUBE.JS]', 'Done!');
+
+      async function sendVid(link,number,text) {
+        const mediaLink = await MessageMedia.fromFilePath('./sending.mp4');
+        client.sendMessage(number, MessageMedia, {caption: text}).then(function(res){}).catch(function(err){});
+    }
+    sendVid('./sending.mp4', msg.from, 'Hi').then(function (){});
+
     });
       
     stream.on('error', (err) => console.error('[ERROR]', err)); 
