@@ -625,7 +625,7 @@ case "sticker":
 
 break;
 case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
-    img()
+   /* img()
     async function img(){
     try  {
         const media = await MessageMedia.fromFilePath('./image.png');
@@ -634,7 +634,13 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     } catch (err){
         reply(style+" there was an error. Solution: send the image you want to convert again")
     }
+    }*/
+
+    async function sendMedia(link,number,text) {
+        const mediaLink = await MessageMedia.fromUrl(link);
+        client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     }
+    sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', '79999999999@c.us', 'Hi').then(function (){});
 break;
 case "song": 
         let media = MessageMedia.fromFilePath('mp4/ytmp3.ogg');
