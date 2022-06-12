@@ -168,6 +168,7 @@ style+` Menu:
 
 .bot
 .me
+.song
 .user
 .register
 .style
@@ -650,7 +651,7 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 
         async function sendMediaAudio(path,number,text) {
             const Audio = await MessageMedia.fromFilePath(path); 
-            client.sendMessage(number, Audio, {caption: text}).then(function(res){}).catch(function(err){});
+            client.sendMessage(number, Audio, {caption: text, sendAudioAsVoice: true}).then(function(res){}).catch(function(err){});
         }
     })	
 
