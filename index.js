@@ -638,7 +638,7 @@ async function search() {
 
     for (const item of videos.values()) {  
         results+="\n- - - - - - - - - - - - - - - - - -\n"+style+" "
-        +JSON.stringify(item.title)+"\n🕰️ "
+        +JSON.stringify(item.title)+"\n💎 "
         +JSON.stringify(item.duration_raw)+"\n📦 "
         +JSON.stringify(item.snippet.publishedAt)+"\n📡"
         +JSON.stringify(item.url)
