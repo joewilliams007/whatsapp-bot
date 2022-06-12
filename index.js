@@ -511,13 +511,13 @@ connection.query(
                 for (const item of res.values()) {  
                     position++
                     if (position == 1) {
-                        leaderboard+="\n 🥇 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                        leaderboard+="\n🥇 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     } else if (position == 2) {
-                        leaderboard+="\n 🥈 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
-                    } else if (position == 3) {
+                        leaderboard+="\n🥈 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                    } else if (position = 3) {
                         leaderboard+="\n 🥉 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands\n"
                     } else {
-                     leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                     leaderboard+="\n  "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     }
                 }
                     
