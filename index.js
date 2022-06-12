@@ -602,7 +602,7 @@ break;
 case "sticker":
     if (!isRegister) return reply(registerMessage)
     if (!isQuote) return reply("please quote a media")
-    
+
     if (args.length > 1) {
         sticker(args[1])
     } else {
@@ -618,7 +618,7 @@ case "sticker":
             reply(style+" reply to a picture")
         }
     } catch (err){
-        reply(style+" there was an error. Solution: send the image you want to convert again")
+        reply(style+" there was an error lol\n\nerror message: \n"+err.message)
     }
     }
 
