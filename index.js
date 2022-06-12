@@ -716,14 +716,14 @@ case "tagall":
     async function tagall() {
     const chat = await msg.getChat();
         
-    let text = "\n - ";
+    let text = " ";
     let mentions = [];
 
     for(let participant of chat.participants) {
         const contact = await client.getContactById(participant.id._serialized);
         
         mentions.push(contact);
-        text += `@${participant.id.user} `;
+        text += `\n - @${participant.id.user} `;
     }
 
     await client.sendMessage(msg.from, text, { mentions });
