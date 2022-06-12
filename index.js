@@ -156,9 +156,9 @@ case "menu":
     var yourDate = new Date()
     var claim;
     if (last_claim==yourDate.toISOString().split('T')[0]) {
-        claim = "already claimed today"
+        claim = "\nalready claimed today"
     } else {
-        claim = ".claim for free $$"
+        claim = "\n.claim for free $$"
     }
 
 reply(
