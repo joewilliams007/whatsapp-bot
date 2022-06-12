@@ -682,7 +682,6 @@ var dislikes = resyt.dislikes
 reply(
 `${style} _${videos[0].title_}
 💎 _${videos[0].duration_raw}_ min
-⭐ _${rating.trim()}/5 Stars_
 📷 _${views.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} Views_
 👍 _Likes ${likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_
 👎 _Dislikes ${dislikes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_`)
