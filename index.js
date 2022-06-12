@@ -673,11 +673,9 @@ var getJSON = require('get-json')
 
 getJSON(`https://returnyoutubedislike.com/votes?videoId=${videos[0].id.videoId}`, function(error, resyt){
 
-var _rating = resyt.rating
-var rating = _rating.toString()
-rating = rating.substring(0, 3);
 var likes = resyt.likes
 var dislikes = resyt.dislikes
+var views = resyt.viewCount
 
 reply(
 `${style} _${videos[0].title_}
