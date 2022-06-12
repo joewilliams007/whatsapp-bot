@@ -714,6 +714,11 @@ break;
 case "video":
     ytb()
     async function ytb() {
+
+        const media = MessageMedia.fromFilePath('./path/to/image.png');
+        chat.sendMessage(number,media);
+
+
     const Innertube = require('youtubei.js');
     
 
