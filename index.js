@@ -434,6 +434,10 @@ try {
 var id; 
 id = res[0].user_id
 } catch (err) {}
+try {
+    var status; 
+    status = res[0].status
+} catch (err) {}
 
 var finalTime;
 var time = (dateInSec - Number(date))
@@ -461,6 +465,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" bio: "+bio
     +"\n"+style+" commands: "+commands
     +"\n"+style+" userid: "+id
+    +"\n"+style+" status: "+status
     +"\n"+style+" account created: "+finalTime1)
 
 });
@@ -496,6 +501,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" commands: "+commands
     +"\n"+style+" number: +"+number.split("@")[0]
     +"\n"+style+" userid: "+id
+    +"\n"+style+" status: "+status
     +"\n"+style+" account created: "+finalTime1)
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
