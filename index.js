@@ -634,11 +634,11 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
 break;
 case "song": 
 
-async function sendMedia(link,number,text) {
+async function sendMediaAu(link,number,text) {
     const Audio = await MessageMedia.fromFilePath('clouds.mp3'); // await MessageMedia.fromFilePath('./image.png');
     client.sendMessage(number, Audio, {caption: text}).then(function(res){}).catch(function(err){});
 }
-sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
+sendMediaAu('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
 
 
 break;
