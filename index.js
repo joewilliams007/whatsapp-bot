@@ -273,7 +273,7 @@ if (winAmount<0) {
 
     connection.query(
         `UPDATE Users
-        SET coins = "${coins+winAmount}"
+        SET coins = "${coins+winAmount}", xp = xp + 2
         WHERE number='${number}'`
         , function (error, results, fields) {
             if (error) console.log(error.message);
@@ -286,9 +286,11 @@ ${slot4}${slot5}${slot6}
 - - - - - - - - - \n${slot7}${slot8}${slot9}
 
 you ${looseorwin} ${winAmount}$!
-you have $${coins+winAmount} left!`)
+you have $${coins+winAmount} left!
+... gained xp!`)
 
 break;
+
 // claim ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "claim":
 if (!isRegister) return reply(registerMessage)
@@ -663,6 +665,7 @@ case "img": // https://wwebjs.dev/guide/handling-attachments.html#sending-media
     }
     sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function (){});
 break;
+// song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "song": 
 if (!isRegister) return reply(registerMessage)
 if (args.length < 2) return reply(`${style} Please enter song name`)	
@@ -671,10 +674,8 @@ var getRandom = (ext) => {
 	return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
 
-	
 songData()
 async function songData() {
-
 
 var yt = require('youtube-search-without-api-key');
 var videos = await yt.search(`${value}`);
@@ -706,6 +707,47 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
 } catch (err) {
     reply("error\n\n"+err.message)
 }
+
+break;
+// video ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "video":
+
+    const Innertube = require('youtubei.js');
+    
+
+    const youtube = await new Innertube();
+    const search = await youtube.search('Sound Coming From A Massive Black Hole - Anton Petrov');
+      
+    const stream = youtube.download(search.videos[0].id, {
+      format: 'mp4', // defaults to mp4
+      quality: '720p', // falls back to 360p if a specific quality isn't available
+      type: 'videoandaudio' 
+    });
+      
+    stream.pipe(fs.createWriteStream(`./${search.videos[0].id}.mp4`));
+     
+    stream.on('start', () => {
+      console.info('[YOUTUBE.JS]', 'Starting now!');
+    });
+      
+    stream.on('info', (info) => {
+      console.info('[YOUTUBE.JS]', `Downloading ${info.video_details.title} by ${info.video_details.metadata.channel_name}`);
+    });
+      
+    stream.on('progress', (info) => {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      process.stdout.write(`[YOUTUBE.JS] Downloaded ${info.percentage}% (${info.downloaded_size}MB) of ${info.size}MB`);
+    });
+      
+    stream.on('end', () => {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      console.info('[YOUTUBE.JS]', 'Done!');
+    });
+      
+    stream.on('error', (err) => console.error('[ERROR]', err)); 
+
 
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
