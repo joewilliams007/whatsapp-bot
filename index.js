@@ -637,7 +637,7 @@ async function search() {
     var results = "found "+videos.length+" results";
 
     for (const item of videos.values()) {  
-        results+="\n- - - - - - - - - - - - - - - - - -\n"+style+" "
+        results+="\n\n"+style+" "
         +JSON.stringify(item.title)+"\n💎 "
         +JSON.stringify(item.duration_raw)+"\n📦 "
         +JSON.stringify(item.snippet.publishedAt)+"\n📡"
@@ -663,7 +663,29 @@ var getRandom = (ext) => {
 	return `${Math.floor(Math.random() * 10000)}${ext}`;
 };
 
-reply(`${style} Sending...`)														
+	
+
+var yt = require('youtube-search-without-api-key');
+var videos = await yt.search(`${value}`);
+var getJSON = require('get-json')
+
+getJSON(`https://returnyoutubedislike.com/votes?videoId=${videos[0].id.videoId}`, function(error, resyt){
+
+var _rating = resyt.rating
+var rating = _rating.toString()
+rating = rating.substring(0, 3);
+var likes = resyt.likes
+var dislikes = resyt.dislikes
+
+reply(
+`${style} _${videos[0].title_}
+💎 _${videos[0].duration_raw}_ min
+⭐ _${rating.trim()}/5 Stars_
+📷 _${views.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')} Views_
+👍 _Likes ${likes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_
+👎 _Dislikes ${dislikes.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}_`)
+})
+
 ran= getRandom('.opus')
 exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (err) => {
                                     
