@@ -667,6 +667,7 @@ var getRandom = (ext) => {
 songData()
 async function songData() {
 
+
 var yt = require('youtube-search-without-api-key');
 var videos = await yt.search(`${value}`);
 
@@ -675,6 +676,7 @@ reply(
 💎 _${videos[0].duration_raw}_ min`)
 }
 
+try {
 ran= getRandom('.opus')
 exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (err) => {
                                     
@@ -683,11 +685,19 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
         sendMediaAudio(ran,msg.from, style+' Heres your song').then(function (){});
 
         async function sendMediaAudio(path,number,text) {
+            try {
             const Audio = await MessageMedia.fromFilePath(path); 
             client.sendMessage(number, Audio, {caption: text, sendAudioAsVoice: true}).then(function(res){}).catch(function(err){});
+
+            } catch (err) {
+                reply("error "+err.message)
+            }
         }
     })	
 
+} catch (err) {
+    reply("error "+err.message)
+}
 
 break;
 // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
