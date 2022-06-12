@@ -715,7 +715,7 @@ case "video":
     ytb()
     async function ytb() {
 
-        const media = MessageMedia.fromFilePath('./sending.mp4');
+        const media = await MessageMedia.fromFilePath('./sending.mp4');
         client.sendMessage(number,media);
 
 
