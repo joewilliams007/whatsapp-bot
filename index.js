@@ -15,7 +15,7 @@ const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = req
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { headless: false }
+    puppeteer: { executablePath: '/usr/share/applications/google-chrome.desktop', headless: false }
 });
 
 mysql = require('mysql'); 
