@@ -306,7 +306,7 @@ break;
 // transfer ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "transfer":
 if (!isRegister) return reply(registerMessage)
-if (args.length<3) return reply("please tag the person you want to send money and enter amount. Example: .transfer 50 @stardash")
+if (args.length<3) return reply("please send id of target and enter amount. Example: .transfer 50 1\n in this example 50 is the amount and 1 the id")
 if (Number(args[1])<1||Number(args[1])==NaN) return reply("please enter a valid amount")
 
 var amount = args[1]
@@ -323,7 +323,7 @@ var amount = args[1]
             connection.query(
                 `UPDATE Users
                 SET coins = coins + ${amount}
-                WHERE number='${args[2]}@c.us'`
+                WHERE user_id=${args[2]}`
                 , function (error, results, fields) {
 
                     if (error) {
@@ -333,7 +333,7 @@ var amount = args[1]
                         connection.query(
                             `UPDATE Users
                             SET coins = coins + ${amount}
-                            WHERE number='${number}%'`
+                            WHERE number='${number}'`
                             , function (error, results, fields) {
 
                         });
