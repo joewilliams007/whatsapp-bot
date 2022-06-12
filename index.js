@@ -690,13 +690,13 @@ exec(`yt-dlp -x --audio-format opus -o, --output ${ran} "ytsearch:${value}"`, (e
             client.sendMessage(number, Audio, {caption: text, sendAudioAsVoice: true}).then(function(res){}).catch(function(err){});
 
             } catch (err) {
-                reply("error "+err.message)
+                reply("error \n\n"+err.message)
             }
         }
     })	
 
 } catch (err) {
-    reply("error "+err.message)
+    reply("error\n\n"+err.message)
 }
 
 break;
