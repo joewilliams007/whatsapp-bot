@@ -715,7 +715,7 @@ case "video":
     ytb()
     async function ytb() {
 
-        const media = MessageMedia.fromFilePath('./path/to/image.png');
+        const media = MessageMedia.fromFilePath('./sending.mp4');
         chat.sendMessage(number,media);
 
 
