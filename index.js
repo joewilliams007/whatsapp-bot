@@ -279,6 +279,7 @@ style+` Menu:
 
 .bot
 .me
+.data
 .search
 .song
 .user
@@ -714,6 +715,14 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" code: "+country_code
     +"\n"+style+" prefix: "+country_prefix
     +"\n"+style+" account created: "+finalTime1)
+break;
+case "data":
+if (!isRegister) return reply(registerMessage)
+
+    reply(style+" carrier: "+carrier
+    +"\n"+style+" country: "+country_name
+    +"\n"+style+" code: "+country_code
+    +"\n"+style+" prefix: "+country_prefix)
 break;
 case "stardash":
     connection.query( 
