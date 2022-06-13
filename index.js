@@ -252,7 +252,7 @@ break;
 case 'wiki':
 case 'whatis':
     if (!isRegister) return reply(registerMessage);
-	if (args.length < 1){ 
+	if (args.length < 2){ 
 		reply(`
 - - - - - - - - - - - - - - - - - -
 use 
