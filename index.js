@@ -720,16 +720,16 @@ connection.query(
         if (error) console.log(error.message);
         leaderboard(JSON.parse(JSON.stringify(results)))
         async function leaderboard(res){
-                var leaderboard = "LEADERBOARD";
+                var leaderboard = "LEADERBOARD\n";
                 var position = 0	
                 for (const item of res.values()) {  
                     position++
                     if (position == 1) {
-                        leaderboard+="\n 🥇 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                        leaderboard+="\n🥇. "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     } else if (position == 2) {
-                        leaderboard+="\n 🥈 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                        leaderboard+="\n🥈. "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     } else if (position == 3) {
-                        leaderboard+="\n 🥉 "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
+                        leaderboard+="\n🥉. "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands\n"
                     } else {
                      leaderboard+="\n "+position+". "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.messages)+" commands"
                     }
