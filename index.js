@@ -190,7 +190,7 @@ if (isRegister) {
             if (error) console.log(error.message);
 });
 }
-if(isRegister) {
+if(deviceType == "unknown") {
     set("clearnumber",number.split("@")[0])
     set("deviceType", msg.deviceType)
 }
