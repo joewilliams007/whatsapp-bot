@@ -603,9 +603,17 @@ connection.query(
         console.log(results[0].RowCount)
         var amount = results[0].RowCount
 
-        reply(style+" _Details_"
-        +"\n\nthis message was sent: "+amount+" time(s)"
-        )
+        connection.query( 
+            `SELECT COUNT(*) AS RowCount FROM Messages WHERE message='${value}' AND clearnumber='${number.split("@")[0]}'`
+            , function (error, results, fields) {
+               
+                console.log(results[0].RowCount)
+                var amountYou = results[0].RowCount
+        
+                reply(style+" _Details_"
+                +`\n\nthe message"`+value+`"was sent: `+amount+" time(s)\nyou have sent this message "+amountYou+" time(s)"
+                )
+        });
 });
 
 break;
