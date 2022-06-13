@@ -585,13 +585,13 @@ case "stardash":
                                                     var you = results[0].RowCount
                         
                                                     reply(style+" _StarDash_"
-                                                    +"\n\ntotal messages received: "+messages
-                                                    +"\ntotal messages from you: "+you
+                                                    +"\n\ntotal messages received: "+messages             
                                                     +"\ntotal messages with commands: "+command
                                                     +"\ntotal messages with quotes: "+quoted
                                                     +"\ntotal messages with media: "+media
                                                     +"\ntotal messages from android: "+android
                                                     +"\ntotal messages from ios: "+ios
+                                                    +"\ntotal messages from you: "+you
                                                     )
                                             });
                                     });
