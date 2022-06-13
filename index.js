@@ -523,8 +523,8 @@ if (isRegister) return reply(style+" you are already registered")
 if (args.length<2) return reply("please enter a username")
 
 connection.query( // register userstuff
-`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages) 
-VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0)`
+`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType) 
+VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}")`
 , function (error, results, fields) {
         if (error) reply ("there was error with registration\n\n"+error.message);
         console.log('Yey a new registration! >_< ');
