@@ -435,13 +435,13 @@ var searchQ =  `SELECT * FROM Users
 WHERE user_id=${args[1]}`
 if (args[1].includes("@")) {
  searchQ = `SELECT * FROM Users
- WHERE number=${value.split("@")[1]}@c.us`
+ WHERE number="${value.split("@")[1]}@c.us"`
 
 }
 connection.query( // get the users stuff
 searchQ
 , function (error, results, fields) {
-if (error) console.log(error.message);
+if (error) reply(error.message);
 var res = JSON.parse(JSON.stringify(results))
 
 var style; 
