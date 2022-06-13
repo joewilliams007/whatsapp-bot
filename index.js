@@ -264,7 +264,7 @@ or
 	else{
 
 		wiki = require ('./_tools/wikiped');
-		wiki.getWikipedia(value, sender, (wikilink)=>
+		wiki.getWikipedia(value, style, (wikilink)=>
 		{
 			reply(wikilink)
 		})
