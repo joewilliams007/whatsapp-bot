@@ -710,6 +710,8 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" userid: "+id
     +"\n"+style+" status: "+status
     +"\n"+style+" device: "+deviceType
+    +"\n"+style+" country code: "+country_code
+    +"\n"+style+" prefix: "+country_prefix
     +"\n"+style+" account created: "+finalTime1)
 break;
 case "data":
