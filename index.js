@@ -428,10 +428,17 @@ break;
 // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "user":
 if (!isRegister) return reply(registerMessage)
-if (args.length<2) return reply("enter the users id")
-connection.query( // get the users stuff
-`SELECT * FROM Users
+if (args.length<2) return reply("enter the users id or tag user")
+
+var searchQ =  `SELECT * FROM Users
 WHERE user_id=${args[1]}`
+if (args[1].includes("@")) {
+ searchQ = `SELECT * FROM Users
+ WHERE number=${args[1].split("@")[0]}@c.us`
+
+}
+connection.query( // get the users stuff
+searchQ
 , function (error, results, fields) {
 if (error) console.log(error.message);
 var res = JSON.parse(JSON.stringify(results))
