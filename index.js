@@ -665,15 +665,15 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
 
     reply(style+" username: "+username
-    +"\n"+style+" xp: "+xp
-    +"\n"+style+" money: $"+coins
-    +"\n"+style+" style: "+style
-    +"\n"+style+" bio: "+bio
-    +"\n"+style+" commands: "+commands
-    +"\n"+style+" userid: "+id
-    +"\n"+style+" status: "+status
-    +"\n"+style+" device: "+deviceType
-    +"\n"+style+" account created: "+finalTime1)
+    +"\n💎 xp: "+xp
+    +"\n💵 money: $"+coins
+    +"\n💿 style: "+style
+    +"\n📋 bio: "+bio
+    +"\n📊 commands: "+commands
+    +"\n💳 userid: "+id
+    +"\n🗂️ status: "+status
+    +"\n📱 device: "+deviceType
+    +"\n🗓️ account created: "+finalTime1)
 
 });
 break;
