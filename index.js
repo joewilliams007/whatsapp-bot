@@ -434,7 +434,7 @@ var searchQ =  `SELECT * FROM Users
 WHERE user_id=${args[1]}`
 if (args[1].includes("@")) {
  searchQ = `SELECT * FROM Users
- WHERE number=${args[1].split("@")[0]}@c.us`
+ WHERE number=${args[1].split("@")[1]}@c.us`
 
 }
 connection.query( // get the users stuff
