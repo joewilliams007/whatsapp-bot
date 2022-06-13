@@ -231,6 +231,7 @@ style+` Menu:
 .leaderboard
 .users
 .stardash
+.message
 .delete
 `
 +claim);
@@ -541,21 +542,23 @@ case "stardash":
     connection.query( 
         `SELECT COUNT(*) AS RowCount FROM Messages`
         , function (error, results, fields) {
-            if (error) throw error;
+            if (error) {
+                reply(style+" error\n\n"+error.message)
+            }
+
             console.log(results[0].RowCount)
             var messages = results[0].RowCount
 
             connection.query( 
                 `SELECT COUNT(*) AS RowCount FROM Messages WHERE isCommand='true'`
                 , function (error, results, fields) {
-                    if (error) throw error;
                     console.log(results[0].RowCount)
                     var command = results[0].RowCount
 
                     connection.query( 
                         `SELECT COUNT(*) AS RowCount FROM Messages WHERE deviceType='android'`
                         , function (error, results, fields) {
-                            if (error) throw error;
+                    
                             console.log(results[0].RowCount)
                             var android = results[0].RowCount
                             var ios = Number(messages) - Number(android)
@@ -563,14 +566,14 @@ case "stardash":
                             connection.query( 
                                 `SELECT COUNT(*) AS RowCount FROM Messages WHERE hasQuotedMsg='true'`
                                 , function (error, results, fields) {
-                                    if (error) throw error;
+                               
                                     console.log(results[0].RowCount)
                                     var quoted = results[0].RowCount
         
                                     connection.query( 
                                         `SELECT COUNT(*) AS RowCount FROM Messages WHERE hasMedia='true'`
                                         , function (error, results, fields) {
-                                            if (error) throw error;
+                                           
                                             console.log(results[0].RowCount)
                                             var media = results[0].RowCount
                 
@@ -587,6 +590,24 @@ case "stardash":
                     });
             });
     });
+break;
+// message ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "message":
+if (!isRegister) return reply(registerMessage)
+if (args.length<2) return reply(style+" please enter a message you want to find out more about")
+
+connection.query( 
+    `SELECT COUNT(*) AS RowCount FROM Messages WHERE message='${value}'`
+    , function (error, results, fields) {
+       
+        console.log(results[0].RowCount)
+        var amount = results[0].RowCount
+
+        reply(style+" _Details_"
+        +"\n\nthis message was sent: "+amount+" time(s)"
+        )
+});
+
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "style":
