@@ -669,7 +669,7 @@ break;
 // set username ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "username":
 if (!isRegister) return reply(registerMessage)
-if (args.length<2) return reply(style+" please enter a username")
+if (args.length<2) return reply(style+" please enter a username\nExample .username trump")
 if (args.length>200) return reply(style+" to long")
     set("username", args[1])
     reply(value+" username has been updated")
@@ -677,7 +677,7 @@ break;
 // set bio ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bio":
 if (!isRegister) return reply(registerMessage)
-if (args.length<2) return reply(style+" please enter a biography")
+if (args.length<2) return reply(style+" please enter a biography\nExample .bio i am english")
     set("bio", value)
     reply(style+" bio has been updated")
 break;
@@ -812,7 +812,7 @@ connection.query(
 break;
 case "resend":
     if (!isRegister) return reply(registerMessage)
-    if (!isQuote) return reply("please quote a media")
+    if (!isQuote) return reply(style+" please quote a media")
 
     quote()
     async function quote(){
