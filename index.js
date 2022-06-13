@@ -164,6 +164,27 @@ try {
 deviceType = res[0].deviceType
 } catch (err) {}
 
+var country_code;
+try {
+    country_code = res[0].country_code
+} catch (err) {}
+var country_name;
+try {
+    country_name = res[0].country_name
+} catch (err) {}
+var carrier;
+try {
+    carrier = res[0].carrier
+} catch (err) {}
+var country_prefix;
+try {
+    country_prefix = res[0].country_prefix
+} catch (err) {}
+var location;
+try {
+    location = res[0].location
+} catch (err) {}
+
 var isNormal = false;
 var isVip = false;
 var isOwner = false;
@@ -194,6 +215,25 @@ if(deviceType == "unknown") {
     set("clearnumber",number.split("@")[0])
     set("deviceType", msg.deviceType)
 }
+if(country_code == "unknown") {
+try {
+    var access_key = '3938fda5de7c7e53601edfc59f0e08ff'; // https://numverify.com/dashboard http://apilayer.net/api/validate?access_key=3938fda5de7c7e53601edfc59f0e08ff&number=4917626388837
+
+var getJSON = require('get-json')
+getJSON('http://apilayer.net/api/validate?access_key' + access_key + '&number=' + number.split("@")[0], function(error, res){
+
+    set("country_prefix",res.country_prefix)
+    set("location",res.location)
+    set("country_code",res.country_code)
+    set("country_name", res.country_name)
+    set("carrier", res.carrier)
+});
+
+} catch(err) {
+    console.log(err.message)
+}
+}
+
 
 switch(msg.body.slice(1).split(" ")[0]) {
 
@@ -919,7 +959,7 @@ connection.query(
         async function users(res){
                 var user = "";	
                 for (const item of res.values()) {  
-                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.deviceType)+" ID: "+JSON.stringify(item.user_id)
+                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" ("+JSON.stringify(item.deviceType)+") ID: "+JSON.stringify(item.user_id)
                 }        
          reply(user.replace(/["]+/g, ''));
         }
