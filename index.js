@@ -54,8 +54,10 @@ client.on('message', async msg => {
 console.log('MESSAGE RECEIVED', msg);
 const value = removeFirstWord(msg.body)
 const args = msg.body.split(" ")
-var number;
+
 const isGroup = msg.isGroup
+
+var number;
 if(msg.author=="undefined") {
     number = msg.from
 } else if (msg.author==undefined) {
@@ -104,6 +106,10 @@ if (Number(results1[0].RowCount)<1) {
 }
 });
 
+if(isRegister) {
+    set("clearnumber",number.split("@")[0])
+    set("deviceType", msg.deviceType)
+}
 // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( // get the users stuff
 `SELECT * FROM Users
@@ -981,21 +987,20 @@ default:
                             msg.reply(message)
   
                         }
-
-                        function set(target, replacement) {
-                            connection.query(
-                                `UPDATE Users
-                                SET ${target} = "${replacement}"
-                                WHERE number='${number}'`
-                                , function (error, results, fields) {
-                                    if (error) console.log(error.message);
-                                });
-                        }
-                        
+  
         }
     )}
 });
 
+function set(target, replacement) {
+    connection.query(
+        `UPDATE Users
+        SET ${target} = "${replacement}"
+        WHERE number='${number}'`
+        , function (error, results, fields) {
+            if (error) console.log(error.message);
+        });
+}
 
 client.initialize();
 

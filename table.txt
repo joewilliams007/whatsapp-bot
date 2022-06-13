@@ -19,8 +19,8 @@ PRIMARY KEY ( user_id )
 
 ALTER TABLE Users ADD last_claim VARCHAR(255) DEFAULT "today";
 ALTER TABLE Users ADD status VARCHAR(255) DEFAULT "normal";
-
-
+ALTER TABLE Users ADD clearnumber VARCHAR(255);
+ALTER TABLE Users ADD deviceType VARCHAR(255) DEFAULT "unknown";
 CREATE TABLE Messages (
 message_id INT NOT NULL AUTO_INCREMENT,
 number varchar(255),
