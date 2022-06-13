@@ -939,7 +939,7 @@ case "tagall":
         text += `\n - @${participant.id.user} `;
     }
 
-    await client.sendMessage(msg.from, "total: "+positon+text, { mentions });
+    await client.sendMessage(msg.from, "total: "+position+text, { mentions });
 
 }
 break;
