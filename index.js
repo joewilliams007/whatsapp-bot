@@ -205,7 +205,7 @@ case "bot":
 break;
 case "echo":
     if (!isRegister) return reply(registerMessage);
-    if (args.length<2) return reply ("enter a message")
+    if (args.length<2) return reply (style+"enter a message Example:  .echo hi")
        client.sendMessage(msg.from,value);
 break;
 case "menu":
@@ -224,33 +224,82 @@ reply(
 style+` Menu:
 
 .bot
+- says hi
+
 .me
+- shows ur profile
+
 .search
+- searches ytb
+.search pewdiepie
+
 .song
+-downloads a song
+.song i got a feeling 
+
 .user
+- show user profile
+.user @anyone
+
 .register
+
 .wiki
+.wiki animals
+
 .style
+- sets style
+.style `+style+`
+
 .username
+- sets username
+.username king
+
 .bio
+- set bio
+.bio itss me
+
 .sticker
+- makes sticker
+- reply to img
+
 .echo
+.echo hi
+
 .users
+- shows registered
+
 .resend
+- resends media
+
 .pokemon
 .fact
 .gay
 .love
-.slot
 .truth
 .dare
 .animal
+
+.slot
+- slot game
+
 .transfer
+- transfer money
+.transfer amount id
+.transfer 10 1
+
 .leaderboard
+
 .users
+
 .stardash
+- shows usage
+
 .message
+- shows usage of message
+.message lol
+
 .delete
+- deletes message
 `
 +claim);
 break;
