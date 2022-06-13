@@ -705,15 +705,42 @@ case "stardash":
                                                     console.log(results[0].RowCount)
                                                     var you = results[0].RowCount
                         
-                                                    reply(style+" _StarDash_"
-                                                    +"\n\ntotal messages received: "+messages             
-                                                    +"\ntotal messages with commands: "+command
-                                                    +"\ntotal messages with quotes: "+quoted
-                                                    +"\ntotal messages with media: "+media
-                                                    +"\ntotal messages from android: "+android
-                                                    +"\ntotal messages from ios: "+ios
-                                                    +"\ntotal messages from you: "+you
-                                                    )
+                                                    connection.query( 
+                                                        `SELECT COUNT(*) AS RowCount FROM Messages WHERE type='chat'`
+                                                        , function (error, results, fields) {
+                                                           
+                                                            console.log(results[0].RowCount)
+                                                            var chat = results[0].RowCount
+                                
+                                                            connection.query( 
+                                                                `SELECT COUNT(*) AS RowCount FROM Messages WHERE type='sticker'`
+                                                                , function (error, results, fields) {
+                                                                   
+                                                                    console.log(results[0].RowCount)
+                                                                    var sticker = results[0].RowCount
+                                        
+                                                                    connection.query( 
+                                                                        `SELECT COUNT(*) AS RowCount FROM Messages WHERE type='image'`
+                                                                        , function (error, results, fields) {
+                                                                           
+                                                                            console.log(results[0].RowCount)
+                                                                            var image = results[0].RowCount
+                                                
+                                                                            reply("📡 StarDash Logs"
+                                                                            +"\n\n💭 all received: "+messages             
+                                                                            +"\n⚔️ commands: "+command
+                                                                            +"\n📨 quotes: "+quoted
+                                                                            +"\n🎞️ media: "+media
+                                                                            +"\n💬 chat msg: "+chat
+                                                                            +"\n🌠 stickers: "+sticker
+                                                                            +"\n📸 images: "+image
+                                                                            +"\n🐺 android: "+android
+                                                                            +"\n🐑 ios: "+ios
+                                                                            +"\n"+style+" from you: "+you
+                                                                            )
+                                                                    });
+                                                            });
+                                                    });
                                             });
                                     });
                             });
