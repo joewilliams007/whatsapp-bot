@@ -85,7 +85,7 @@ VALUES ("${number}","${number.split("@")[0]}","${msg.notifyName}","${msg.body}",
 // msg.reply("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nCHOOSINGs: "+number)
 // console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
-const registerMessage = "you are not registered. To register send the message: .register +yourname"
+const registerMessage = "you are not registered. To register send the message:\n\n.register yourname"
 const vipMessage = "this command is only for vip users"
 const ownerMessage = "this command is only for the owner"
 var isRegister = false;
@@ -804,7 +804,7 @@ connection.query(
         async function users(res){
                 var user = "";	
                 for (const item of res.values()) {  
-                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" ID: "+JSON.stringify(item.user_id)
+                        user+="\n "+JSON.stringify(item.style)+" "+JSON.stringify(item.username)+" "+JSON.stringify(item.deviceType)+" ID: "+JSON.stringify(item.user_id)
                 }        
          reply(user.replace(/["]+/g, ''));
         }
