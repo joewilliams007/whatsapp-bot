@@ -215,7 +215,7 @@ if(deviceType == "unknown") {
     set("clearnumber",number.split("@")[0])
     set("deviceType", msg.deviceType)
 }
-if(country_code == "unknown" && (deviceType != "unknown") || country_code == "undefined") {
+if(country_code == "unknown" && (deviceType != "unknown")) {
 try {
 
  //  "3938fda5de7c7e53601edfc59f0e08ff",
