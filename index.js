@@ -211,6 +211,7 @@ style+` Menu:
 .song
 .user
 .register
+.wiki
 .style
 .username
 .bio
@@ -253,13 +254,7 @@ case 'wiki':
 case 'whatis':
     if (!isRegister) return reply(registerMessage);
 	if (args.length < 2){ 
-		reply(`
-- - - - - - - - - - - - - - - - - -
-use 
-.wiki <topic>
-or
-.whatis <topic>
-- - - - - - - - - - - - - - - - - -`)
+		reply(style+` please enter a search title`)
 	}
 	else{
 
@@ -540,6 +535,15 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" userid: "+id
     +"\n"+style+" status: "+status
     +"\n"+style+" account created: "+finalTime1)
+break;
+case "stardash":
+    connection.query( 
+        `SELECT COUNT(*) AS RowCount FROM Messages;`
+        , function (error, results, fields) {
+            if (error) throw error;
+            console.log(results[0].RowCount)
+    
+    });
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "style":
