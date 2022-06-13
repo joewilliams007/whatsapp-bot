@@ -64,9 +64,17 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
+var isCommand = false;
+    try {
+    if (msg.body.split("")[0]==".") {
+        isCommand = true
+    }
+    } catch(err) {
+        
+    }
 connection.query( // save message
-`INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded) 
-VALUES ("${number}","${number.split("@")[0]}","${msg.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}")`
+`INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded, isCommand) 
+VALUES ("${number}","${number.split("@")[0]}","${msg.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}","${isCommand}")`
 , function (error, results, fields) {
         if (error) console.log(error.message)
 });
