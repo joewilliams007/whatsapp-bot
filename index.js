@@ -611,7 +611,7 @@ connection.query(
                 var amountYou = results[0].RowCount
         
                 reply(style+" _Details_"
-                +`\n\nthe message"`+value+`"was sent: `+amount+" time(s)\nyou have sent this message "+amountYou+" time(s)"
+                +`\n\nthe message: "`+value+`" was sent: `+amount+" time(s)\nyou have sent this message "+amountYou+" time(s)"
                 )
         });
 });
