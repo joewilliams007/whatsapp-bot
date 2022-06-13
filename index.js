@@ -223,6 +223,47 @@ reply(
 
 style+` Menu:
 
+.help
+
+.bot
+.me
+.search
+.song
+.user
+.register
+.wiki
+.style
+.username
+.bio
+.sticker
+.echo
+.users
+.resend
+.pokemon
+.fact
+.gay
+.love
+.slot
+.truth
+.dare
+.animal
+.transfer
+.leaderboard
+.users
+.stardash
+.message
+.delete
+`
++claim);
+break;
+case "help":
+
+reply(style+` Menu:
+
+.register
+- registration
+.register username
+
 .bot
 - says hi
 
@@ -240,8 +281,6 @@ style+` Menu:
 .user
 - show user profile
 .user @anyone
-
-.register
 
 .wiki
 .wiki animals
@@ -300,9 +339,9 @@ style+` Menu:
 
 .delete
 - deletes message
-`
-+claim);
+`)
 break;
+
 case "delete":
     if (!isRegister) return reply(registerMessage);
 
