@@ -439,7 +439,7 @@ VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0
 , function (error, results, fields) {
         if (error) throw error;
         console.log('Yey a new registration! >_< ');
-    reply("registration successfull "+args[1])
+    reply("registration successfull "+args[1]+"\n\nall commands: .menu\nyour profile: .me")
 });
 
 break;
