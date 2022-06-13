@@ -106,10 +106,7 @@ if (Number(results1[0].RowCount)<1) {
 }
 });
 
-if(isRegister) {
-    set("clearnumber",number.split("@")[0])
-    set("deviceType", msg.deviceType)
-}
+
 // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( // get the users stuff
 `SELECT * FROM Users
@@ -158,6 +155,14 @@ var status;
 try {
 status = res[0].status
 } catch (err) {}
+var clearnumber;
+try {
+clearnumber = res[0].clearnumber
+} catch (err) {}
+var deviceType;
+try {
+deviceType = res[0].deviceType
+} catch (err) {}
 
 var isNormal = false;
 var isVip = false;
@@ -185,7 +190,14 @@ if (isRegister) {
             if (error) console.log(error.message);
 });
 }
+if(isRegister) {
+    set("clearnumber",number.split("@")[0])
+    set("deviceType", msg.deviceType)
+}
+
 switch(msg.body.slice(1).split(" ")[0]) {
+
+    
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "bot":
     if (!isRegister) return reply(registerMessage);
@@ -486,6 +498,10 @@ try {
     var status; 
     status = res[0].status
 } catch (err) {}
+try {
+var deviceType; 
+deviceType = res[0].deviceType
+} catch (err) {}
 
 var finalTime;
 var time = (dateInSec - Number(date))
@@ -514,6 +530,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" commands: "+commands
     +"\n"+style+" userid: "+id
     +"\n"+style+" status: "+status
+    +"\n"+style+" device: "+deviceType
     +"\n"+style+" account created: "+finalTime1)
 
 });
@@ -550,6 +567,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n"+style+" number: +"+number.split("@")[0]
     +"\n"+style+" userid: "+id
     +"\n"+style+" status: "+status
+    +"\n"+style+" device: "+deviceType
     +"\n"+style+" account created: "+finalTime1)
 break;
 case "stardash":
@@ -987,20 +1005,22 @@ default:
                             msg.reply(message)
   
                         }
+
+                        function set(target, replacement) {
+                            connection.query(
+                                `UPDATE Users
+                                SET ${target} = "${replacement}"
+                                WHERE number='${number}'`
+                                , function (error, results, fields) {
+                                    if (error) console.log(error.message);
+                                });
+                        }
   
         }
     )}
 });
 
-function set(target, replacement) {
-    connection.query(
-        `UPDATE Users
-        SET ${target} = "${replacement}"
-        WHERE number='${number}'`
-        , function (error, results, fields) {
-            if (error) console.log(error.message);
-        });
-}
+
 
 client.initialize();
 
