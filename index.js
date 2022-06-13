@@ -230,6 +230,7 @@ style+` Menu:
 .transfer
 .leaderboard
 .users
+.stardash
 .delete
 `
 +claim);
@@ -566,13 +567,22 @@ case "stardash":
                                     console.log(results[0].RowCount)
                                     var quoted = results[0].RowCount
         
-                                    reply(style+" StarDash"
-                                    +"\n\ntotal messages received: "+messages
-                                    +"\ntotal commands received: "+command
-                                    +"\ntotal messages with quotes: "+quoted
-                                    +"\ntotal messages from android: "+android
-                                    +"\ntotal messages from ios: "+ios
-                                    )
+                                    connection.query( 
+                                        `SELECT COUNT(*) AS RowCount FROM Messages WHERE hasMedia='true'`
+                                        , function (error, results, fields) {
+                                            if (error) throw error;
+                                            console.log(results[0].RowCount)
+                                            var media = results[0].RowCount
+                
+                                            reply(style+" _StarDash_"
+                                            +"\n\ntotal messages received: "+messages
+                                            +"\n\ntotal messages with commands: "+command
+                                            +"\ntotal messages with quotes: "+quoted
+                                            +"\ntotal messages with media: "+media
+                                            +"\n\ntotal messages from android: "+android
+                                            +"\ntotal messages from ios: "+ios
+                                            )
+                                    });
                             });
                     });
             });
