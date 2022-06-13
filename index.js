@@ -64,6 +64,14 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
+connection.query( // save message
+`INSERT INTO Messages (number, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded) 
+VALUES ("${number}","${msg.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}")`
+, function (error, results, fields) {
+        if (error) console.log(error.message)
+});
+
+
 // msg.reply("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nCHOOSINGs: "+number)
 // console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
