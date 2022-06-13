@@ -215,12 +215,12 @@ if(deviceType == "unknown") {
     set("clearnumber",number.split("@")[0])
     set("deviceType", msg.deviceType)
 }
-if(country_code == "unknown") {
+if(country_code == "unknown" && (deviceType != "unknown") || country_code == "undefined") {
 try {
     var access_key = '3938fda5de7c7e53601edfc59f0e08ff'; // https://numverify.com/dashboard http://apilayer.net/api/validate?access_key=3938fda5de7c7e53601edfc59f0e08ff&number=4917626388837
 
 var getJSON = require('get-json')
-getJSON('http://apilayer.net/api/validate?access_key' + access_key + '&number=' + number.split("@")[0], function(error, res){
+getJSON('http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + number.split("@")[0], function(error, res){
 
     set("country_prefix",res.country_prefix)
     set("location",res.location)
