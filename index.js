@@ -91,7 +91,7 @@ const ownerMessage = "this command is only for the owner"
 var isRegister = false;
 var isQuote = msg.hasQuotedMsg
 
-if (msg.body.split("")[0]==".") {
+if (msg.body.split("")[0]=="." ||msg.body.split("")[0]=="#" ||msg.body.split("")[0]=="$" ||msg.body.split("")[0]=="!") {
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( 
     `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
