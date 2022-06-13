@@ -217,9 +217,10 @@ if(deviceType == "unknown") {
 }
 if(country_code == "unknown" && (deviceType != "unknown") || country_code == "undefined") {
 try {
-
+    
+ //  "3938fda5de7c7e53601edfc59f0e08ff",
     var myArray = [
-        "3938fda5de7c7e53601edfc59f0e08ff",
+     
         "TjKbBTVmomPXYVbzQDLvbocaHj1TmXBV",
         "0mCGEjRet3ZI0lt3Wjwjwgx0HsQva3xN",
         "E3M7hH18tci64NPFQUXi5TFD47p6oZjt"
