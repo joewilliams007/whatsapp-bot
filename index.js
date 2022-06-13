@@ -720,7 +720,7 @@ connection.query(
         if (error) console.log(error.message);
         leaderboard(JSON.parse(JSON.stringify(results)))
         async function leaderboard(res){
-                var leaderboard = "LEADERBOARD\n";
+                var leaderboard = style+"LEADERBOARD\n";
                 var position = 0	
                 for (const item of res.values()) {  
                     position++
@@ -930,15 +930,15 @@ case "tagall":
         
     let text = " ";
     let mentions = [];
-
+    var position = 0
     for(let participant of chat.participants) {
         const contact = await client.getContactById(participant.id._serialized);
-        
+        position++
         mentions.push(contact);
         text += `\n - @${participant.id.user} `;
     }
 
-    await client.sendMessage(msg.from, text, { mentions });
+    await client.sendMessage(msg.from, "total: "+positon+text, { mentions });
 
 }
 break;
