@@ -538,11 +538,44 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 break;
 case "stardash":
     connection.query( 
-        `SELECT COUNT(*) AS RowCount FROM Messages;`
+        `SELECT COUNT(*) AS RowCount FROM Messages`
         , function (error, results, fields) {
             if (error) throw error;
             console.log(results[0].RowCount)
-    
+            var messages = results[0].RowCount
+
+            connection.query( 
+                `SELECT COUNT(*) AS RowCount FROM Messages WHERE isCommand='true'`
+                , function (error, results, fields) {
+                    if (error) throw error;
+                    console.log(results[0].RowCount)
+                    var command = results[0].RowCount
+
+                    connection.query( 
+                        `SELECT COUNT(*) AS RowCount FROM Messages WHERE deviceType='android'`
+                        , function (error, results, fields) {
+                            if (error) throw error;
+                            console.log(results[0].RowCount)
+                            var android = results[0].RowCount
+                            var ios = Number(messages) - Number(android)
+
+                            connection.query( 
+                                `SELECT COUNT(*) AS RowCount FROM Messages WHERE hasQuotedMsg='true'`
+                                , function (error, results, fields) {
+                                    if (error) throw error;
+                                    console.log(results[0].RowCount)
+                                    var quoted = results[0].RowCount
+        
+                                    reply(style+" StarDash"
+                                    +"\n\ntotal messages received: "+messages
+                                    +"\ntotal commands received: "+command
+                                    +"\ntotal messages with quotes: "+quoted
+                                    +"\ntotal messages from android: "+android
+                                    +"\ntotal messages from ios: "+ios
+                                    )
+                            });
+                    });
+            });
     });
 break;
 // set style ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
