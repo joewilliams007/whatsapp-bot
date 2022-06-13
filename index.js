@@ -104,7 +104,6 @@ if (Number(results1[0].RowCount)<1) {
 }
 });
 
-
 // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( // get the users stuff
 `SELECT * FROM Users
@@ -249,6 +248,28 @@ case "delete":
         }
     }
 break;
+// wiki ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case 'wiki':
+case 'whatis':
+    if (!isRegister) return reply(registerMessage);
+	if (args.length < 1){ 
+		reply(`
+- - - - - - - - - - - - - - - - - -
+use 
+.wiki <topic>
+or
+.whatis <topic>
+- - - - - - - - - - - - - - - - - -`)
+	}
+	else{
+
+		wiki = require ('./_tools/wikiped');
+		wiki.getWikipedia(value, sender, (wikilink)=>
+		{
+			reply(wikilink)
+		})
+	}
+break
 case "button":
 let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
 client.sendMessage(msg.from, button);
