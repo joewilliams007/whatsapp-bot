@@ -576,10 +576,10 @@ case "stardash":
                 
                                             reply(style+" _StarDash_"
                                             +"\n\ntotal messages received: "+messages
-                                            +"\n\ntotal messages with commands: "+command
+                                            +"\ntotal messages with commands: "+command
                                             +"\ntotal messages with quotes: "+quoted
                                             +"\ntotal messages with media: "+media
-                                            +"\n\ntotal messages from android: "+android
+                                            +"\ntotal messages from android: "+android
                                             +"\ntotal messages from ios: "+ios
                                             )
                                     });
