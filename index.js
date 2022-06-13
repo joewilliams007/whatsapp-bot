@@ -388,7 +388,8 @@ break;
 case "transfer":
 if (!isRegister) return reply(registerMessage)
 if (args.length<3) return reply("please send id of target and enter amount. Example: .transfer 50 1\n in this example 50 is the amount and 1 the id")
-if (Number(args[1])<1||Number(args[1])==NaN) return reply("please enter a valid amount")
+if (Number(args[1])<1||Number(args[1])==NaN) return reply(style+" please enter a valid amount")
+if (Number(args[1])<Number(coins)) return reply(style+" you dont have enough money for thistransaction")
 
 var amount = args[1]
 
