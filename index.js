@@ -217,16 +217,25 @@ if(deviceType == "unknown") {
 }
 if(country_code == "unknown" && (deviceType != "unknown") || country_code == "undefined") {
 try {
-    var access_key = '3938fda5de7c7e53601edfc59f0e08ff'; // https://numverify.com/dashboard http://apilayer.net/api/validate?access_key=3938fda5de7c7e53601edfc59f0e08ff&number=4917626388837
+
+    var myArray = [
+        "3938fda5de7c7e53601edfc59f0e08ff",
+        "TjKbBTVmomPXYVbzQDLvbocaHj1TmXBV",
+        "0mCGEjRet3ZI0lt3Wjwjwgx0HsQva3xN"
+      ];
+      
+      var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
 
 var getJSON = require('get-json')
-getJSON('http://apilayer.net/api/validate?access_key=' + access_key + '&number=' + number.split("@")[0], function(error, res){
+getJSON('http://apilayer.net/api/validate?access_key=' + randomItem + '&number=' + number.split("@")[0], function(error, res){
 
     set("country_prefix",res.country_prefix)
     set("location",res.location)
     set("country_code",res.country_code)
     set("country_name", res.country_name)
     set("carrier", res.carrier)
+
+    console.log("LOOOKING FOR COUNTRY DETAILS")
 });
 
 } catch(err) {
