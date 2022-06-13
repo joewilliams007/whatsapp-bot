@@ -577,14 +577,23 @@ case "stardash":
                                             console.log(results[0].RowCount)
                                             var media = results[0].RowCount
                 
-                                            reply(style+" _StarDash_"
-                                            +"\n\ntotal messages received: "+messages
-                                            +"\ntotal messages with commands: "+command
-                                            +"\ntotal messages with quotes: "+quoted
-                                            +"\ntotal messages with media: "+media
-                                            +"\ntotal messages from android: "+android
-                                            +"\ntotal messages from ios: "+ios
-                                            )
+                                            connection.query( 
+                                                `SELECT COUNT(*) AS RowCount FROM Messages WHERE number='${number.split("@")[0]}@c.us'`
+                                                , function (error, results, fields) {
+                                                   
+                                                    console.log(results[0].RowCount)
+                                                    var you = results[0].RowCount
+                        
+                                                    reply(style+" _StarDash_"
+                                                    +"\n\ntotal messages received: "+messages
+                                                    +"\ntotal messages from you: "+you
+                                                    +"\ntotal messages with commands: "+command
+                                                    +"\ntotal messages with quotes: "+quoted
+                                                    +"\ntotal messages with media: "+media
+                                                    +"\ntotal messages from android: "+android
+                                                    +"\ntotal messages from ios: "+ios
+                                                    )
+                                            });
                                     });
                             });
                     });
