@@ -730,6 +730,12 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
 break;
 case "stardash":
+
+    var ImageCharts = require('image-charts');
+
+  
+
+
     connection.query( 
         `SELECT COUNT(*) AS RowCount FROM Messages`
         , function (error, results, fields) {
@@ -815,8 +821,9 @@ case "stardash":
                                                                                     var iosPercentage = Number(ios)/receivedNumber*100
                                                                                     var youPercentage = Number(you)/receivedNumber*100
         
-                                                        
-                                                                                    reply("📡 StarDash Logs"
+                                                                                    const pie = ImageCharts().cht('p').chd('a:2.5,5,8.3').chs('100x100');
+
+                                                                                    var text = "📡 StarDash Logs"
                                                                                     +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
                                                                                     +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
                                                                                     +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
@@ -828,9 +835,16 @@ case "stardash":
                                                                                     +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-        
-                                                                                    )
-        
+                                                                                   
+                                                                                    sendMedia(msg.from, text).then(function (){});
+                                                                                    async function sendChart(number,text) {
+                                                                                        const mediaLink = await pie.toURL()
+                                                                                        client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
+                                                                                    }
+                                                                                 
+
+
+                                                                
                                                                             });
 
                                                                     });
