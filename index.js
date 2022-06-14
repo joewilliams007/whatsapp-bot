@@ -836,7 +836,7 @@ case "stardash":
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
                                                                                    
-                                                                                    sendMedia(msg.from, text).then(function (){});
+                                                                                    sendChart(msg.from, text).then(function (){});
                                                                                     async function sendChart(number,text) {
                                                                                         const mediaLink = await pie.toURL()
                                                                                         client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
