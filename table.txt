@@ -43,6 +43,7 @@ isForwarded varchar(255),
 PRIMARY KEY ( message_id )
 );
 
+ALTER TABLE Messages ADD date VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Messages ADD clearnumber VARCHAR(255);
 ALTER TABLE Messages ADD isCommand VARCHAR(255) DEFAULT "false";
 

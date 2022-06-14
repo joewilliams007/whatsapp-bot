@@ -73,9 +73,11 @@ var isCommand = false;
     } catch(err) {
         
     }
+
+var yourDate = new Date()
 connection.query( // save message
-`INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded, isCommand) 
-VALUES ("${number}","${number.split("@")[0]}","${msg.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}","${isCommand}")`
+`INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded, isCommand, date) 
+VALUES ("${number}","${number.split("@")[0]}","${msg.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}","${isCommand}",${yourDate.toISOString().split('T')[0]})`
 , function (error, results, fields) {
         if (error) console.log(error.message)
 });
