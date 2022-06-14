@@ -805,7 +805,7 @@ case "stardash":
                                                                                                
                                                                                                 var amount = results[0].RowCount
                                                                             
-                                                                                                text+="from country +"+element+" "+amount+"\n"
+                                                                                                text+="from country +"+element+" "+amount+"\n"+arr
                                                                                          });
                                                                                     });
                                                                             
