@@ -809,7 +809,7 @@ case "stardash":
                                                                                             , function (error, results, fields) {
                                                                                                
                                                                                                 var amount = results[0].RowCount
-                                                                                                
+                                                                                               
 
 
                                                                                                 text+="\n🪐 +"+JSON.stringify(item.country_code)+" ("+amount+")"
@@ -841,7 +841,8 @@ case "stardash":
                                                                                             var androidPercentage = Number(android)/receivedNumber*100
                                                                                             var iosPercentage = Number(ios)/receivedNumber*100
                                                                                             var youPercentage = Number(you)/receivedNumber*100
-                
+                                                                                            
+                                                                                           
         
                                                                                             reply("📡 StarDash Logs"
                                                                                             +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
@@ -854,8 +855,10 @@ case "stardash":
                                                                                             +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
                                                                                             +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                             +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
+                                                                                            +text.replace(/["]+/g, '')
                                                                                             +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-                                                                                            +text.replace(/["]+/g, ''))
+                                                                    
+                                                                                            )
         
                                                                         
                                                                                     });
