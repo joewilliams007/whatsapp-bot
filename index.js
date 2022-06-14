@@ -824,7 +824,7 @@ case "stardash":
                                                                                     +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
                                                                                     +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
-                                                                                    +"\n💫 users registered:clea "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         
                                                                                     )
         
