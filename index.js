@@ -71,9 +71,6 @@ code()
 async function code(){
     const code = await client.getCountryCode(number)
     console.log(code)
-
-    const sd = await new navigator
-    console.log(sd)
 }
 
 var isCommand = false;
