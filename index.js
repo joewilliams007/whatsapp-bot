@@ -994,14 +994,18 @@ case "resend":
     if (!isRegister) return reply(registerMessage)
     if (!isQuote) return reply(style+" please quote a media")
 
+   
     quote()
     async function quote(){
+        try {
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
             const attachmentData = await quotedMsg.downloadMedia();
           client.sendMessage(msg.from, attachmentData, { caption: 'Here\'s your requested media.' });
-    
         }
+    } catch(err){
+        reply(style+" there was an error. tag media.\n\n"+err.message)
+    }
     }
 break;
 case "sticker":
