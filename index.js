@@ -807,16 +807,16 @@ case "stardash":
 
                                                 
                                                                             reply("📡 StarDash Logs"
-                                                                            +"\n\n💭 all received: "+messages.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
-                                                                            +"\n⚔️ commands: "+command.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage+"%)"
-                                                                            +"\n📨 quotes: "+quoted.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage+"%)"
-                                                                            +"\n🎞️ media: "+media.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage+"%)"
-                                                                            +"\n💬 chat msg: "+chat.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage+"%)"
-                                                                            +"\n🌠 stickers: "+sticker.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage+"%)"
-                                                                            +"\n📸 images: "+image.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage+"%)"
-                                                                            +"\n🐺 android: "+android.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage+"%)"
-                                                                            +"\n🐑 ios: "+ios.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage+"%)"
-                                                                            +"\n"+style+" from you: "+you.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage+"%)"
+                                                                            +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
+                                                                            +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage+"%)"
+                                                                            +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage+"%)"
+                                                                            +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage+"%)"
+                                                                            +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage+"%)"
+                                                                            +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage+"%)"
+                                                                            +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage+"%)"
+                                                                            +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage+"%)"
+                                                                            +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage+"%)"
+                                                                            +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage+"%)"
 
                                                                             )
 
