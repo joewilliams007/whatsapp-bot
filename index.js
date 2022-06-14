@@ -35,6 +35,7 @@ client.on('qr', qr => {
    qrcode.generate(qr, {small: true});
 });
 
+
 client.on('authenticated', () => {
     console.log('AUTHENTICATED');
 });
@@ -559,7 +560,7 @@ var amount = args[1]
 
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-case "":
+case "register":
 if (isRegister) return reply(style+" you are already registered")
 
 
