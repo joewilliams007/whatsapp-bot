@@ -817,7 +817,7 @@ case "stardash":
                                                                                     var youPercentage = Number(you)/receivedNumber*100
         
 
-                                                                                    var text = "📡 StarDash Logs"
+                                                                                    reply("📡 StarDash Logs"
                                                                                     +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
                                                                                     +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
                                                                                     +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
@@ -828,45 +828,16 @@ case "stardash":
                                                                                     +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
                                                                                     +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
-                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'))
 
-                                                                                                                                cj()
-                                                                                    async function cj() {   
-
-                                                                                    const chartNode = new ChartjsNode(600, 600); // Create an instance with dimensions
-                                                                                    
-                                                                                    const barGraphOptions = {
-                                                                                      type: 'bar',
-                                                                                      data: []
-                                                                                    };
-                                                                                    
-                                                                                    // Draw the chart and write the file to the file system
-                                                                                    await new Promise(resolve => {
-                                                                                      chartNode
-                                                                                        .drawChart(barGraphOptions)
-                                                                                        .then(() => {
-                                                                                          chartNode.getImageBuffer('image/png');
-                                                                                        })
-                                                                                        .then(() => {
-                                                                                          chartNode.writeImageToFile('image/png', 'some_file.png').then(() => {
-                                                                                            resolve();
-                                                                                          });
-                                                                                        })
-                                                                                        .catch(e => {
-                                                                                          console.log('Caught', e);
-                                                                                        });
-                                                                                    });
-                                                                                    
+                                                                                                                            
+                                                                             
                                                         
-                                                                                   //  sendMediaC(msg.from, text).then(function (){});
+                                                                                  
+                                                                                
+            
 
-                                                                                }
-                
-
-                                                                                            async function sendMediaC(number,text) {
-                                                                                                const mediaLink = await MessageMedia.fromFilePath('./test.svg');
-                                                                                                client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
-                                                                                            }
+                                                                               
                                                                  
                                             
 
