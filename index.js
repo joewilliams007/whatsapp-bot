@@ -795,28 +795,28 @@ case "stardash":
                                                                             
                                                                             var receivedNumber = Number(messages)
 
-                                                                            var commandPercentage = receivedNumber/Number(command)
-                                                                            var quotedPercentage = receivedNumber/Number(quoted)
-                                                                            var mediaPercentage = receivedNumber/Number(media)
-                                                                            var chatPercentage = receivedNumber/Number(chat)
-                                                                            var stickerPercentage = receivedNumber/Number(sticker)
+                                                                            var commandPercentage = receivedNumber/Number(command)*100
+                                                                            var quotedPercentage = receivedNumber/Number(quoted)*100
+                                                                            var mediaPercentage = receivedNumber/Number(media)*100
+                                                                            var chatPercentage = receivedNumber/Number(chat)*100
+                                                                            var stickerPercentage = receivedNumber/Number(sticker)*100
                                                                             var imagePercentage = receivedNumber/Number(image)
-                                                                            var androidPercentage = receivedNumber/Number(android)
-                                                                            var iosPercentage = receivedNumber/Number(ios)
-                                                                            var youPercentage = receivedNumber/Number(you)
+                                                                            var androidPercentage = receivedNumber/Number(android)*100
+                                                                            var iosPercentage = receivedNumber/Number(ios)*100
+                                                                            var youPercentage = receivedNumber/Number(you)*100
 
                                                 
                                                                             reply("📡 StarDash Logs"
                                                                             +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
-                                                                            +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage+"%)"
-                                                                            +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage+"%)"
-                                                                            +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage+"%)"
-                                                                            +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage+"%)"
-                                                                            +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage+"%)"
-                                                                            +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage+"%)"
-                                                                            +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage+"%)"
-                                                                            +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage+"%)"
-                                                                            +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage+"%)"
+                                                                            +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
+                                                                            +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
+                                                                            +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage.toFixed(2)+"%)"
+                                                                            +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage.toFixed(2)+"%)"
+                                                                            +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage.toFixed(2)+"%)"
+                                                                            +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage.toFixed(2)+"%)"
+                                                                            +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
+                                                                            +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
+                                                                            +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
 
                                                                             )
 
