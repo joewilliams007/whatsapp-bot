@@ -838,7 +838,8 @@ case "stardash":
                                                                                    
                                                                                     sendChart(msg.from, text).then(function (){});
                                                                                     async function sendChart(number,text) {
-                                                                                        const mediaLink = await pie.toURL()
+                                                                                        var link = await pie.toURL()
+                                                                                        const mediaLink = link
                                                                                         client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
                                                                                     }
                                                                                  
