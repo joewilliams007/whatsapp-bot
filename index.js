@@ -562,14 +562,24 @@ break;
 case "":
 if (isRegister) return reply(style+" you are already registered")
 
-connection.query( // register userstuff
-`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType, clearnumber) 
-VALUES ("${pushname}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}","${number.split("@")[0]}")`
-, function (error, results, fields) {
-        if (error) reply ("there was error with registration\n\n"+error.message);
-        console.log('Yey a new registration! >_< ');
-    reply("registration successfull "+pushname+"\n\nall commands: .menu\nyour profile: .me")
-});
+
+codeZ()
+async function codeZ(){
+    const codeZ = await client.getCountryCode(number)
+
+    connection.query( // register userstuff
+    `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType, clearnumber, country_code) 
+    VALUES ("${pushname}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}","${number.split("@")[0]}","${codeZ}")`
+    , function (error, results, fields) {
+            if (error) reply ("there was error with registration\n\n"+error.message);
+            console.log('Yey a new registration! >_< ');
+        reply("registration successfull "+pushname+"\n\nall commands: .menu\nyour profile: .me")
+    });
+}
+
+
+
+
 
 break;
 // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -779,59 +789,66 @@ case "stardash":
                                                                            
                                                                             console.log(results[0].RowCount)
                                                                             var image = results[0].RowCount
-                                                                            
+        
                                                                             connection.query( 
-                                                                                `SELECT COUNT(*) AS RowCount FROM Users WHERE user_id > 0`
-                                                                                , function (error, results, fields) {
-                                                                                   
-                                                                                    console.log(results[0].RowCount)
-                                                                                    var registered = results[0].RowCount
-                                                                                    
-                                                                                    var receivedNumber = Number(messages)
-        
-                                                                                    var commandPercentage = Number(command)/receivedNumber*100
-                                                                                    var quotedPercentage = Number(quoted)/receivedNumber*100
-                                                                                    var mediaPercentage = Number(media)/receivedNumber*100
-                                                                                    var chatPercentage = Number(chat)/receivedNumber*100
-                                                                                    var stickerPercentage = Number(sticker)/receivedNumber*100
-                                                                                    var imagePercentage = Number(image)/receivedNumber*100
-                                                                                    var androidPercentage = Number(android)/receivedNumber*100
-                                                                                    var iosPercentage = Number(ios)/receivedNumber*100
-                                                                                    var youPercentage = Number(you)/receivedNumber*100
-        
-
-                                                                                    reply("📡 StarDash Logs"
-                                                                                    +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
-                                                                                    +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
-                                                                                    +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
-                                                                                    +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage.toFixed(2)+"%)"
-                                                                                    +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage.toFixed(2)+"%)"
-                                                                                    +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage.toFixed(2)+"%)"
-                                                                                    +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage.toFixed(2)+"%)"
-                                                                                    +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
-                                                                                    +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
-                                                                                    +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
-                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'))
-
-                                                                                                                            
-                                                                             
-                                                        
-                                                                                  
+                                                                                `SELECT DISTINCT(country_code) FROM Messages;`
+                                                                                    , function (error, results, fields) {
+                                                                                    var arr = JSON.parse(JSON.stringify(results))
+                                                                                    var different = arr.length
+                                                                                    var text = "\n\nfrom "+different+" countries\n\n";
                                                                                 
-            
+                                                                                    arr.forEach(element => {
+                                                                            
+                                                                                        connection.query( 
+                                                                                            `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${element}'`
+                                                                                            , function (error, results, fields) {
+                                                                                               
+                                                                                                var amount = results[0].RowCount
+                                                                            
+                                                                                                text+="from country +"+element+" "+amount+"\n"
+                                                                                         });
+                                                                                    });
+                                                                            
+                                                                                    connection.query( 
+                                                                            
+                                                                                        `SELECT COUNT(*) AS RowCount FROM Users WHERE user_id > 0`
+                                                                                        , function (error, results, fields) {
+                                                                                           
+                                                                                            console.log(results[0].RowCount)
+                                                                                            var registered = results[0].RowCount
+                                                                                            
+                                                                                            var receivedNumber = Number(messages)
+                
+                                                                                            var commandPercentage = Number(command)/receivedNumber*100
+                                                                                            var quotedPercentage = Number(quoted)/receivedNumber*100
+                                                                                            var mediaPercentage = Number(media)/receivedNumber*100
+                                                                                            var chatPercentage = Number(chat)/receivedNumber*100
+                                                                                            var stickerPercentage = Number(sticker)/receivedNumber*100
+                                                                                            var imagePercentage = Number(image)/receivedNumber*100
+                                                                                            var androidPercentage = Number(android)/receivedNumber*100
+                                                                                            var iosPercentage = Number(ios)/receivedNumber*100
+                                                                                            var youPercentage = Number(you)/receivedNumber*100
+                
+        
+                                                                                            reply("📡 StarDash Logs"
+                                                                                            +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
+                                                                                            +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
+                                                                                            +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
+                                                                                            +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage.toFixed(2)+"%)"
+                                                                                            +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage.toFixed(2)+"%)"
+                                                                                            +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage.toFixed(2)+"%)"
+                                                                                            +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage.toFixed(2)+"%)"
+                                                                                            +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
+                                                                                            +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
+                                                                                            +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
+                                                                                            +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+                                                                                            +text)
+        
+                                                                        
+                                                                                    });
 
-                                                                               
-                                                                 
-                                            
+                                                                                });
 
-                                                                   
-                                                                                   
-                                                                 
-                                                                                 
-
-
-                                                                
-                                                                            });
 
                                                                     });
                                                             });
@@ -842,6 +859,9 @@ case "stardash":
                     });
             });
     });
+
+
+
 break;
 // message ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "message":
