@@ -69,7 +69,7 @@ if(msg.author=="undefined") {
 
 code()
 async function code(){
-    const code = await msg.getCountryCode
+    const code = await client.getCountryCode(number)
     console.log(code)
 }
 
