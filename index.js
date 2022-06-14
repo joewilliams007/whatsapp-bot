@@ -792,19 +792,35 @@ case "stardash":
                                                                            
                                                                             console.log(results[0].RowCount)
                                                                             var image = results[0].RowCount
+                                                                            
+                                                                            var receivedNumber = Number(messages)
+
+                                                                            var commandPercentage = receivedNumber/Number(command)
+                                                                            var quotedPercentage = receivedNumber/Number(quoted)
+                                                                            var mediaPercentage = receivedNumber/Number(media)
+                                                                            var chatPercentage = receivedNumber/Number(chat)
+                                                                            var stickerPercentage = receivedNumber/Number(sticker)
+                                                                            var imagePercentage = receivedNumber/Number(image)
+                                                                            var androidPercentage = receivedNumber/Number(android)
+                                                                            var iosPercentage = receivedNumber/Number(ios)
+                                                                            var youPercentage = receivedNumber/Number(you)
+
                                                 
                                                                             reply("📡 StarDash Logs"
-                                                                            +"\n\n💭 all received: "+messages             
-                                                                            +"\n⚔️ commands: "+command
-                                                                            +"\n📨 quotes: "+quoted
-                                                                            +"\n🎞️ media: "+media
-                                                                            +"\n💬 chat msg: "+chat
-                                                                            +"\n🌠 stickers: "+sticker
-                                                                            +"\n📸 images: "+image
-                                                                            +"\n🐺 android: "+android
-                                                                            +"\n🐑 ios: "+ios
-                                                                            +"\n"+style+" from you: "+you
+                                                                            +"\n\n💭 all received: "+messages.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
+                                                                            +"\n⚔️ commands: "+command.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage+"%)"
+                                                                            +"\n📨 quotes: "+quoted.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage+"%)"
+                                                                            +"\n🎞️ media: "+media.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage+"%)"
+                                                                            +"\n💬 chat msg: "+chat.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage+"%)"
+                                                                            +"\n🌠 stickers: "+sticker.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage+"%)"
+                                                                            +"\n📸 images: "+image.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage+"%)"
+                                                                            +"\n🐺 android: "+android.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage+"%)"
+                                                                            +"\n🐑 ios: "+ios.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage+"%)"
+                                                                            +"\n"+style+" from you: "+you.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage+"%)"
+
                                                                             )
+
+                                                    
                                                                     });
                                                             });
                                                     });
