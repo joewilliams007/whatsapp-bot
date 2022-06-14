@@ -224,12 +224,7 @@ if (isRegister) {
             if (error) console.log(error.message);
 });
 
-code()
-async function code(){
-    const code = await client.getCountryCode(number)
-    set("country_code",code)
-    console.log(code)
-}
+console.log("message: "+msg.body+" from user "+number)
 
 }
 if(deviceType == "unknown") {
@@ -636,6 +631,15 @@ try {
 var deviceType; 
 deviceType = res[0].deviceType
 } catch (err) {}
+try {
+var country_code; 
+country_code = res[0].country_code
+} catch (err) {}
+try {
+var clearnumber; 
+clearnumber = res[0].clearnumber
+} catch (err) {}
+
 
 var finalTime;
 var time = (dateInSec - Number(date))
@@ -665,6 +669,8 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n💳 userid: "+id
     +"\n🗂️ status: "+status
     +"\n📱 device: "+deviceType
+    +"\n📟 number: "+clearnumber
+    +"\n⚙️ code: "+country_code
     +"\n🗓️ account created: "+finalTime1)
 
 });
