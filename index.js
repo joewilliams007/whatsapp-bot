@@ -9,7 +9,7 @@ const _love = JSON.parse(fs.readFileSync('./result/ranswer/lovemeter.json'));
 const _animal = JSON.parse(fs.readFileSync('./result/ranswer/animal.json'));
 const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
 const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
-ChartjsNode = require('chartjs-node'); // Import the library
+var ChartjsNode = require('chartjs-node'); // Import the library
 
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
@@ -831,8 +831,8 @@ case "stardash":
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 
-
-                                                                                   
+                                                                                                                                cj()
+                                                                                    async function cj() {   
 
                                                                                     const chartNode = new ChartjsNode(600, 600); // Create an instance with dimensions
                                                                                     
@@ -861,7 +861,7 @@ case "stardash":
                                                         
                                                                                    //  sendMediaC(msg.from, text).then(function (){});
 
-                                                                                    
+                                                                                }
                 
 
                                                                                             async function sendMediaC(number,text) {
