@@ -1187,8 +1187,11 @@ default:
     reply(style+" what even is this command")
     }
                         function reply(message){
-                            msg.reply(message)
-  
+                            try {
+                                msg.reply(message)
+                            } catch(err){
+                                reply("there was an error\n\n"+err.message)
+                            }
                         }
 
                         function set(target, replacement) {
