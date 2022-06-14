@@ -1023,9 +1023,16 @@ case "sticker":
         try {
         const quotedMsg = await msg.getQuotedMessage();
         if (quotedMsg.hasMedia) {
+            
+            try {
         const encmedia = await quotedMsg.downloadMedia();
         client.sendMessage(msg.from, encmedia, { quotedMessageId: msg.id._serialized, sendMediaAsSticker: true, stickerName: name, stickerAuthor: username, stickerCategories: ['😎','😾','🗿'] })
-        } else {
+    
+        } catch (err){
+            reply(style+" there was an error lol cryptic details:\n\n\n"+err.message)
+        }
+    
+    } else {
             reply(style+" reply to a picture")
         }
     } catch (err){
