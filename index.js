@@ -99,7 +99,9 @@ var args = msg.body.split(" ")
 var switchMsg;
 if (msg.body.split("")[1] == " ") {
     var value = removeFirstWord(msg.body)
-    var args = msg.body.slice(2).removeFirstWord().split(" ")
+
+    var sub = removeFirstWord(msg.body.slice(2))
+    var args = sub.split(" ")
     switchMsg = msg.body.slice(2).split(" ")[0]
 } else {
     switchMsg = msg.body.slice(1).split(" ")[0]
