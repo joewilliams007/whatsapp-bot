@@ -801,20 +801,20 @@ case "stardash":
                                                                                     var itemsProcessed = 0;
                                                                                     arr.forEach((item, index, array) => {
                                                                                   
-                                                                                    asyncFunction(item, () => {
+                                                                             
                                                                                         itemsProcessed++;
                                                                                         connection.query( 
-                                                                                            `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${element}'`
+                                                                                            `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${item}'`
                                                                                             , function (error, results, fields) {
                                                                                                
                                                                                                 var amount = results[0].RowCount
                                                                             
-                                                                                                text+="from country +"+element+" "+amount+"\n"+arr
+                                                                                                text+="from country +"+JSON.stringify(item)+" "+amount+"\n"
                                                                                          });
                                                                                         if(itemsProcessed === array.length) {
                                                                                         callback();
                                                                                         }
-                                                                                    });
+                                                                                  
                                                                                     });
 
                                                 
