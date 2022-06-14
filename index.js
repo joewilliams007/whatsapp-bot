@@ -795,15 +795,15 @@ case "stardash":
                                                                             
                                                                             var receivedNumber = Number(messages)
 
-                                                                            var commandPercentage = receivedNumber/Number(command)*10
-                                                                            var quotedPercentage = receivedNumber/Number(quoted)*10
-                                                                            var mediaPercentage = receivedNumber/Number(media)*10
-                                                                            var chatPercentage = receivedNumber/Number(chat)*10
-                                                                            var stickerPercentage = receivedNumber/Number(sticker)*10
-                                                                            var imagePercentage = receivedNumber/Number(image)*10
-                                                                            var androidPercentage = receivedNumber/Number(android)*10
-                                                                            var iosPercentage = receivedNumber/Number(ios)*10
-                                                                            var youPercentage = receivedNumber/Number(you)*10
+                                                                            var commandPercentage = Number(command)/receivedNumber*100
+                                                                            var quotedPercentage = Number(quoted)/receivedNumber*100
+                                                                            var mediaPercentage = Number(media)/receivedNumber*100
+                                                                            var chatPercentage = Number(chat)/receivedNumber*100
+                                                                            var stickerPercentage = Number(sticker)/receivedNumber*100
+                                                                            var imagePercentage = Number(image)/receivedNumber*100
+                                                                            var androidPercentage = Number(android)/receivedNumber*100
+                                                                            var iosPercentage = Number(ios)/receivedNumber*100
+                                                                            var youPercentage = Number(you)/receivedNumber*100
 
                                                 
                                                                             reply("📡 StarDash Logs"
