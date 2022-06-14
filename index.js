@@ -92,6 +92,7 @@ const vipMessage = "this command is only for vip users"
 const ownerMessage = "this command is only for the owner"
 var isRegister = false;
 var isQuote = msg.hasQuotedMsg
+var pushname = msg._data.notifyName
 
 var value = removeFirstWord(msg.body)
 var args = msg.body.split(" ")
@@ -588,15 +589,14 @@ break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "register":
 if (isRegister) return reply(style+" you are already registered")
-if (args.length<2) return reply("please enter a username")
 
 connection.query( // register userstuff
 `INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType, clearnumber) 
-VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}","${number.split("@")[0]}")`
+VALUES ("${pushname}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}","${number.split("@")[0]}")`
 , function (error, results, fields) {
         if (error) reply ("there was error with registration\n\n"+error.message);
         console.log('Yey a new registration! >_< ');
-    reply("registration successfull "+args[1]+"\n\nall commands: .menu\nyour profile: .me")
+    reply("registration successfull "+pushname+"\n\nall commands: .menu\nyour profile: .me")
 });
 
 break;
