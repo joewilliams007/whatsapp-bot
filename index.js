@@ -811,7 +811,7 @@ case "stardash":
                                                                                                 
 
 
-                                                                                                text+="\n+"+JSON.stringify(item.country_code)+": "+amount
+                                                                                                text+="\n🪐 +"+JSON.stringify(item.country_code)+" ("+amount+")"
                                                                                          });
                                                                                         if(itemsProcessed === array.length) {
                                                                                         callback();
