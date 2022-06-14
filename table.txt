@@ -22,11 +22,13 @@ ALTER TABLE Users ADD status VARCHAR(255) DEFAULT "normal";
 ALTER TABLE Users ADD clearnumber VARCHAR(255);
 ALTER TABLE Users ADD deviceType VARCHAR(255) DEFAULT "unknown";
 
-ALTER TABLE Users ADD country_prefix VARCHAR(255) DEFAULT "unknown";
-ALTER TABLE Users ADD location VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Users ADD country_code VARCHAR(255) DEFAULT "unknown";
-ALTER TABLE Users ADD country_name VARCHAR(255) DEFAULT "unknown";
-ALTER TABLE Users ADD carrier VARCHAR(255) DEFAULT "unknown";
+
+
+ALTER TABLE Users DROP "carrier";
+ALTER TABLE Users DROP "country_name";
+ALTER TABLE Users DROP "country_prefix";
+ALTER TABLE Users DROP "location";
 
 CREATE TABLE Messages (
 message_id INT NOT NULL AUTO_INCREMENT,

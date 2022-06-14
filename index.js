@@ -67,11 +67,7 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
-code()
-async function code(){
-    const code = await client.getCountryCode(number)
-    console.log(code)
-}
+
 
 var isCommand = false;
     try {
@@ -95,7 +91,7 @@ VALUES ("${number}","${number.split("@")[0]}","${msg._data.notifyName}","${msg.b
 // msg.reply("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nCHOOSINGs: "+number)
 // console.log("MSG.AUTHOR: "+msg.author+"\nMSG.FROM: "+msg.from+"\nSETTING: "+number)
 const dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
-const registerMessage = "you are not registered. To register send the message:\n\n.register yourname"
+const registerMessage = "you are not registered. To register send the message:\n\n.register"
 const vipMessage = "this command is only for vip users"
 const ownerMessage = "this command is only for the owner"
 var isRegister = false;
@@ -194,22 +190,7 @@ var country_code;
 try {
     country_code = res[0].country_code
 } catch (err) {}
-var country_name;
-try {
-    country_name = res[0].country_name
-} catch (err) {}
-var carrier;
-try {
-    carrier = res[0].carrier
-} catch (err) {}
-var country_prefix;
-try {
-    country_prefix = res[0].country_prefix
-} catch (err) {}
-var location;
-try {
-    location = res[0].location
-} catch (err) {}
+
 
 var isNormal = false;
 var isVip = false;
@@ -236,41 +217,21 @@ if (isRegister) {
         , function (error, results, fields) {
             if (error) console.log(error.message);
 });
+
+code()
+async function code(){
+    const code = await client.getCountryCode(number)
+    set("country_code",code)
+    console.log(code)
+}
+
 }
 if(deviceType == "unknown") {
     set("clearnumber",number.split("@")[0])
     set("deviceType", msg.deviceType)
 }
-if(country_code == "unknown" && (deviceType != "unknown")) {
-try {
 
- //  "3938fda5de7c7e53601edfc59f0e08ff",
-    var myArray = [
-     
-        "TjKbBTVmomPXYVbzQDLvbocaHj1TmXBV",
-        "0mCGEjRet3ZI0lt3Wjwjwgx0HsQva3xN",
-        "E3M7hH18tci64NPFQUXi5TFD47p6oZjt",
-        "FHMxEsxySYRoFuSNBLrAosKSn3lQ65Nh"
-      ];
-      
-      var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
 
-var getJSON = require('get-json')
-getJSON('http://apilayer.net/api/validate?access_key=' + randomItem + '&number=' + number.split("@")[0], function(error, res){
-
-    set("country_prefix",res.country_prefix)
-    set("location",res.location)
-    set("country_code",res.country_code)
-    set("country_name", res.country_name)
-    set("carrier", res.carrier)
-
-    console.log("LOOOKING FOR COUNTRY DETAILS")
-});
-
-} catch(err) {
-    console.log(err.message)
-}
-}
 
 
 
@@ -597,7 +558,7 @@ var amount = args[1]
 
 break;
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-case "register":
+case "":
 if (isRegister) return reply(style+" you are already registered")
 
 connection.query( // register userstuff
