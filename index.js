@@ -797,8 +797,12 @@ case "stardash":
                                                                                     var different = arr.length
                                                                                     var text = "\n\nfrom "+different+" countries\n\n";
                                                                                 
-                                                                                    arr.forEach(element => {
-                                                                            
+                                                                                  
+                                                                                    var itemsProcessed = 0;
+                                                                                    arr.forEach((item, index, array) => {
+                                                                                  
+                                                                                    asyncFunction(item, () => {
+                                                                                        itemsProcessed++;
                                                                                         connection.query( 
                                                                                             `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${element}'`
                                                                                             , function (error, results, fields) {
@@ -807,8 +811,14 @@ case "stardash":
                                                                             
                                                                                                 text+="from country +"+element+" "+amount+"\n"+arr
                                                                                          });
+                                                                                        if(itemsProcessed === array.length) {
+                                                                                        callback();
+                                                                                        }
                                                                                     });
-                                                                            
+                                                                                    });
+
+                                                
+                                                                                    function callback () { console.log('all done'); 
                                                                                     connection.query( 
                                                                             
                                                                                         `SELECT COUNT(*) AS RowCount FROM Users WHERE user_id > 0`
@@ -846,6 +856,8 @@ case "stardash":
         
                                                                         
                                                                                     });
+
+                                                                                }
 
                                                                                 });
 
