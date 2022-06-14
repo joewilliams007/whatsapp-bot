@@ -731,11 +731,6 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 break;
 case "stardash":
 
-    var ImageCharts = require('image-charts');
-
-  
-
-
     connection.query( 
         `SELECT COUNT(*) AS RowCount FROM Messages`
         , function (error, results, fields) {
@@ -821,7 +816,6 @@ case "stardash":
                                                                                     var iosPercentage = Number(ios)/receivedNumber*100
                                                                                     var youPercentage = Number(you)/receivedNumber*100
         
-                                                                                    const pie = ImageCharts().cht('p').chd('a:2.5,5,8.3').chs('100x100');
 
                                                                                     var text = "📡 StarDash Logs"
                                                                                     +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
@@ -835,13 +829,50 @@ case "stardash":
                                                                                     +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+
+
+                                                                                    var JSDOM = require('jsdom').JSDOM;
+                                                                                    // Create instance of JSDOM.
+                                                                                    var jsdom = new JSDOM('<body><div id="container"></div></body>', {runScripts: 'dangerously'});
+                                                                                    // Get window
+                                                                                    var window = jsdom.window;
+                                                                
+                                                                                    var anychart = require('anychart')(window);
+                                                                                    var anychartExport = require('anychart-nodejs')(anychart);
+                
+                                                                                    var chart = anychart.pie([10, 20, 7, 18, 30]);
+                                                                                    chart.bounds(0, 0, 800, 600);
+                                                                                    chart.container('container');
+                                                                                    chart.draw();
+                                                                                    
+                                                                                    // generate JPG image and save it to a file
+                                                                                    anychartExport.exportTo(chart, 'jpg').then(function(image) {
+                                                                                      fs.writeFile('anychart.jpg', image, function(fsWriteError) {
+                                                                                        if (fsWriteError) {
+                                                                                          console.log(fsWriteError);
+                                                                                        } else {
+                                                                                          console.log('Complete');
+
+                                                                                          
+                                                                                          sendMediaC(msg.from, text).then(function (){});
+
+                                                                                       
+                                                                            async function sendMediaC(number,text) {
+                                                                                const mediaLink = await MessageMedia.fromFilePath('./anychart.jpg');
+                                                                                client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
+                                                                            }
+                                                                 
+                                                                                        }
+                                                                                      });
+                                                                                    }, function(generationError) {
+                                                                                      console.log(generationError);
+                                                                                    });
+
+                                            
+
+                                                                   
                                                                                    
-                                                                                    sendChart(msg.from, text).then(function (){});
-                                                                                    async function sendChart(number,text) {
-                                                                                        var link = await pie.toURL()
-                                                                                        const mediaLink = link
-                                                                                        client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
-                                                                                    }
+                                                                 
                                                                                  
 
 
