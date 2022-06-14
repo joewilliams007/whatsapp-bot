@@ -795,7 +795,7 @@ case "stardash":
                                                                                     , function (error, results, fields) {
                                                                                     var arr = JSON.parse(JSON.stringify(results))
                                                                                     var different = arr.length
-                                                                                    var text = "\n\nfrom "+different+" countries\n\n";
+                                                                                    var text = "\n🌎 from "+different+" countries";
                                                                                 
                                                                                   
                                                                                     var itemsProcessed = 0;
@@ -808,8 +808,10 @@ case "stardash":
                                                                                             , function (error, results, fields) {
                                                                                                
                                                                                                 var amount = results[0].RowCount
-                                                                            
-                                                                                                text+="from country +"+JSON.stringify(item.country_code)+" "+amount+"\n"
+                                                                                                
+
+
+                                                                                                text+="\n+"+JSON.stringify(item.country_code)+": "+amount
                                                                                          });
                                                                                         if(itemsProcessed === array.length) {
                                                                                         callback();
@@ -852,7 +854,7 @@ case "stardash":
                                                                                             +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                             +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
                                                                                             +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-                                                                                            +text)
+                                                                                            +text.replace(/["]+/g, ''))
         
                                                                         
                                                                                     });
