@@ -53,7 +53,7 @@ client.on('message', async msg => {
 
 
    
-console.log('MESSAGE RECEIVED', msg);
+// console.log('MESSAGE RECEIVED', msg);
 
 
 const isGroup = msg.isGroup
@@ -67,7 +67,11 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
-console.log("COUNTRY CODE "+client.getCountryCode(number))
+code()
+async function code(){
+    const code = await msg.getCountryCode
+    console.log(code)
+}
 
 var isCommand = false;
     try {
