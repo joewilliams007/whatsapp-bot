@@ -588,8 +588,8 @@ if (isRegister) return reply(style+" you are already registered")
 if (args.length<2) return reply("please enter a username")
 
 connection.query( // register userstuff
-`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType) 
-VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}")`
+`INSERT INTO Users (username, number, date, coins, xp, style, age, bio, messages, deviceType, clearnumber) 
+VALUES ("${args[1]}","${number}","${dateInSec}",100,0,"⛓️",0,"hey its me", 0, "${msg.deviceType}","${number.split("@")[0]}")`
 , function (error, results, fields) {
         if (error) reply ("there was error with registration\n\n"+error.message);
         console.log('Yey a new registration! >_< ');
@@ -824,7 +824,7 @@ case "stardash":
                                                                                     +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
                                                                                     +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
                                                                                     +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
-                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+                                                                                    +"\n💫 users registered:clea "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         
                                                                                     )
         
