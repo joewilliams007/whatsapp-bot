@@ -793,34 +793,43 @@ case "stardash":
                                                                             console.log(results[0].RowCount)
                                                                             var image = results[0].RowCount
                                                                             
-                                                                            var receivedNumber = Number(messages)
+                                                                            connection.query( 
+                                                                                `SELECT COUNT(*) AS RowCount FROM Users WHERE user_id > 0`
+                                                                                , function (error, results, fields) {
+                                                                                   
+                                                                                    console.log(results[0].RowCount)
+                                                                                    var registered = results[0].RowCount
+                                                                                    
+                                                                                    var receivedNumber = Number(messages)
+        
+                                                                                    var commandPercentage = Number(command)/receivedNumber*100
+                                                                                    var quotedPercentage = Number(quoted)/receivedNumber*100
+                                                                                    var mediaPercentage = Number(media)/receivedNumber*100
+                                                                                    var chatPercentage = Number(chat)/receivedNumber*100
+                                                                                    var stickerPercentage = Number(sticker)/receivedNumber*100
+                                                                                    var imagePercentage = Number(image)/receivedNumber*100
+                                                                                    var androidPercentage = Number(android)/receivedNumber*100
+                                                                                    var iosPercentage = Number(ios)/receivedNumber*100
+                                                                                    var youPercentage = Number(you)/receivedNumber*100
+        
+                                                        
+                                                                                    reply("📡 StarDash Logs"
+                                                                                    +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
+                                                                                    +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
+                                                                                    +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
+                                                                                    +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage.toFixed(2)+"%)"
+                                                                                    +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage.toFixed(2)+"%)"
+                                                                                    +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage.toFixed(2)+"%)"
+                                                                                    +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage.toFixed(2)+"%)"
+                                                                                    +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
+                                                                                    +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
+                                                                                    +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
+                                                                                    +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        
+                                                                                    )
+        
+                                                                            });
 
-                                                                            var commandPercentage = Number(command)/receivedNumber*100
-                                                                            var quotedPercentage = Number(quoted)/receivedNumber*100
-                                                                            var mediaPercentage = Number(media)/receivedNumber*100
-                                                                            var chatPercentage = Number(chat)/receivedNumber*100
-                                                                            var stickerPercentage = Number(sticker)/receivedNumber*100
-                                                                            var imagePercentage = Number(image)/receivedNumber*100
-                                                                            var androidPercentage = Number(android)/receivedNumber*100
-                                                                            var iosPercentage = Number(ios)/receivedNumber*100
-                                                                            var youPercentage = Number(you)/receivedNumber*100
-
-                                                
-                                                                            reply("📡 StarDash Logs"
-                                                                            +"\n\n💭 all received: "+messages.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')             
-                                                                            +"\n⚔️ commands: "+command.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+commandPercentage.toFixed(2)+"%)"
-                                                                            +"\n📨 quotes: "+quoted.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+quotedPercentage.toFixed(2)+"%)"
-                                                                            +"\n🎞️ media: "+media.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+mediaPercentage.toFixed(2)+"%)"
-                                                                            +"\n💬 chat msg: "+chat.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+chatPercentage.toFixed(2)+"%)"
-                                                                            +"\n🌠 stickers: "+sticker.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+stickerPercentage.toFixed(2)+"%)"
-                                                                            +"\n📸 images: "+image.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+imagePercentage.toFixed(2)+"%)"
-                                                                            +"\n🐺 android: "+android.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+androidPercentage.toFixed(2)+"%)"
-                                                                            +"\n🐑 ios: "+ios.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+iosPercentage.toFixed(2)+"%)"
-                                                                            +"\n"+style+" from you: "+you.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')+" ("+youPercentage.toFixed(2)+"%)"
-
-                                                                            )
-
-                                                    
                                                                     });
                                                             });
                                                     });
