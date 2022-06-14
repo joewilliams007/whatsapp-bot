@@ -831,43 +831,62 @@ case "stardash":
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 
 
-                                                                                    var JSDOM = require('jsdom').JSDOM;
-                                                                                    // Create instance of JSDOM.
-                                                                                    var jsdom = new JSDOM('<body><div id="container"></div></body>', {runScripts: 'dangerously'});
-                                                                                    // Get window
-                                                                                    var window = jsdom.window;
-                                                                
-                                                                                    var anychart = require('anychart')(window);
-                                                                                    var anychartExport = require('anychart-nodejs')(anychart);
-                
-                                                                                    var chart = anychart.pie([10, 20, 7, 18, 30]);
-                                                                                    chart.bounds(0, 0, 800, 600);
-                                                                                    chart.container('container');
-                                                                                    chart.draw();
+                                                                        
+                                                                                    var path = require('path');
+                                                                                    const d3 = require('d3');
+                                                                                    const jsdom = require("jsdom");
+                                                                                    const JSDOM = jsdom.JSDOM;
                                                                                     
-                                                                                    // generate JPG image and save it to a file
-                                                                                    anychartExport.exportTo(chart, 'jpg').then(function(image) {
-                                                                                      fs.writeFile('anychart.jpg', image, function(fsWriteError) {
-                                                                                        if (fsWriteError) {
-                                                                                          console.log(fsWriteError);
-                                                                                        } else {
-                                                                                          console.log('Complete');
+                                                                                    const chartWidth = 500;
+                                                                                    const chartHeight = 500;
+                                                                                    
+                                                                                    const arc = d3.arc()
+                                                                                      .outerRadius(chartWidth / 2 - 10)
+                                                                                      .innerRadius(0);
+                                                                                    
+                                                                                    const colours = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
+                                                                                    function go(
+                                                                                      pieData = [12, 31],
+                                                                                      outputLocation = path.join(__dirname, './test.svg')
+                                                                                    ) {
+                                                                                      const dom = new JSDOM("");
+                                                                                    
+                                                                                      dom.window.d3 = d3.select(dom.window.document); //get d3 into the dom
+                                                                                    
+                                                                                      //do yr normal d3 stuff
+                                                                                      const svg = dom.window.d3.select('body')
+                                                                                        .append('div').attr('class', 'container') //make a container div to ease the saving process
+                                                                                        .append('svg')
+                                                                                        .attr("xmlns", 'http://www.w3.org/2000/svg')
+                                                                                        .attr("width", chartWidth)
+                                                                                        .attr("height", chartHeight)
+                                                                                        .append('g')
+                                                                                        .attr('transform', 'translate(' + chartWidth / 2 + ',' + chartWidth / 2 + ')');
+                                                                                    
+                                                                                      svg.selectAll('.arc')
+                                                                                        .data(d3.pie()(pieData))
+                                                                                        .enter()
+                                                                                        .append('path')
+                                                                                        .attr("class", 'arc')
+                                                                                        .attr("d", arc)
+                                                                                        .attr("fill", (d, i) => colours[i])
+                                                                                        .attr("stroke", '#fff')
+                                                                                    
+                                                                                      //using sync to keep the code simple
+                                                                                      fs.writeFileSync(outputLocation, dom.window.d3.select('.container').html())
+                                                                                    }
+                                                                                    
+                                                                                    go()
+                                                                                   //  sendMediaC(msg.from, text).then(function (){});
 
-                                                                                          
-                                                                                          sendMediaC(msg.from, text).then(function (){});
+                                                                                    
+                
 
-                                                                                       
-                                                                            async function sendMediaC(number,text) {
-                                                                                const mediaLink = await MessageMedia.fromFilePath('./anychart.jpg');
-                                                                                client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
-                                                                            }
+                                                                                            async function sendMediaC(number,text) {
+                                                                                                const mediaLink = await MessageMedia.fromFilePath('./test.svg');
+                                                                                                client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
+                                                                                            }
                                                                  
-                                                                                        }
-                                                                                      });
-                                                                                    }, function(generationError) {
-                                                                                      console.log(generationError);
-                                                                                    });
-
                                             
 
                                                                    
