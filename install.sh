@@ -4,5 +4,4 @@ sudo chmod a+rx /usr/local/bin/yt-dlp
 npm i get-json
 npm i youtube-search-without-api-key
 npm install youtubei.js@latest
-npm i jsdom
-npm i d3
+npm i chartjs-node

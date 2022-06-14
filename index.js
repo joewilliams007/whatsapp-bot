@@ -9,6 +9,7 @@ const _love = JSON.parse(fs.readFileSync('./result/ranswer/lovemeter.json'));
 const _animal = JSON.parse(fs.readFileSync('./result/ranswer/animal.json'));
 const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
 const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
+import * as ChartjsNode from 'chartjs-node'; // Import the library
 
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
@@ -831,52 +832,33 @@ case "stardash":
                                                                                     +"\n💫 users registered: "+registered.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 
 
-                                                                        
-                                                                                    var path = require('path');
-                                                                                    const d3 = require('d3');
-                                                                                    const jsdom = require("jsdom");
-                                                                                    const JSDOM = jsdom.JSDOM;
+                                                                                   
+
+                                                                                    const chartNode = new ChartjsNode(600, 600); // Create an instance with dimensions
                                                                                     
-                                                                                    const chartWidth = 500;
-                                                                                    const chartHeight = 500;
+                                                                                    const barGraphOptions = {
+                                                                                      type: 'bar',
+                                                                                      data: []
+                                                                                    };
                                                                                     
-                                                                                    const arc = d3.arc()
-                                                                                      .outerRadius(chartWidth / 2 - 10)
-                                                                                      .innerRadius(0);
+                                                                                    // Draw the chart and write the file to the file system
+                                                                                    await new Promise(resolve => {
+                                                                                      chartNode
+                                                                                        .drawChart(barGraphOptions)
+                                                                                        .then(() => {
+                                                                                          chartNode.getImageBuffer('image/png');
+                                                                                        })
+                                                                                        .then(() => {
+                                                                                          chartNode.writeImageToFile('image/png', 'some_file.png').then(() => {
+                                                                                            resolve();
+                                                                                          });
+                                                                                        })
+                                                                                        .catch(e => {
+                                                                                          console.log('Caught', e);
+                                                                                        });
+                                                                                    });
                                                                                     
-                                                                                    const colours = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
-                                                                                    function go(
-                                                                                      pieData = [12, 31],
-                                                                                      outputLocation = path.join(__dirname, './test.svg')
-                                                                                    ) {
-                                                                                      const dom = new JSDOM("");
-                                                                                    
-                                                                                      dom.window.d3 = d3.select(dom.window.document); //get d3 into the dom
-                                                                                    
-                                                                                      //do yr normal d3 stuff
-                                                                                      const svg = dom.window.d3.select('body')
-                                                                                        .append('div').attr('class', 'container') //make a container div to ease the saving process
-                                                                                        .append('svg')
-                                                                                        .attr("xmlns", 'http://www.w3.org/2000/svg')
-                                                                                        .attr("width", chartWidth)
-                                                                                        .attr("height", chartHeight)
-                                                                                        .append('g')
-                                                                                        .attr('transform', 'translate(' + chartWidth / 2 + ',' + chartWidth / 2 + ')');
-                                                                                    
-                                                                                      svg.selectAll('.arc')
-                                                                                        .data(d3.pie()(pieData))
-                                                                                        .enter()
-                                                                                        .append('path')
-                                                                                        .attr("class", 'arc')
-                                                                                        .attr("d", arc)
-                                                                                        .attr("fill", (d, i) => colours[i])
-                                                                                        .attr("stroke", '#fff')
-                                                                                    
-                                                                                      //using sync to keep the code simple
-                                                                                      fs.writeFileSync(outputLocation, dom.window.d3.select('.container').html())
-                                                                                    }
-                                                                                    
-                                                                                    go()
+                                                        
                                                                                    //  sendMediaC(msg.from, text).then(function (){});
 
                                                                                     
