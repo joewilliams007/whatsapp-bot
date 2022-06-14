@@ -9,7 +9,7 @@ const _love = JSON.parse(fs.readFileSync('./result/ranswer/lovemeter.json'));
 const _animal = JSON.parse(fs.readFileSync('./result/ranswer/animal.json'));
 const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
 const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
-import * as ChartjsNode from 'chartjs-node'; // Import the library
+ChartjsNode = require('chartjs-node'); // Import the library
 
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
