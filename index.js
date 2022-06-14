@@ -52,8 +52,7 @@ client.on('ready', () => {
 client.on('message', async msg => {
 
 console.log('MESSAGE RECEIVED', msg);
-const value = removeFirstWord(msg.body)
-const args = msg.body.split(" ")
+
 
 const isGroup = msg.isGroup
 
@@ -90,6 +89,18 @@ const vipMessage = "this command is only for vip users"
 const ownerMessage = "this command is only for the owner"
 var isRegister = false;
 var isQuote = msg.hasQuotedMsg
+
+var value = removeFirstWord(msg.body)
+var args = msg.body.split(" ")
+var switchMsg;
+if (msg.body.split("")[1] == " ") {
+    var value = removeFirstWord(msg.body)
+    var args = msg.body.slice(2).split(" ")
+} else {
+    switchMsg = msg.body.slice(1).split(" ")[0]
+}
+
+
 
 if (msg.body.split("")[0]=="." ||msg.body.split("")[0]=="#" ||msg.body.split("")[0]=="$" ||msg.body.split("")[0]=="!") {
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -247,7 +258,8 @@ getJSON('http://apilayer.net/api/validate?access_key=' + randomItem + '&number='
 }
 
 
-switch(msg.body.slice(1).split(" ")[0]) {
+
+switch(switchMsg) {
 
     
 // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -279,7 +291,6 @@ style+` Menu:
 
 .bot
 .me
-.data
 .search
 .song
 .user
@@ -710,19 +721,9 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
     +"\n💳 userid: "+id
     +"\n🗂️ status: "+status
     +"\n📱 device: "+deviceType
-    +"\n📁 country code: "+country_code
-    +"\n🔗 prefix: "+country_prefix
     +"\n🗓️ account created: "+finalTime1)
 
 
-break;
-case "data":
-if (!isRegister) return reply(registerMessage)
-
-    reply(style+" carrier: "+carrier
-    +"\n"+style+" country: "+country_name
-    +"\n"+style+" code: "+country_code
-    +"\n"+style+" prefix: "+country_prefix)
 break;
 case "stardash":
     connection.query( 
