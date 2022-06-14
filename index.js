@@ -67,7 +67,7 @@ if(msg.author=="undefined") {
     number = msg.author
 }
 
-console.log("COUNTRY CODE "+getCountryCode(number))
+console.log("COUNTRY CODE "+client.getCountryCode(number))
 
 var isCommand = false;
     try {
