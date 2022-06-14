@@ -804,12 +804,12 @@ case "stardash":
                                                                              
                                                                                         itemsProcessed++;
                                                                                         connection.query( 
-                                                                                            `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${item}'`
+                                                                                            `SELECT COUNT(*) AS RowCount FROM Messages WHERE country_code='${item.country_code}'`
                                                                                             , function (error, results, fields) {
                                                                                                
                                                                                                 var amount = results[0].RowCount
                                                                             
-                                                                                                text+="from country +"+JSON.stringify(item)+" "+amount+"\n"
+                                                                                                text+="from country +"+JSON.stringify(item.country_code)+" "+amount+"\n"
                                                                                          });
                                                                                         if(itemsProcessed === array.length) {
                                                                                         callback();
