@@ -51,6 +51,8 @@ client.on('ready', () => {
 
 client.on('message', async msg => {
 
+
+   
 console.log('MESSAGE RECEIVED', msg);
 
 
@@ -64,6 +66,8 @@ if(msg.author=="undefined") {
 } else {
     number = msg.author
 }
+
+console.log("COUNTRY CODE "+getCountryCode(number))
 
 var isCommand = false;
     try {
