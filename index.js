@@ -100,12 +100,16 @@ codeM()
 async function codeM(){
     const codeM = await client.getCountryCode(number)
 
+    if(msg.body.includes("mylast")) {
+
+    } else {
         connection.query( // save message
-    `INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded, isCommand, date, country_code) 
-    VALUES ("${number}","${number.split("@")[0]}","${msg._data.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}","${isCommand}","${dd}","${codeM}")`
-    , function (error, results, fields) {
-            if (error) console.log(error.message)
-    });
+        `INSERT INTO Messages (number, clearnumber, pushname, message, type, hasMedia, timestamp, deviceType, hasQuotedMsg, isGif, isForwarded, isCommand, date, country_code) 
+        VALUES ("${number}","${number.split("@")[0]}","${msg._data.notifyName}","${msg.body}","${msg.type}","${msg.hasMedia}",${msg.timestamp},"${msg.deviceType}","${msg.hasQuotedMsg}","${msg.isGif}","${msg.isForwarded}","${isCommand}","${dd}","${codeM}")`
+        , function (error, results, fields) {
+                if (error) console.log(error.message)
+        });
+    }
 }
 
 
@@ -308,6 +312,7 @@ style+` Menu:
 .leaderboard
 .users
 .stardash
+.mylast
 .message
 .delete
 `
@@ -993,33 +998,33 @@ break;
 case "mylast":
 connection.query( // get the users stuff
 `SELECT * FROM Messages
-WHERE number="${number}" ORDER BY timestamp DESC limit 5`
+WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 , function (error, results, fields) {
 if (error) reply("error\n\n"+error.message);
 var res = JSON.parse(JSON.stringify(results))
 
 var itemsProcessed = 0;
-var text = "🪐 your last 5 messages";
+var text = "🪐 your last message";
 res.forEach((item, index, array) => {
-                                                                                  
-
+                                                       
+    
     itemsProcessed++;
     text+="\n"
-    +"\nmessage:\n"+item.message
-    +"\nid: "+item.message_id
-    +"\nnumber: "+item.number
-    +"\nclear-number: "+item.clearnumber
+    +"\n💬 message:\n"+item.message
+    +"\n💳 id: "+item.message_id
+    +"\n☎️ number: "+item.number
+    +"\n☎️ clear-number: "+item.clearnumber
     +"\npushname: "+item.pushname
-    +"\ntype: "+item.type
-    +"\ntime-in-ms: "+item.timestamp
-    +"\ndate: "+item.date
-    +"\nhas-media: "+item.hasMedia
-    +"\ndevice: "+item.deviceType
-    +"\nhas-quote: "+item.hasQuotedMsg
-    +"\nis-gif: "+item.isGif
-    +"\nis-forwarded: "+item.isForwarded
-    +"\nis-command: "+item.isCommand
-    +"\ncountry-code: "+item.country_code
+    +"\n📷 type: "+item.type
+    +"\n⏱️ time-in-ms: "+item.timestamp
+    +"\n🗓️ date: "+item.date
+    +"\n💽 has-media: "+item.hasMedia
+    +"\n📱 device: "+item.deviceType
+    +"\n🔭 has-quote: "+item.hasQuotedMsg
+    +"\n🌠 is-gif: "+item.isGif
+    +"\n📩 is-forwarded: "+item.isForwarded
+    +"\n⚔️ is-command: "+item.isCommand
+    +"\n📡 country-code: "+item.country_code
 
 
     if(itemsProcessed === array.length) {
