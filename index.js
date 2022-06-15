@@ -435,12 +435,12 @@ case 'send':
 	if (args.length < 1) return reply(`${style} 𝑊ℎ𝑎𝑡 𝑖𝑠 𝑡ℎ𝑒 𝑝𝑖𝑐𝑡𝑢𝑟𝑒 𝑡𝑖𝑡𝑙𝑒?`)
 
 reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - - - - - - - - - - - -\n❇️ 𝐸𝑓𝑓𝑒𝑐𝑡𝑠`)
-exec(`ddg-download "${value} jpg" -l 1`, (err) => {
+exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o image.jpg`, (err) => {
 if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
 
 sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){});
 async function sendD(number,text) {
-    const mediaLink = await MessageMedia.fromFilePath('./image.png');
+    const mediaLink = await MessageMedia.fromFilePath('./image.jpg');
     client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     exec(`rm -rf ${value}.jpg`)
 }
