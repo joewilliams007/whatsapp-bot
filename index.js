@@ -1005,20 +1005,22 @@ res.forEach((item, index, array) => {
 
     itemsProcessed++;
     text+="\n"
-    +"\nid "+item.message_id
-    +"\nnumber "+item.number
-    +"\nclear-number "+item.clearnumber
-    +"\npushname "+item.pushname
-    +"\ntype "+item.type
-    +"\ntime-in-ms "+item.timestamp
-    +"\ndate "+item.date
-    +"\nhas-media "+item.hasMedia
-    +"\ndevice "+item.deviceType
-    +"\nhas-quote "+item.hasQuotedMsg
-    +"\nis-gif "+item.isGif
-    +"\nis-forwarded "+item.isForwarded
-    +"\nis-command "+item.isCommand
-    +"\ncountry-code "+item.country_code
+    +"\nmessage:\n"+item.message
+    +"\nid: "+item.message_id
+    +"\nnumber: "+item.number
+    +"\nclear-number: "+item.clearnumber
+    +"\npushname: "+item.pushname
+    +"\ntype: "+item.type
+    +"\ntime-in-ms: "+item.timestamp
+    +"\ndate: "+item.date
+    +"\nhas-media: "+item.hasMedia
+    +"\ndevice: "+item.deviceType
+    +"\nhas-quote: "+item.hasQuotedMsg
+    +"\nis-gif: "+item.isGif
+    +"\nis-forwarded: "+item.isForwarded
+    +"\nis-command: "+item.isCommand
+    +"\ncountry-code: "+item.country_code
+
 
     if(itemsProcessed === array.length) {
     callback();
