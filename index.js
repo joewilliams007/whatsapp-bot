@@ -288,7 +288,7 @@ style+` Menu:
 .user @anyone
 .register
 .wiki
-.weathers
+.weather new york
 .style
 .username
 .bio
