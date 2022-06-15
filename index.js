@@ -440,7 +440,7 @@ if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
 
 sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){});
 async function sendD(number,text) {
-    const mediaLink = await MessageMedia.fromFilePath('./image.jpg');
+    const mediaLink = await MessageMedia.fromFilePath('./image.jpg./*');
     client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     exec(`rm -rf ${value}.jpg`)
 }
