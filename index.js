@@ -468,6 +468,8 @@ case 'weather':
 // Options:
 // search:     location name or zipcode
 // degreeType: F or C
+
+try {
 weather.find({search: `${value}`, degreeType: 'c'}, function(err, result) {
   if(err) console.log(err);
   var cityName = result[0].location.name
@@ -500,6 +502,10 @@ ${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
 🧭 𝑊𝑖𝑛𝑑 ⌖ ${winddisplay}
 - - - - - - - - - - - - - - - - - -`);
 });
+
+} catch (err) {
+    reply(style+" unknkown location? Error message:\n\n"+err.message)
+}
 
 break
 
