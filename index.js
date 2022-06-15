@@ -298,9 +298,19 @@ ${style} .bot
 ${style} .me
 ${style} .transfer
 ${style} .leaderboard
+${style} .support
 ${style} ${claim}
 - - - - - - - - - - - - - - - - - -  
 𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "support":
+case "suport":
+case "help":
+    if (!isRegister) return reply(registerMessage);   
+    reply(style+` Support Group
+- - - - - - - - - - - - - - - - - -     
+https://chat.whatsapp.com/I09F6RruESk0XimB12YlDF
+- - - - - - - - - - - - - - - - - - `)
 break;
 case "settings":
     if (!isRegister) return reply(registerMessage);    
@@ -969,6 +979,7 @@ case "stardash":
                                                 `SELECT COUNT(*) AS RowCount FROM Messages WHERE number='${number.split("@")[0]}@c.us'`
                                                 , function (error, results, fields) {
                                                    
+                                                    console.log(results[0].RowCount)
                                                     console.log(results[0].RowCount)
                                                     var you = results[0].RowCount
                         
