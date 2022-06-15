@@ -285,9 +285,10 @@ style+` Menu:
 .me
 .search
 .song
-.user
+.user @anyone
 .register
 .wiki
+.weathers
 .style
 .username
 .bio
