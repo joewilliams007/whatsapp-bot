@@ -998,7 +998,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 5`
 if (error) reply("error\n\n"+error.message);
 var res = JSON.parse(JSON.stringify(results))
 
-
+var itemsProcessed = 0;
 var text = "🪐 your last 5 messages";
 res.forEach((item, index, array) => {
                                                                                   
