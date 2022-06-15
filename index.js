@@ -492,7 +492,7 @@ weather.find({search: `${value}`, degreeType: 'c'}, function(err, result) {
 		else  {
 			var tempSymbol = "🔥"
 			}
-reply(`${stlye} 𝑊𝑒𝑎𝑡ℎ𝑒𝑟
+reply(`${style} 𝑊𝑒𝑎𝑡ℎ𝑒𝑟
 - - - - - - - - - - - - - - - - - -
 📍 𝐿𝑜𝑐𝑎𝑡𝑖𝑜𝑛 ⌖ ${cityName} 
 ${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
