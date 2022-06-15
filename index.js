@@ -437,7 +437,7 @@ case 'send':
 reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - - - - - - - - - - - -\n❇️ 𝐸𝑓𝑓𝑒𝑐𝑡𝑠`)
 exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o image.jpg`, (err) => {
 if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
-
+var path = require('path');
 fs.readdir(
     path.resolve(__dirname, "./image.jpg/"),
     (err, files) => {
