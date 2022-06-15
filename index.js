@@ -429,6 +429,122 @@ case 'whatis':
 		})
 	}
 break
+
+case 'send':
+	if (!isRegister) return reply(registerMessage)
+	if (args.length < 1) return reply(`${style} 𝑊ℎ𝑎𝑡 𝑖𝑠 𝑡ℎ𝑒 𝑝𝑖𝑐𝑡𝑢𝑟𝑒 𝑡𝑖𝑡𝑙𝑒?`)
+
+reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - - - - - - - - - - - -\n❇️ 𝐸𝑓𝑓𝑒𝑐𝑡𝑠`)
+exec(`ddg-download "${value} jpg" -l 1`, (err) => {
+if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
+
+sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){});
+async function sendD(number,text) {
+    const mediaLink = await MessageMedia.fromFilePath('./image.png');
+    client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
+    exec(`rm -rf ${value}.jpg`)
+}
+
+})
+
+break
+
+case 'weather':
+	if (!isVerify) return reply(userB())
+	if (args.length < 1) return reply(`${design} 𝑃𝑙𝑒𝑎𝑠𝑒 𝑎𝑑𝑑 𝑎 𝑐𝑖𝑡𝑦 𝑎𝑛𝑑 𝑐𝑜𝑢𝑛𝑡𝑟𝑦𝑛𝑎𝑚𝑒`)
+    if (money < 10) return reply(`${design} 𝑌𝑜𝑢 𝑑𝑜𝑛𝑡 ℎ𝑎𝑣𝑒 𝑒𝑛𝑜𝑢𝑔ℎ 𝑚𝑜𝑛𝑒𝑦.\n- - - - - - - - - - - - - - - - - -\n𝑀𝑜𝑛𝑒𝑦 𝑛𝑒𝑒𝑑𝑒𝑑 10$ 𝑌𝑜𝑢𝑟 𝑚𝑜𝑛𝑒𝑦 ${money}$\n${moneystatus}\n❎ 𝑋623 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`) 
+
+    var money1 = Number(money);
+    var cost = Number(10);
+    var newmoney = money1 - cost; 
+
+    fs.readFile(`./data/users/${sender.split("@")[0]}/money.json`, 'utf-8', function(err, data) {
+        if (err) throw err;
+        var newValue = data.replace(`${money1}`, newmoney);
+        fs.writeFile(`./data/users/${sender.split("@")[0]}/money.json`, newValue, 'utf-8', function(err, data) {
+            if (err) throw err;
+        })
+    })
+    await delay(1000) /// waiting 1 second.							
+
+// Options:
+// search:     location name or zipcode
+// degreeType: F or C
+weather.find({search: `${value}`, degreeType: 'c'}, function(err, result) {
+  if(err) console.log(err);
+  var cityName = result[0].location.name
+  var temperature = result[0].current.temperature
+  var skytext = result[0].current.skytext
+  var winddisplay = result[0].current.winddisplay
+  var imageurl = result[0].current.imageUrl
+		var request = require('request');
+		var download = function(uri, filename, callback){
+		request.head(uri, function(err, res, body){
+			console.log('content-type:', res.headers['content-type']);
+			console.log('content-length:', res.headers['content-length']);
+			request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+		});
+		};
+
+		download(imageurl, 'weather.gif', function(){
+		console.log('done')
+		});
+	//	buffer = fs.readFileSync(`weather.gif`)
+	//	Lxa.sendMessage(from, buffer, video, {quoted:mek, caption: `hi`})
+    // console.log(JSON.stringify(result, null, 2)); 
+
+	if (Number(temperature) < Number(6)) {
+		var tempSymbol = "❄️"
+	}
+		else if (Number(temperature) < Number(10)) {
+		  var tempSymbol = "☁️"
+		}
+		else if (Number(temperature) < Number(15)) {
+		  var tempSymbol = "🌤️"
+		  }
+		else if (Number(temperature) < Number(25)) {
+			var tempSymbol = "☀️"
+			}
+		else  {
+			var tempSymbol = "🔥"
+			}
+reply(`${design} 𝑊𝑒𝑎𝑡ℎ𝑒𝑟
+- - - - - - - - - - - - - - - - - -
+📍 𝐿𝑜𝑐𝑎𝑡𝑖𝑜𝑛 ⌖ ${cityName} 
+${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
+🔮 𝑆𝑘𝑦 ⌖ ${skytext}
+🧭 𝑊𝑖𝑛𝑑 ⌖ ${winddisplay}
+- - - - - - - - - - - - - - - - - -
+𝑀𝑜𝑛𝑒𝑦 𝑙𝑒𝑓𝑡: ${newmoney}$`);
+});
+
+if (internet === "data") return 
+await delay(3000) /// waiting 3 second. until gif downloaded
+ran = getRandom('.webp')
+await ffmpeg(`./weather.gif`)
+	.inputFormat("weather.gif".split('.')[1])
+	.on('start', function (cmd) {
+		console.log(`Started : ${cmd}`)
+	})
+	.on('error', function (err) {
+		console.log(`Error : ${err}`)
+		tipe = 'gif'
+		reply(`falsch`)
+  })
+	.on('end', function () {
+		console.log('Finish')
+		exec(`webpmux -set exif ${addMetadata('Your', "Weather")} ${ran} -o ${ran}`, async (error) => {
+			if (error) return reply(stick())
+			Lxa.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})			
+			fs.unlinkSync(ran)
+		})
+	})
+	.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
+	.toFormat('webp')
+	.save(ran)
+
+break
+
 case "button":
 let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
 client.sendMessage(msg.from, button);

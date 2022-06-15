@@ -5,3 +5,4 @@ npm i get-json
 npm i youtube-search-without-api-key
 npm install youtubei.js@latest
 npm i chartjs-node
+npm install -g ddg-bulk-image-downloader
