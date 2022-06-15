@@ -472,14 +472,15 @@ case 'weather':
 try {
 weather.find({search: `${value}`, degreeType: 'c'}, function(err, result) {
   if(err) console.log(err);
-  var cityName = result[0].location.name
-  var temperature = result[0].current.temperature
-  var skytext = result[0].current.skytext
-  var winddisplay = result[0].current.winddisplay
-  var imageurl = result[0].current.imageUrl
 
+  try {
+    var cityName = result[0].location.name
+    var temperature = result[0].current.temperature
+    var skytext = result[0].current.skytext
+    var winddisplay = result[0].current.winddisplay
+    var imageurl = result[0].current.imageUrl
 
-	if (Number(temperature) < Number(6)) {
+    if (Number(temperature) < Number(6)) {
 		var tempSymbol = "❄️"
 	}
 		else if (Number(temperature) < Number(10)) {
@@ -501,6 +502,12 @@ ${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
 🔮 𝑆𝑘𝑦 ⌖ ${skytext}
 🧭 𝑊𝑖𝑛𝑑 ⌖ ${winddisplay}
 - - - - - - - - - - - - - - - - - -`);
+    } catch (err) {
+        reply(style+" unknkown location? Error message:\n\n"+err.message)
+    }
+
+
+
 });
 
 } catch (err) {
