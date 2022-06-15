@@ -438,11 +438,27 @@ reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - -
 exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o image.jpg`, (err) => {
 if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
 
-sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){});
-async function sendD(number,text) {
-    const mediaLink = await MessageMedia.fromFilePath('./image.jpg/*');
+fs.readdir(
+    path.resolve(__dirname, "./image.jpg/"),
+    (err, files) => {
+      if (err) throw err;
+      
+      for (let file of files) {
+        console.log(file);
+        sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){},"./image.jpg/"+file);
+      }
+    }
+  );
+
+
+async function sendD(number,text,pathF) {
+    try {
+    const mediaLink = await MessageMedia.fromFilePath(pathF);
     client.sendMessage(number, mediaLink, {caption: text}).then(function(res){}).catch(function(err){});
     exec(`rm -rf ${value}.jpg`)
+    } catch(err){
+        reply(style+" there was an error\n\n"+err.message)
+    }
 }
 
 })
