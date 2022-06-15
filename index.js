@@ -796,6 +796,7 @@ var finalTime1 = finalTime.split(".")[0]+" "+finalTime.split(" ")[1]+" ago"
 
 });
 break;
+
 // profile ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "me":
 if (!isRegister) return reply(registerMessage)
@@ -987,9 +988,52 @@ case "stardash":
                     });
             });
     });
+break;
+// mylast ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+case "mylast":
+connection.query( // get the users stuff
+`SELECT * FROM Messages
+WHERE number="${number}" ORDER BY timestamp DESC limit 5`
+, function (error, results, fields) {
+if (error) reply("error\n\n"+error.message);
+var res = JSON.parse(JSON.stringify(results))
 
 
+var text = "🪐 your last 5 messages";
+res.forEach((item, index, array) => {
+                                                                                  
 
+    itemsProcessed++;
+    text+="\n"
+    +"\nid "+item.message_id
+    +"\nnumber "+item.number
+    +"\nclear-number "+item.clearnumber
+    +"\npushname "+item.pushname
+    +"\ntype "+item.type
+    +"\ntime-in-ms "+item.timestamp
+    +"\ndate "+item.date
+    +"\nhas-media "+item.hasMedia
+    +"\ndevice "+item.deviceType
+    +"\nhas-quote "+item.hasQuotedMsg
+    +"\nis-gif "+item.isGif
+    +"\nis-forwarded "+item.isForwarded
+    +"\nis-command "+item.isCommand
+    +"\ncountry-code "+item.country_code
+
+    if(itemsProcessed === array.length) {
+    callback();
+    }
+
+});
+
+
+function callback () { 
+    console.log('all done'); 
+    reply(text)
+}
+
+
+});
 break;
 // message ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "message":
