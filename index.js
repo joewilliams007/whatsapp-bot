@@ -449,7 +449,7 @@ async function sendD(number,text) {
 
 break
 
-case 'weather':
+/*case 'weather':
 	if (!isVerify) return reply(userB())
 	if (args.length < 1) return reply(`${design} 𝑃𝑙𝑒𝑎𝑠𝑒 𝑎𝑑𝑑 𝑎 𝑐𝑖𝑡𝑦 𝑎𝑛𝑑 𝑐𝑜𝑢𝑛𝑡𝑟𝑦𝑛𝑎𝑚𝑒`)
     if (money < 10) return reply(`${design} 𝑌𝑜𝑢 𝑑𝑜𝑛𝑡 ℎ𝑎𝑣𝑒 𝑒𝑛𝑜𝑢𝑔ℎ 𝑚𝑜𝑛𝑒𝑦.\n- - - - - - - - - - - - - - - - - -\n𝑀𝑜𝑛𝑒𝑦 𝑛𝑒𝑒𝑑𝑒𝑑 10$ 𝑌𝑜𝑢𝑟 𝑚𝑜𝑛𝑒𝑦 ${money}$\n${moneystatus}\n❎ 𝑋623 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`) 
@@ -543,7 +543,7 @@ await ffmpeg(`./weather.gif`)
 	.toFormat('webp')
 	.save(ran)
 
-break
+break*/
 
 case "button":
 let button = new Buttons('Button body',[{body:'bt1'},{body:'bt2'},{body:'bt3'}],'title','footer');
