@@ -404,6 +404,8 @@ case "delete":
 
     deleteMsg(msg,style)
     async function deleteMsg(msg, style) {
+
+        try {
     const quotedMsg = await msg.getQuotedMessage();
         if (msg.hasQuotedMsg) {
             if (quotedMsg.fromMe) {
@@ -412,6 +414,9 @@ case "delete":
                 reply(style+' I can only delete my own messages');
             }
         }
+    } catch(err) {
+        reply(style+" There was an error. Cryptic error message:\n\n"+err.message)
+    }
     }
 break;
 // wiki ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -422,12 +427,16 @@ case 'whatis':
 		reply(style+` please enter a search title`)
 	}
 	else{
-
+        try {
 		wiki = require ('./_tools/wikiped');
 		wiki.getWikipedia(value, style, (wikilink)=>
 		{
 			reply(wikilink)
 		})
+
+        } catch(err) {
+            reply(style+" There was an error. Cryptic error message:\n\n"+err.message)
+        }
 	}
 break
 
