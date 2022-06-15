@@ -273,37 +273,124 @@ case "menu":
     var yourDate = new Date()
     var claim;
     if (last_claim==yourDate.toISOString().split('T')[0]) {
-        claim = "\nalready claimed today"
+        claim = "\nalready claimed"
     } else {
-        claim = "\n.claim for free $$"
+        claim = "\n.claim"
     }
    
     var level0 = Number(xp)/100+1
     var level = level0+"."
 reply(
-
+// cMenus ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 `𝑀𝑒𝑛𝑢 ☁️
 - - - - - - - - - - - - - - - - - -  
 ⌖ ${username} 
-⌖ ${level.split(".")[0]} lvl
+⌖ level ${level.split(".")[0]} 
 ⌖ ${xp} XP
 - - - - - - - - - - - - - - - - - - 
-${style} .help
+${style} .games
+${style} .media
+${style} .www
+${style} .settings
+${style} .database
+- - - - - - - - - - - - - - - - - - 
 ${style} .bot
 ${style} .me
-${style} .search
-${style} .song
-${style} .user @anyone
-${style} .register
-${style} .wiki
-${style} .weather new york
+${style} .transfer
+${style} .leaderboard
+${style} ${claim}
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "settings":
+    if (!isRegister) return reply(registerMessage);    
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
+reply(
+
+`𝑆𝑒𝑡𝑡𝑖𝑛𝑔𝑠 ☁️
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ level ${level.split(".")[0]} 
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
 ${style} .style
 ${style} .username
 ${style} .bio
-${style} .sticker
-${style} .echo
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "www":
+    if (!isRegister) return reply(registerMessage);    
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
+reply(
+
+`𝑊𝑤𝑤 ☁️
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ level ${level.split(".")[0]} 
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
+${style} .search
+${style} .wiki
+${style} .weather new york
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "database":
+    if (!isRegister) return reply(registerMessage);    
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
+reply(
+
+`𝐷𝑎𝑡𝑎𝑏𝑎𝑠𝑒 ☁️
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ level ${level.split(".")[0]} 
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
+${style} .user @anyone
 ${style} .users
+${style} .stardash
+${style} .mylast
+${style} .message
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "media":
+    if (!isRegister) return reply(registerMessage);    
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
+reply(
+
+`𝑀𝑒𝑑𝑖𝑎 ☁️
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ level ${level.split(".")[0]} 
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
+${style} .song
+${style} .wiki
+${style} .sticker
 ${style} .resend
+${style} .echo
+${style} .delete
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
+break;
+case "games":
+    if (!isRegister) return reply(registerMessage);    
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
+reply(
+
+`𝐺𝑎𝑚𝑒𝑠 ☁️
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ level ${level.split(".")[0]} 
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
 ${style} .pokemon
 ${style} .fact
 ${style} .gay
@@ -312,17 +399,9 @@ ${style} .slot
 ${style} .truth
 ${style} .dare
 ${style} .animal
-${style} .transfer
 ${style} .leaderboard
-${style} .users
-${style} .stardash
-${style} .mylast
-${style} .message
-${style} .delete
 - - - - - - - - - - - - - - - - - -  
-𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_
-`
-+claim);
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
 break;
 case "help":
 
@@ -409,6 +488,7 @@ reply(style+` Menu:
 - deletes message
 `)
 break;
+// delete ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 case "delete":
     if (!isRegister) return reply(registerMessage);
