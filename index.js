@@ -282,7 +282,7 @@ case "menu":
     var level = level0+"."
 reply(
 
-style+` Menu:
+`𝑀𝑒𝑛𝑢 ☁️
 - - - - - - - - - - - - - - - - - -  
 ⌖ ${username} 
 ⌖ ${level.split(".")[0]} lvl
