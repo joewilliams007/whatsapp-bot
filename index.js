@@ -273,9 +273,9 @@ case "menu":
     var yourDate = new Date()
     var claim;
     if (last_claim==yourDate.toISOString().split('T')[0]) {
-        claim = "\nalready claimed"
+        claim = "already claimed"
     } else {
-        claim = "\n.claim"
+        claim = ".claim"
     }
    
     var level0 = Number(xp)/100+1
