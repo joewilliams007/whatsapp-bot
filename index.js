@@ -277,44 +277,50 @@ case "menu":
     } else {
         claim = "\n.claim for free $$"
     }
-
+   
+    var level0 = Number(xp)/100+1
+    var level = level0+"."
 reply(
 
-
 style+` Menu:
-
-.help
-
-.bot
-.me
-.search
-.song
-.user @anyone
-.register
-.wiki
-.weather new york
-.style
-.username
-.bio
-.sticker
-.echo
-.users
-.resend
-.pokemon
-.fact
-.gay
-.love
-.slot
-.truth
-.dare
-.animal
-.transfer
-.leaderboard
-.users
-.stardash
-.mylast
-.message
-.delete
+- - - - - - - - - - - - - - - - - -  
+⌖ ${username} 
+⌖ ${level.split(".")[0]} lvl
+⌖ ${xp} XP
+- - - - - - - - - - - - - - - - - - 
+${style} .help
+${style} .bot
+${style} .me
+${style} .search
+${style} .song
+${style} .user @anyone
+${style} .register
+${style} .wiki
+${style} .weather new york
+${style} .style
+${style} .username
+${style} .bio
+${style} .sticker
+${style} .echo
+${style} .users
+${style} .resend
+${style} .pokemon
+${style} .fact
+${style} .gay
+${style} .love
+${style} .slot
+${style} .truth
+${style} .dare
+${style} .animal
+${style} .transfer
+${style} .leaderboard
+${style} .users
+${style} .stardash
+${style} .mylast
+${style} .message
+${style} .delete
+- - - - - - - - - - - - - - - - - -  
+𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_
 `
 +claim);
 break;
@@ -1010,7 +1016,7 @@ res.forEach((item, index, array) => {
     
     itemsProcessed++;
     text+="\n"
-    +"\n💬 message:\n"+item.message
+    +"\n💬 message: "+item.message
     +"\n💳 id: "+item.message_id
     +"\n☎️ number: "+item.number
     +"\n☎️ clear-number: "+item.clearnumber
