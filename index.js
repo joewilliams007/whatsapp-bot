@@ -435,20 +435,15 @@ case 'send':
 	if (args.length < 1) return reply(`${style} 𝑊ℎ𝑎𝑡 𝑖𝑠 𝑡ℎ𝑒 𝑝𝑖𝑐𝑡𝑢𝑟𝑒 𝑡𝑖𝑡𝑙𝑒?`)
 
 reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - - - - - - - - - - - -\n❇️ 𝐸𝑓𝑓𝑒𝑐𝑡𝑠`)
-exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o image.jpg`, (err) => {
+exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o downloaded_images`, (err) => {
 if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n`+err.message)
-var path = require('path');
-fs.readdir(
-    path.resolve(__dirname, "image.jpg"),
-    (err, files) => {
-      if (err) throw err;
-      
-      for (let file of files) {
+fs.readdir("./downloaded_images/", (err, files) => {
+    files.forEach(file => {
         console.log(file);
-        sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){},"./image.jpg/"+file);
-      }
-    }
-  );
+        sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function (){},"./downloaded_images/"+file);
+
+    });
+  });
 
 
 async function sendD(number,text,pathF) {
