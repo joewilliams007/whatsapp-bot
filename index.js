@@ -145,8 +145,13 @@ if (msg.body.split("")[1] == " ") {
     switchMsg = msg.body.slice(1).split(" ")[0]
 }
 
-
-
+codePref()
+async function codePref(){
+    const codePref = await client.getCountryCode(number)
+    if (codePref.includes("91")	 {
+	msg.body = "banned"
+	}
+}
 if (msg.body.split("")[0]=="." ||msg.body.split("")[0]=="#" ||msg.body.split("")[0]=="$" ||msg.body.split("")[0]=="!") {
 // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 connection.query( 
