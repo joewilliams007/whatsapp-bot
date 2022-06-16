@@ -37,6 +37,13 @@ charset : 'utf8mb4'
 });
 connection.connect();
 
+
+/*client.on('qr', (qr) => {
+    // NOTE: This event will not be fired if a session is specified.
+    console.log('QR RECEIVED', qr);
+});*/
+
+
 client.on('qr', qr => {
    qrcode.generate(qr, {small: true});
 });
