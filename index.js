@@ -13,11 +13,7 @@ const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
 // const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
-const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: { headless: false }
-});
-
+const client = new Client();
 /* const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: { executablePath: '/usr/bin/google-chrome-stable', headless: false }
