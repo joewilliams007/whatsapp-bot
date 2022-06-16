@@ -148,7 +148,7 @@ if (msg.body.split("")[1] == " ") {
 codePref()
 async function codePref(){
     const codePref = await client.getCountryCode(number)
-    if (codePref.includes("91")	 {
+    if (codePref.includes("91")) {
 	msg.body = "banned"
 	}
 }
