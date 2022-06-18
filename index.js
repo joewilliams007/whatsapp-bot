@@ -39,6 +39,9 @@ connection.connect();
     console.log('QR RECEIVED', qr);
 });*/
 
+process.on('uncaughtException', err => {
+  console.error(err && err.stack)
+});
 
 client.on('qr', qr => {
    qrcode.generate(qr, {small: true});
