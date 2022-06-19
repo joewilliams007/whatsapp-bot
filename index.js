@@ -1355,7 +1355,8 @@ break;
 case "kick":
     kick(msg, number)
     async function kick (msg, number){
-        await client.removeParticipants(number)
+        var gc = new GroupChat()
+        await gc.removeParticipants(number)
         reply("kicked")
     }
 break;
