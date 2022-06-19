@@ -1355,7 +1355,7 @@ break;
 case "kick":
     kick(msg, number)
     async function kick (msg, number){
-        await removeParticipants(number)
+        await client.removeParticipants(number)
         reply("kicked")
     }
 break;
