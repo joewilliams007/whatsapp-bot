@@ -41,6 +41,9 @@ process.on('uncaughtException', err => {
   console.error(err && err.stack)
 });
 
+/*client.on('qr', qr => {
+   qrcode.generate(qr, {small: true});
+});*/
 
 
 client.on('authenticated', () => {
@@ -1227,6 +1230,7 @@ if (args.length<2) return reply(style+" please enter a user id")
     });
     reply(style+" the user with the id "+args[1]+" has been demoted!")
 break;
+
 // leaderboard ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 case "leaderboard":
 case "leader":
@@ -1328,7 +1332,9 @@ connection.query(
         }
     });
 break;
+
 case "resend":
+    case "image":
     if (!isRegister) return reply(registerMessage)
     if (!isQuote) return reply(style+" please quote a media")
 
@@ -1344,6 +1350,13 @@ case "resend":
     } catch(err){
         reply(style+" there was an error. tag media.\n\n"+err.message)
     }
+    }
+break;
+case "kick":
+    kick(msg, number)
+    async function kick (msg, number){
+        await removeParticipants(number)
+        reply("kicked")
     }
 break;
 case "sticker":
