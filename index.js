@@ -11,13 +11,11 @@ const _facts = JSON.parse(fs.readFileSync('./result/ranswer/facts.json'));
 const _pokemon = JSON.parse(fs.readFileSync('./result/ranswer/pokemon.json'));
 
 const { Client, LocalAuth, Location, List, Buttons, MessageMedia, NoAuth } = require('whatsapp-web.js');
-// const { Client, Location, List, Buttons, LocalAuth } = require('./index');
 
-const client = new Client();
-/* const client = new Client({
+const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: { executablePath: '/usr/bin/google-chrome-stable', headless: false }
-});*/
+});
 
 
 mysql = require('mysql'); 
@@ -34,18 +32,15 @@ charset : 'utf8mb4'
 connection.connect();
 
 
-/*client.on('qr', (qr) => {
+client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
     console.log('QR RECEIVED', qr);
-});*/
+});
 
 process.on('uncaughtException', err => {
   console.error(err && err.stack)
 });
 
-client.on('qr', qr => {
-   qrcode.generate(qr, {small: true});
-});
 
 
 client.on('authenticated', () => {
