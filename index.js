@@ -1356,7 +1356,7 @@ case "kick":
     kick(msg, number)
     async function kick (msg, number){
         let chat = await msg.getChat();
-        await chat.removeParticipants(number)
+        await chat.removeParticipants(msg._data.id)
         reply("kicked")
     }
 break;
