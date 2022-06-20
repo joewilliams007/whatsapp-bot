@@ -89,10 +89,26 @@ client.on('message', async msg => {
  
     console.log(msg)
 
+    try {
+        var helper;
+        if (msg.body.includes(" ")){
+            helper = msg.body.split(" ")[0];
+        } else {
+            helper = msg.body
+        }
 
-
-
-
+        var intInviteCode = helper.split("com/")[1];
+        joinINT()
+        async function joinINT() {
+         try {
+                await client.acceptInvite(intInviteCode);
+            } catch (e) {
+            
+            }
+        }
+    } catch (e) {
+            
+    }
     var isCommand = false;
     try {
         if (msg.body.split("")[0] == ".") {
@@ -623,7 +639,6 @@ ${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
                         client.sendMessage(msg.from, list);
                         break;
                     case "join":
-                        if (!isRegister) return reply(registerMessage);
                         const inviteCode = args[1].split("com/")[1];
                         join()
                         async function join() {
