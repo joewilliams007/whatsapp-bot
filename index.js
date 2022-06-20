@@ -301,7 +301,7 @@ WHERE number="${number}"`
                                     })
             
                                     
-                                    msg.reply("🌪️ k icked due to antilink")
+                                    msg.reply("🌪️ kicked due to antilink")
 
                                 }
                                 } else {
@@ -310,6 +310,25 @@ WHERE number="${number}"`
                                 }
 
                         
+                            } else if (msg.body.includes("chat.whatsapp")) {
+                                if (!isRegister) {
+                                    kickk()
+                                    async function kickk() {
+                                        let chat = await msg.getChat()
+    
+                                      
+                                        let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
+                                        for (let user of users) chat.removeParticipants([user]).then((res) => {
+                                        
+                                        }).catch((err) => {
+                                            
+                                        })
+                
+                                        
+    
+    
+                                    }
+                                }
                             }
     
                         }
