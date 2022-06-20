@@ -277,9 +277,11 @@ WHERE number="${number}"`
                             isAntilink = anti[0].active
                             isAntilink = true;
 
-                            if (!isRegister) {
+                          
             
-                            if (msg.body.includes("http")) {
+                            if (msg.body.includes("http") || msg.body.includes("bit.ly")) {
+
+                                if (!isRegister) {
                                 kickAnti(msg, number)
                                 async function kickAnti(msg, number) {
                                     let chat = await msg.getChat()
@@ -297,11 +299,13 @@ WHERE number="${number}"`
                                     msg.reply("🌪️ kicked due to antilink")
                                    
                                 }
+
+                            } else {
+                                msg.reply("💎 registered users are safe from antilink")
+                              
                             }
 
-                          } else {
-                            msg.reply("💎 registered users are safe from antilink")
-                          }
+ }
             
             
                         } catch (err) {
