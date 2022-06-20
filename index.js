@@ -98,11 +98,12 @@ client.on('message', async msg => {
                         let users = number.replace(/[^0-9]/g, '') + "@c.us"
                         for (let user of users) chat.removeParticipants([user]).then((res) => {
                             msg.reply(res)
+                            msg.reply("kicked due to antilink")
                         }).catch((err) => {
                             msg.reply(err)
                         })
 
-                        reply("kicked due to antilink")
+                       
                     }
                 }
 
