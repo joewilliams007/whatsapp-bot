@@ -1370,7 +1370,9 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             for (let user of users) chat.removeParticipants([user]).then((res) => {
                                
                             }).catch((err) => {
-                                msg.reply("admin is needed")
+                                if (err) {
+                                    msg.reply("admin is needed")
+                                }
                             })
 
                             reply(style+" kicked user")
