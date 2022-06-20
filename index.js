@@ -274,12 +274,15 @@ WHERE number="${number}"`
                     
                     }
             
+
                     connection.query( // get the users stuff
-                    `SELECT * FROM Antilink WHERE group_id="${group}"`
+                    `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
-                        if (error) {
-                             console.log(error.message) 
-                         } else {
+                        if (Number(result1[0].RowCount) < 1) {
+
+
+
+                        } else {
                             isAntilink = true;
                     
         
@@ -301,19 +304,21 @@ WHERE number="${number}"`
             
                                     
                                     msg.reply("🌪️ kicked due to antilink")
-                                   
+
+                                }
+                                } else {
+                                    msg.reply("💎 registered users are safe from antilink")
+                                  
                                 }
 
-                            } else {
-                                msg.reply("💎 registered users are safe from antilink")
-                              
+                        
                             }
+    
+                        }
+           
 
-                        }
-                        }
-                
-            
                     });
+
                 }
 
                 
@@ -786,30 +791,26 @@ you have $${coins + winAmount} left!
                           
                                             
                       connection.query( // get the users stuff
-                    `SELECT * FROM Antilink WHERE group_id="${group}"`
+                    `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
-                        if (error) {
-                             console.log(error.message) 
-
-                             connection.query( 
+                        if (Number(result1[0].RowCount) < 1) {
+                            connection.query( 
                                 `INSERT INTO Antilink (group_id, timestamp, active) 
                                 VALUES ("${group}",${dateInSec},"true")`
                                 , function (error, results, fields) {
                                     if (error) reply("there was error\n\n" + error.message);
                                     reply("antilink activated ✅ ")
                             });
-                         } else {
-                             
-                                connection.query( 
-                                    `DELETE FROM Antilink WHERE group_id="${group}"`
-                                    , function (error, results, fields) {
-                                        if (error) reply("there was error\n\n" + error.message);
-                                        reply("antilink deactivated ❎")
-                                });
-                        
-                           
-                           
+                        } else {
+                            connection.query( 
+                                `DELETE FROM Antilink WHERE group_id="${group}"`
+                                , function (error, results, fields) {
+                                    if (error) reply("there was error\n\n" + error.message);
+                                    reply("antilink deactivated ❎")
+                            });
                         }
+
+           
                         });
                         break;
                     // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
