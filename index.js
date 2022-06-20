@@ -776,16 +776,16 @@ you have $${coins + winAmount} left!
                             if (!isVip) return reply(vipMessage)
 
                             var group = msg._data.id.remote
-                            reply("uhm "+group)
+                       
                                 if (group.includes("-")) {
                                     group = msg._data.id.remote.split("-")[1]
-                                    reply("uhm "+group)
+                                
                                 }
                           
                             
                             if (isAntilink) {
                                 connection.query( 
-                                    `DELETE FROM Antilink WHERE group_id="${msg.from.split("-")[1]}"`
+                                    `DELETE FROM Antilink WHERE group_id="${group}"`
                                     , function (error, results, fields) {
                                         if (error) reply("there was error\n\n" + error.message);
                                         reply("antilink deactivated ❎")
@@ -793,10 +793,10 @@ you have $${coins + winAmount} left!
                             } else {
                             connection.query( 
                                 `INSERT INTO Antilink (group_id, timestamp, active) 
-                                VALUES ("${msg.from.split("-")[1]}",${dateInSec},"true")`
+                                VALUES ("${group}",${dateInSec},"true")`
                                 , function (error, results, fields) {
                                     if (error) reply("there was error\n\n" + error.message);
-                                    reply("antilink activated ✅ "+group)
+                                    reply("antilink activated ✅ ")
                             });
                            }
                         break;
