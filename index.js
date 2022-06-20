@@ -1368,12 +1368,12 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             let chat = await msg.getChat()
                             let users = msg.mentionedIds[0] ? msg.mentionedIds : msg.hasQuotedMsg ? [quoted.from] : [text.replace(/[^0-9]/g, '') + "@c.us"]
                             for (let user of users) chat.removeParticipants([user]).then((res) => {
-                                msg.reply(res)
+                               
                             }).catch((err) => {
-                                msg.reply(err)
+                                msg.reply("admin is needed")
                             })
 
-                            reply("kicked")
+                            reply(style+" kicked user")
                         }
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
