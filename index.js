@@ -277,15 +277,12 @@ WHERE number="${number}"`
                     connection.query( // get the users stuff
                     `SELECT * FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
-                        if (error) console.log(error.message);
-                        var anti = JSON.parse(JSON.stringify(results))
-            
-                        try {
-                            isAntilink = anti[0].active
+                        if (error) {
+                             console.log(error.message) 
+                         } else {
                             isAntilink = true;
-
-                          
-            
+                    
+        
                             if (msg.body.includes("http") || msg.body.includes("bit.ly") ||  msg.body.includes(".com")) {
 
                                 if (!isRegister) {
@@ -312,12 +309,10 @@ WHERE number="${number}"`
                               
                             }
 
- }
-            
-            
-                        } catch (err) {
-                            isAntilink = false;
                         }
+                        }
+                
+            
                     });
                 }
 
