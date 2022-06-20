@@ -776,7 +776,7 @@ you have $${coins + winAmount} left!
                             if (!isVip) return reply(vipMessage)
 
                             var group = msg._data.id.remote
-
+                            reply("uhm "+group)
                                 if (group.includes("-")) {
                                     group = msg._data.id.remote.split("-")[1]
                                 }
@@ -795,7 +795,7 @@ you have $${coins + winAmount} left!
                                 VALUES ("${msg.from.split("-")[1]}",${dateInSec},"true")`
                                 , function (error, results, fields) {
                                     if (error) reply("there was error\n\n" + error.message);
-                                    reply("antilink activated ✅")
+                                    reply("antilink activated ✅ "+group)
                             });
                            }
                         break;
