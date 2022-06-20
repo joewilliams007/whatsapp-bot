@@ -264,7 +264,7 @@ WHERE number="${number}"`
 
                 var isGroup = false;
                 var isAntilink = false;
-                if (msg.from.includes("@g.us")) {
+                if (msg._data.id.remote.includes("@g.us")) {
                     isGroup = true;
 
                     var group = msg._data.id.remote
