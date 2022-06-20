@@ -45,6 +45,14 @@ isForwarded varchar(255),
 PRIMARY KEY ( message_id )
 );
 
+CREATE TABLE Antilink (
+antilink_id INT NOT NULL AUTO_INCREMENT,
+group_id varchar(255),
+active varchar(255),
+timestamp int,
+PRIMARY KEY ( antilink_id )
+);
+
 ALTER TABLE Messages ADD date VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Messages ADD clearnumber VARCHAR(255);
 ALTER TABLE Messages ADD isCommand VARCHAR(255) DEFAULT "false";
