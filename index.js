@@ -784,23 +784,33 @@ you have $${coins + winAmount} left!
                                 
                                 }
                           
-                            
-                            if (isAntilink) {
-                                connection.query( 
-                                    `DELETE FROM Antilink WHERE group_id="${group}"`
-                                    , function (error, results, fields) {
-                                        if (error) reply("there was error\n\n" + error.message);
-                                        reply("antilink deactivated ❎")
-                                });
-                            } else {
-                            connection.query( 
+                                            
+                      connection.query( // get the users stuff
+                    `SELECT * FROM Antilink WHERE group_id="${group}"`
+                    , function (error, results, fields) {
+                        if (error) {
+                             console.log(error.message) 
+
+                             connection.query( 
                                 `INSERT INTO Antilink (group_id, timestamp, active) 
                                 VALUES ("${group}",${dateInSec},"true")`
                                 , function (error, results, fields) {
                                     if (error) reply("there was error\n\n" + error.message);
                                     reply("antilink activated ✅ ")
                             });
-                           }
+                         } else {
+                             
+                                connection.query( 
+                                    `DELETE FROM Antilink WHERE group_id="${group}"`
+                                    , function (error, results, fields) {
+                                        if (error) reply("there was error\n\n" + error.message);
+                                        reply("antilink deactivated ❎")
+                                });
+                        
+                           
+                           
+                        }
+                        });
                         break;
                     // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "user":
