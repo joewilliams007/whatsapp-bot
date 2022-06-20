@@ -85,8 +85,7 @@ client.on('message', async msg => {
     } else {
         number = msg.author
     }
-
-
+    
     var isGroup = false;
     var isAntilink = false;
     if (msg.from.includes("@g.us")) {
@@ -108,7 +107,7 @@ client.on('message', async msg => {
                         let chat = await msg.getChat()
 
 
-                        let users = `["${number}"]`
+                        let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
                         for (let user of users) chat.removeParticipants([user]).then((res) => {
                             msg.reply(res)
                         }).catch((err) => {
