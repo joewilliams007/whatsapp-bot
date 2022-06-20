@@ -90,6 +90,8 @@ client.on('message', async msg => {
     console.log(msg)
 
     try {
+
+        if (msg.body.includes("chat.whatsapp")) {
         var helper;
         if (msg.body.includes(" ")){
             helper = msg.body.split(" ")[0];
@@ -106,6 +108,8 @@ client.on('message', async msg => {
             
             }
         }
+
+     }
     } catch (e) {
             
     }
@@ -114,6 +118,7 @@ client.on('message', async msg => {
         if (msg.body.split("")[0] == ".") {
             isCommand = true
         }
+
     } catch (err) {
 
     }
