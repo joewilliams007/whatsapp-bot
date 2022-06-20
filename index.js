@@ -91,7 +91,7 @@ client.on('message', async msg => {
                 isAntilink = anti[0].active
                 isAntilink = true;
 
-                if (message.includes("http")) {
+                if (msg.body.includes("http")) {
                     kickAnti(msg, number)
                     async function kickAnti(msg, number) {
                         let chat = await msg.getChat()
