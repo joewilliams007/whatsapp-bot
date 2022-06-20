@@ -778,7 +778,7 @@ you have $${coins + winAmount} left!
                             var group = msg._data.remote
 
                                 if (group.includes("-")) {
-                                    group = msg._data.remote.split("-")[1]
+                                    group = msg._data.id.remote.split("-")[1]
                                 }
                           
                             
