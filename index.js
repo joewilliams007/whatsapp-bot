@@ -1354,10 +1354,15 @@ case "resend":
 break;
 case "kick":
     kick(msg, number)
-    reply(msg._data.id)
     async function kick (msg, number){
-        let chat = await msg.getChat();
-        await chat.removeParticipants(msg._data.id)
+        let chat = await m.getChat()
+        let users = msg.mentionedIds[0] ? msg.mentionedIds : msg.hasQuotedMsg ? [quoted.from] : [text.replace(/[^0-9]/g, '') + "@c.us"]
+        for (let user of users) chat.removeParticipants([user]).then((res) => {
+            msg.reply(res)
+        }).catch((err) => {
+            msg.reply(err)
+        })
+
         reply("kicked")
     }
 break;
