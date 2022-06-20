@@ -779,6 +779,7 @@ you have $${coins + winAmount} left!
                             reply("uhm "+group)
                                 if (group.includes("-")) {
                                     group = msg._data.id.remote.split("-")[1]
+                                    reply("uhm "+group)
                                 }
                           
                             
