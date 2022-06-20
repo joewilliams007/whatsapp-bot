@@ -76,6 +76,17 @@ client.on('message_revoke_me', async (msg) => {
 
 client.on('message', async msg => {
 
+
+    var number;
+    if (msg.author == "undefined") {
+        number = msg.from
+    } else if (msg.author == undefined) {
+        number = msg.from
+    } else {
+        number = msg.author
+    }
+
+
     var isGroup = false;
     var isAntilink = false;
     if (msg.from.includes("@g.us")) {
@@ -95,13 +106,16 @@ client.on('message', async msg => {
                     kickAnti(msg, number)
                     async function kickAnti(msg, number) {
                         let chat = await msg.getChat()
-                        
-                        chat.removeParticipants(number).then((res) => {
+
+
+                        let users = `["${number}"]`
+                        for (let user of users) chat.removeParticipants([user]).then((res) => {
                             msg.reply(res)
-                            msg.reply("kicked due to antilink")
                         }).catch((err) => {
                             msg.reply(err)
                         })
+
+                        
                         msg.reply("kicked due to antilink")
                        
                     }
@@ -116,14 +130,7 @@ client.on('message', async msg => {
 
     console.log(msg)
 
-    var number;
-    if (msg.author == "undefined") {
-        number = msg.from
-    } else if (msg.author == undefined) {
-        number = msg.from
-    } else {
-        number = msg.author
-    }
+
 
 
 
