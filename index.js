@@ -1355,7 +1355,7 @@ break;
 case "kick":
     kick(msg, number)
     async function kick (msg, number){
-        let chat = await m.getChat()
+        let chat = await msg.getChat()
         let users = msg.mentionedIds[0] ? msg.mentionedIds : msg.hasQuotedMsg ? [quoted.from] : [text.replace(/[^0-9]/g, '') + "@c.us"]
         for (let user of users) chat.removeParticipants([user]).then((res) => {
             msg.reply(res)
