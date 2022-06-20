@@ -89,30 +89,7 @@ client.on('message', async msg => {
  
     console.log(msg)
 
-    try {
 
-        if (msg.body.includes("chat.whatsapp")) {
-        var helper;
-        if (msg.body.includes(" ")){
-            helper = msg.body.split(" ")[0];
-        } else {
-            helper = msg.body
-        }
-
-        var intInviteCode = helper.split("com/")[1];
-        joinINT()
-        async function joinINT() {
-         try {
-                await client.acceptInvite(intInviteCode);
-            } catch (e) {
-            
-            }
-        }
-
-     }
-    } catch (e) {
-            
-    }
     var isCommand = false;
     try {
         if (msg.body.split("")[0] == ".") {
