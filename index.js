@@ -90,6 +90,23 @@ client.on('message', async msg => {
             try {
                 isAntilink = anti[0].active
                 isAntilink = true;
+
+                if (message.includes("http")) {
+                    kickAnti(msg, number)
+                    async function kickAnti(msg, number) {
+                        let chat = await msg.getChat()
+                        let users = number.replace(/[^0-9]/g, '') + "@c.us"
+                        for (let user of users) chat.removeParticipants([user]).then((res) => {
+                            msg.reply(res)
+                        }).catch((err) => {
+                            msg.reply(err)
+                        })
+
+                        reply("kicked due to antilink")
+                    }
+                }
+
+
             } catch (err) {
                 isAntilink = false;
             }
