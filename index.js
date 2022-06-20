@@ -266,9 +266,16 @@ WHERE number="${number}"`
                 var isAntilink = false;
                 if (msg.from.includes("@g.us")) {
                     isGroup = true;
+
+                    var group = msg._data.id.remote
+                       
+                    if (group.includes("-")) {
+                        group = msg._data.id.remote.split("-")[1]
+                    
+                    }
             
                     connection.query( // get the users stuff
-                    `SELECT * FROM Antilink WHERE group_id="${msg.from.split("-")[1]}"`
+                    `SELECT * FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
                         if (error) console.log(error.message);
                         var anti = JSON.parse(JSON.stringify(results))
@@ -279,7 +286,7 @@ WHERE number="${number}"`
 
                           
             
-                            if (msg.body.includes("http") || msg.body.includes("bit.ly")) {
+                            if (msg.body.includes("http") || msg.body.includes("bit.ly") ||  msg.body.includes(".com")) {
 
                                 if (!isRegister) {
                                 kickAnti(msg, number)
