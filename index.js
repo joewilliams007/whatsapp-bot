@@ -775,10 +775,10 @@ you have $${coins + winAmount} left!
                             if (!isGroup) return reply(groupMessage)
                             if (!isVip) return reply(vipMessage)
 
-                            var group = msg._data._remote
+                            var group = msg._data.remote
 
                                 if (group.includes("-")) {
-                                    group = msg._data._remote.split("-")[1]
+                                    group = msg._data.remote.split("-")[1]
                                 }
                           
                             
