@@ -774,6 +774,13 @@ you have $${coins + winAmount} left!
                             if (!isRegister) return reply(registerMessage)
                             if (!isGroup) return reply(groupMessage)
                             if (!isVip) return reply(vipMessage)
+
+                            var group = msg._data._remote
+
+                                if (group.includes("-")) {
+                                    group = msg._data._remote.split("-")[1]
+                                }
+                          
                             
                             if (isAntilink) {
                                 connection.query( 
