@@ -75,7 +75,11 @@ client.on('message_revoke_me', async (msg) => {
 
 
 client.on('message', async msg => {
-const isGroup = msg.isGroup
+
+    var isGroup = false;
+    if (msg.from.includes("@g.us")) {
+        isGroup = true;
+    }
 
 console.log(msg)
 
