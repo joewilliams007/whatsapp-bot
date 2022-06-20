@@ -1366,6 +1366,10 @@ case "kick":
         reply("kicked")
     }
 break;
+case "group":
+    let chat = await msg.getChat()
+reply(chat.participants)
+break;
 case "sticker":
     if (!isRegister) return reply(registerMessage)
     if (!isQuote) return reply("please quote a media")
