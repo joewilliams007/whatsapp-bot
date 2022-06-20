@@ -86,47 +86,7 @@ client.on('message', async msg => {
         number = msg.author
     }
     
-    var isGroup = false;
-    var isAntilink = false;
-    if (msg.from.includes("@g.us")) {
-        isGroup = true;
-
-        connection.query( // get the users stuff
-        `SELECT * FROM Antilink WHERE group_id="${msg.from.split("-")[1]}"`
-        , function (error, results, fields) {
-            if (error) console.log(error.message);
-            var anti = JSON.parse(JSON.stringify(results))
-
-            try {
-                isAntilink = anti[0].active
-                isAntilink = true;
-
-                if (msg.body.includes("http")) {
-                    kickAnti(msg, number)
-                    async function kickAnti(msg, number) {
-                        let chat = await msg.getChat()
-
-
-                        let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
-                        for (let user of users) chat.removeParticipants([user]).then((res) => {
-                            msg.reply(res)
-                        }).catch((err) => {
-                            msg.reply(err)
-                        })
-
-                        
-                        msg.reply("kicked due to antilink")
-                       
-                    }
-                }
-
-
-            } catch (err) {
-                isAntilink = false;
-            }
-        });
-    }
-
+ 
     console.log(msg)
 
 
@@ -301,6 +261,56 @@ WHERE number="${number}"`
                     set("clearnumber", number.split("@")[0])
                     set("deviceType", msg.deviceType)
                 }
+
+                var isGroup = false;
+                var isAntilink = false;
+                if (msg.from.includes("@g.us")) {
+                    isGroup = true;
+            
+                    connection.query( // get the users stuff
+                    `SELECT * FROM Antilink WHERE group_id="${msg.from.split("-")[1]}"`
+                    , function (error, results, fields) {
+                        if (error) console.log(error.message);
+                        var anti = JSON.parse(JSON.stringify(results))
+            
+                        try {
+                            isAntilink = anti[0].active
+                            isAntilink = true;
+
+                            if (!isRegister) {
+            
+                            if (msg.body.includes("http")) {
+                                kickAnti(msg, number)
+                                async function kickAnti(msg, number) {
+                                    let chat = await msg.getChat()
+
+                                    
+            
+                                    let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
+                                    for (let user of users) chat.removeParticipants([user]).then((res) => {
+                                        msg.reply(res)
+                                    }).catch((err) => {
+                                        msg.reply(err)
+                                    })
+            
+                                    
+                                    msg.reply("🌪️ kicked due to antilink")
+                                   
+                                }
+                            }
+
+                          } else {
+                            msg.reply("💎 registered users are safe from antilink")
+                          }
+            
+            
+                        } catch (err) {
+                            isAntilink = false;
+                        }
+                    });
+                }
+
+                
 
                 switch (switchMsg) {
                     // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -760,13 +770,13 @@ you have $${coins + winAmount} left!
                             if (!isRegister) return reply(registerMessage)
                             if (!isGroup) return reply(groupMessage)
                             if (!isVip) return reply(vipMessage)
-
+                            
                             if (isAntilink) {
                                 connection.query( 
                                     `DELETE FROM Antilink WHERE group_id="${msg.from.split("-")[1]}"`
                                     , function (error, results, fields) {
                                         if (error) reply("there was error\n\n" + error.message);
-                                        reply(style+" antilink deactivated")
+                                        reply("antilink deactivated ❎")
                                 });
                             } else {
                             connection.query( 
@@ -774,7 +784,7 @@ you have $${coins + winAmount} left!
                                 VALUES ("${msg.from.split("-")[1]}",${dateInSec},"true")`
                                 , function (error, results, fields) {
                                     if (error) reply("there was error\n\n" + error.message);
-                                    reply(style+" antilink activated")
+                                    reply("antilink activated ✅")
                             });
                            }
                         break;
