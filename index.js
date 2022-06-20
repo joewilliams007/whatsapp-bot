@@ -278,7 +278,7 @@ WHERE number="${number}"`
                     connection.query( // get the users stuff
                     `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
-                        if (Number(result1[0].RowCount) < 1) {
+                        if (Number(results[0].RowCount) < 1) {
 
 
 
@@ -793,7 +793,7 @@ you have $${coins + winAmount} left!
                       connection.query( // get the users stuff
                     `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
-                        if (Number(result1[0].RowCount) < 1) {
+                        if (Number(results[0].RowCount) < 1) {
                             connection.query( 
                                 `INSERT INTO Antilink (group_id, timestamp, active) 
                                 VALUES ("${group}",${dateInSec},"true")`
