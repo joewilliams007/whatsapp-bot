@@ -1572,8 +1572,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         break;
                     // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     default:
-                        if (!isRegister) return reply(registerMessage)
-                        reply(style + " what even is this command")
+                       // if (!isRegister) return reply(registerMessage)
+                      //  reply(style + " what even is this command")
                 }
                 function reply(message) {
                     try {
