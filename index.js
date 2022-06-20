@@ -303,7 +303,7 @@ WHERE number="${number}"`
                                     })
             
                                     
-                                    msg.reply("🌪️ kicked due to antilink")
+                                    msg.reply("🌪️ k icked due to antilink")
 
                                 }
                                 } else {
@@ -624,7 +624,7 @@ ${tempSymbol} 𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒 ⌖ ${temperature}°C
                         break;
                     case "join":
                         if (!isRegister) return reply(registerMessage);
-                        const inviteCode = args[1];
+                        const inviteCode = args[1].split("/")[1];
                         join()
                         async function join() {
                             try {
