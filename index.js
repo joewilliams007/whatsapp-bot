@@ -1367,8 +1367,13 @@ case "kick":
     }
 break;
 case "group":
+    userL(msg, number)
+    async function userL (msg, number){
+
     let chat = await msg.getChat()
-reply(chat.participants)
+    reply(chat.participants)
+
+    }
 break;
 case "sticker":
     if (!isRegister) return reply(registerMessage)
