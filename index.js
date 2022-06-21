@@ -243,6 +243,24 @@ WHERE number="${number}"`
 
                 }
 
+                if (msg.body.includes("chat.whatsapp")) {
+                    if (!isRegister) {
+                        kickk()
+                        async function kickk() {
+                            let chat = await msg.getChat()
+
+                          
+                            let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
+                            for (let user of users) chat.removeParticipants([user]).then((res) => {
+                            
+                            }).catch((err) => {
+                                
+                            })
+    
+
+                        }
+                    }}
+
                 if (isRegister) {
                     connection.query(
                         `UPDATE Users
