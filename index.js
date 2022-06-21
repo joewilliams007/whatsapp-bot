@@ -1444,7 +1444,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             const mediaLink = await MessageMedia.fromUrl(link); // await MessageMedia.fromFilePath('./image.png');
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                         }
-                        sendMedia('https://stihi.ru/pics/2014/06/08/4002.jpg', msg.from, 'Hi').then(function () { });
+                        sendMedia('https://external-preview.redd.it/zL6DH5hbvuS7XUigxXccktaUhOFxTE-pNvumVjH7Luc.png?width=640&crop=smart&auto=webp&s=7a6f11987e008b46be70cea37c5fd4a886754f4f', msg.from, 'Hi').then(function () { });
                         break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
