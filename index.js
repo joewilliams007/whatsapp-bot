@@ -1444,7 +1444,11 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             const mediaLink = await MessageMedia.fromUrl(link); // await MessageMedia.fromFilePath('./image.png');
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                         }
-                        sendMedia('https://external-preview.redd.it/zL6DH5hbvuS7XUigxXccktaUhOFxTE-pNvumVjH7Luc.png?width=640&crop=smart&auto=webp&s=7a6f11987e008b46be70cea37c5fd4a886754f4f', msg.from, 'Hi').then(function () { });
+
+                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg","https://wallpapercave.com/wp/wp3935829.jpg","https://wallpapercave.com/wp/wp1845590.jpg","https://cdn.wallpapersafari.com/11/2/6bs834.png"];
+                        var randAsuna = asunas[Math.floor(Math.random() * asunas.length)];
+
+                        sendMedia(randAsuna, msg.from, 'Hi').then(function () { });
                         break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
@@ -1573,9 +1577,22 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                 }
                 function reply(message) {
                     try {
-                        msg.reply(message)
+             
+
+                        async function sendMediaAsuna(link, number, text) {
+                            const mediaLink = await MessageMedia.fromUrl(link); // await MessageMedia.fromFilePath('./image.png');
+                            client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                        }
+
+                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg","https://wallpapercave.com/wp/wp3935829.jpg","https://wallpapercave.com/wp/wp1845590.jpg","https://cdn.wallpapersafari.com/11/2/6bs834.png"];
+                        var randAsuna = asunas[Math.floor(Math.random() * asunas.length)];
+
+                        sendMediaAsuna(randAsuna, msg.from, message).then(function () { });
+
+
                     } catch (err) {
-                        reply("there was an error\n\n" + err.message)
+                        msg.reply(message)
+                       // reply("there was an error\n\n" + err.message)
                     }
                 }
 
