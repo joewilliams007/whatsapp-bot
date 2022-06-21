@@ -814,7 +814,6 @@ you have $${coins + winAmount} left!
                         case "antilink":
                             if (!isRegister) return reply(registerMessage)
                             if (!isGroup) return reply(groupMessage)
-                            if (!isVip) return reply(vipMessage)
 
                             var group = msg._data.id.remote
                        
@@ -1377,6 +1376,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "kick":
                         if (!isRegister) return reply(registerMessage)
+                        if (!isVip) return reply(vipMessage)
                         kick(msg, number)
                         async function kick(msg, number) {
                             let chat = await msg.getChat()
