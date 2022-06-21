@@ -1584,7 +1584,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                         }
 
-                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg","https://wallpapercave.com/wp/wp3935829.jpg","https://wallpapercave.com/wp/wp1845590.jpg","https://cdn.wallpapersafari.com/11/2/6bs834.png"];
+                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg", 
+                        "https://preview.redd.it/razgxg2a9z351.jpg?auto=webp&s=9b0ade413fa0047e7fcec52176b98daf90f94e8f",
+                        "https://wallpapercave.com/wp/wp3935829.jpg", 
+                        "https://wallpapercave.com/wp/wp1845590.jpg", 
+                        "https://www.teahub.io/photos/full/251-2512969_sword-art-online-kirito-and-asuna.jpg",
+                        "https://pbs.twimg.com/media/B19F934CQAAfA2R.png",
+                        "https://cdn.wallpapersafari.com/11/2/6bs834.png"];
                         var randAsuna = asunas[Math.floor(Math.random() * asunas.length)];
 
                         sendMediaAsuna(randAsuna, msg.from, message).then(function () { });
