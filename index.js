@@ -489,6 +489,7 @@ ${style} .message
 ⌖ ${xp} XP
 - - - - - - - - - - - - - - - - - - 
 ${style} .song
+${style} .send
 ${style} .wiki
 ${style} .sticker
 ${style} .resend
@@ -567,28 +568,27 @@ ${style} .leaderboard
                         if (!isRegister) return reply(registerMessage)
                         if (args.length < 1) return reply(`${style} 𝑊ℎ𝑎𝑡 𝑖𝑠 𝑡ℎ𝑒 𝑝𝑖𝑐𝑡𝑢𝑟𝑒 𝑡𝑖𝑡𝑙𝑒?`)
 
-                        reply(`${style} 𝐷𝑜𝑤𝑛𝑙𝑜𝑎𝑑𝑖𝑛𝑔...\n- - - - - - - - - - - - - - - - - -\n❇️ 𝐸𝑓𝑓𝑒𝑐𝑡𝑠`)
-                        exec(`npx ddg-bulk-image-downloader -q "${value} jpg" -l 1 -o downloaded_images`, (err) => {
-                            if (err) return reply(`${style} 𝐸𝑟𝑟𝑜𝑟\n\n` + err.message)
-                            fs.readdir("./downloaded_images/", (err, files) => {
-                                files.forEach(file => {
-                                    console.log(file);
-                                    sendD(msg.from, `${style} 𝑆𝑒𝑛𝑑𝑖𝑛𝑔 𝑓𝑜𝑟 ${username}...\n- - - - - - - - - - - - - - - - - -\n✅ 𝑃𝑖𝑐𝑡𝑢𝑟𝑒𝑠`).then(function () { }, "./downloaded_images/" + file);
+                        var gis = require('g-i-s');
+                        gis(value, logResults);
 
-                                });
-                            });
+                        async function logResults(error, results) {
+                        if (error) {
+                            console.log(error);
+                            reply("error lol\n\n"+error.message)
+                        }
+                        else {
+                            console.log(JSON.stringify(results, null, '  '));
 
 
-                            async function sendD(number, text, pathF) {
-                                try {
-                                    const mediaLink = await MessageMedia.fromFilePath(pathF);
-                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
-                                } catch (err) {
-                                    reply(style + " there was an error\n\n" + err.message)
-                                }
+                            async function sendImgsS(link, number, text) {
+                                const mediaLink = await MessageMedia.fromUrl(link); 
+                                client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                             }
+                            
+                            sendImgsS(results[0].url, msg.from, `${style} _${value}_`).then(function () { });
 
-                        })
+                        }
+                        }
 
                         break
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
