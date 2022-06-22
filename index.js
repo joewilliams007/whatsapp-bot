@@ -1483,7 +1483,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
                             var gis = require('g-i-s');
-                            gis(value, logResults);
+                            gis("album cover "+value, logResults);
 
                             async function logResults(error, results) {
                             if (error) {
