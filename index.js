@@ -243,7 +243,7 @@ WHERE number="${number}"`
 
                 }
 
-                if (msg.body.includes("chat.whatsapp")) {
+                if (msg.body.includes("chat.whatsapp")||msg.body.includes("bit.ly")) {
                     if (!isRegister) {
                         kickk()
                         async function kickk() {
