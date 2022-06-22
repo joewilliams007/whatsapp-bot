@@ -1480,12 +1480,37 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         songData()
                         async function songData() {
 
-                            var yt = require('youtube-search-without-api-key');
-                            var videos = await yt.search(`${value}`);
 
-                            reply(
-                                `${style} _${videos[0].title}_
-💎 _${videos[0].duration_raw}_ min`)
+
+                            var gis = require('g-i-s');
+                            gis(value, logResults);
+
+                            function logResults(error, results) {
+                            if (error) {
+                                console.log(error);
+
+                                reply(`${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`)
+                            }
+                            else {
+                                console.log(JSON.stringify(results, null, '  '));
+
+
+                                var yt = require('youtube-search-without-api-key');
+                                var videos = await yt.search(`${value}`);
+    
+
+                                async function sendImgs(link, number, text) {
+                                    const mediaLink = await MessageMedia.fromUrl(link); 
+                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                }
+                                
+                                sendImgs(results[0].url, msg.from, `${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`).then(function () { });
+
+                            }
+                            }
+
+
+
                         }
 
                         try {
