@@ -1485,7 +1485,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             var gis = require('g-i-s');
                             gis(value, logResults);
 
-                            function logResults(error, results) {
+                            async function logResults(error, results) {
                             if (error) {
                                 console.log(error);
 
