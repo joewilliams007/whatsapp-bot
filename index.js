@@ -75,8 +75,13 @@ client.on('message_revoke_me', async (msg) => {
 
 
 client.on('message', async msg => {
+    try {
+  
+        msg.react("❤️")
 
-    msg.react("❤️")
+    } catch (err) {
+
+    }
 
     var number;
     if (msg.author == "undefined") {
