@@ -1344,8 +1344,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "users":
                         if (!isRegister) return reply(registerMessage)
                         connection.query(
-                            `SELECT *
-    FROM Users`
+                            `SELECT * FROM Users`
                             , function (error, results, fields) {
                                 if (error) console.log(error.message);
                                 users(JSON.parse(JSON.stringify(results)))
