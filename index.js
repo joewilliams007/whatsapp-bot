@@ -1626,7 +1626,11 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                 function reply(message) {
                     try {
              
+                        msg.reply(message)
+                       
 
+                    } catch (err) {
+                        msg.reply(message)
                         async function sendMediaAsuna(link, number, text) {
                             const mediaLink = await MessageMedia.fromUrl(link); // await MessageMedia.fromFilePath('./image.png');
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
@@ -1643,10 +1647,6 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                         sendMediaAsuna(randAsuna, msg.from, message).then(function () { });
 
-
-                    } catch (err) {
-                        msg.reply(message)
-                       // reply("there was an error\n\n" + err.message)
                     }
                 }
 
