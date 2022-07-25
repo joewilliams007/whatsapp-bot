@@ -1227,7 +1227,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (args.length < 1) return reply(style + " please enter a strong password\nExample .password 12345")
                         if (args.length > 2) return reply(style + " password cant contain spaces")
                         set("password", args[1])
-                        reply(value + " password has been updated to: "+args[1]+"\n\nuse this password to log into the StarMe App")
+                        reply(style+" password has been updated to: "+args[1]+"\n\nuse this password to log into the StarMe App")
                         break;
                     // set username ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "username":
