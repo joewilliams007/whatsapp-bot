@@ -1223,7 +1223,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     // set password ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "password":
                         if (!isRegister) return reply(registerMessage)
-                        if (isGroup) return reply(style + " for security use this command in private chat")
+                        if (isGroup) return reply(style + " for security use this command in private chat\n\nwa.me/18507795914?text=.password")
                         if (args.length < 1) return reply(style + " please enter a strong password\nExample .password 12345")
                         if (args.length > 2) return reply(style + " password cant contain spaces")
                         set("password", args[1])
