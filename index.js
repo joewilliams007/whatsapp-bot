@@ -1224,7 +1224,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "password":
                         if (!isRegister) return reply(registerMessage)
                         if (isGroup) return reply(style + " for security use this command in private chat\n\nwa.me/18507795914?text=.password")
-                        if (args.length < 1) return reply(style + " please enter a strong password\nExample .password 12345")
+                        if (args.length < 2) return reply(style + " please enter a strong password\nExample .password 12345")
                         if (args.length > 2) return reply(style + " password cant contain spaces")
                         set("password", args[1])
                         reply(style+" password has been updated to: "+args[1]+"\n\nuse this password to log into the StarMe App")
