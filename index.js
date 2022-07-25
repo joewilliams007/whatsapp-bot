@@ -396,13 +396,17 @@ WHERE number="${number}"`
 ⌖ ${username} 
 ⌖ level ${level.split(".")[0]} 
 ⌖ ${xp} XP
-- - - - - - - - - - - - - - - - - - 
+- - - - - - - - - - - - - - - - - -
+M E N U S 
+- - - - - - - - - - - - - - - - - -
 ${style} .games
 ${style} .media
 ${style} .www
 ${style} .settings
 ${style} .database
 - - - - - - - - - - - - - - - - - - 
+O T H E R
+- - - - - - - - - - - - - - - - - -
 ${style} .bot
 ${style} .me
 ${style} .transfer
@@ -437,6 +441,7 @@ https://chat.whatsapp.com/I09F6RruESk0XimB12YlDF
 - - - - - - - - - - - - - - - - - - 
 ${style} .style
 ${style} .username
+${style} .password
 ${style} .bio
 - - - - - - - - - - - - - - - - - -  
 𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
@@ -1214,6 +1219,15 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (args.length < 2) return reply(style + " please enter a style")
                         set("style", value)
                         reply(value + " style has been updated")
+                        break;
+                    // set password ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    case "password":
+                        if (!isRegister) return reply(registerMessage)
+                        if (isGroup) return reply(style + " for security use this command in private chat")
+                        if (args.length < 3) return reply(style + " please enter a strong password\nExample .password 12345")
+                        if (args.length > 20) return reply(style + " password is too long")
+                        set("password", args[1])
+                        reply(value + " password has been updated\n\nuse this password to log into the StarMe App")
                         break;
                     // set username ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "username":

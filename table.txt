@@ -21,7 +21,7 @@ ALTER TABLE Users ADD last_claim VARCHAR(255) DEFAULT "today";
 ALTER TABLE Users ADD status VARCHAR(255) DEFAULT "normal";
 ALTER TABLE Users ADD clearnumber VARCHAR(255);
 ALTER TABLE Users ADD deviceType VARCHAR(255) DEFAULT "unknown";
-
+ALTER TABLE Users ADD password VARCHAR(255) DEFAULT "none";
 ALTER TABLE Users ADD country_code VARCHAR(255) DEFAULT "unknown";
 
 
