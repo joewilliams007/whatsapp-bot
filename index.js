@@ -1496,7 +1496,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "gartic":
                         if (!isRegister) return reply(registerMessage)
                         if (!isGroup) return reply(groupMessage)
-                        
+
                         connection.query( 
                             `DELETE FROM Gartic WHERE group_id="${group}"`
                             , function (error, results, fields) {
@@ -1650,8 +1650,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             if (!isRegister) return reply(registerMessage)
                             connection.query(
                                 `SELECT *
-                                FROM Users
-                                ORDER BY gartic_points DESC`
+                                FROM Users WHERE gartic_point >= 1
+                                ORDER BY gartic_point DESC`
                                 , function (error, results, fields) {
                                     if (error) console.log(error.message);
                                     garticLeaderboard(JSON.parse(JSON.stringify(results)))
@@ -1660,7 +1660,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         var position = 0
                                         for (const item of res.values()) {
                                             position++
-                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " points"
+                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.gartic_point) + " points"
                                         
                                         }
     
