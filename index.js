@@ -1508,7 +1508,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         ]
                             var gis = require('g-i-s');
                             var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
-                            gis(randomElement, logResultsSend);
+                            gis(randomElement.replace("s",""), logResultsSend);
 
                             
 
@@ -1571,7 +1571,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                 reply(style+" there is no active game in this group!\nTo start a game type: .gartic")
                     } else {
                         connection.query( // get the users stuff
-                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
+                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase().replace("s","")}"`
                         , function (error, results, fields) {
                             if (Number(results[0].RowCount) < 1) {
                                         reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .garticbuy")
@@ -1594,12 +1594,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         , function (error, results, fields) {
                                             if (error) reply("there was error deleting the session\n\n" + error.message);
                                    
-                                    var randomArray = [
-                                        'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','president','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fire','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
-                                    ]
+                                            var randomArray = [
+                                                'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','president','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fire','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple',
+                                                'Angry','Elephant','Pinch','Baby','Fish','Reach','Ball','Remote','Baseball','Football','Roll','Basketball','Fork','Sad','Bounce','Giggle','Scissors','Cat','Golf','Skip','Chicken','Guitar','Sneeze','Chimpanzee','Hammer','Spin','Clap','Happy','Spoon','Cough','Horns','Stomp','Cry','Joke','Stop','Dog','Mime','Tail','Drink','Toothbrush','Drums','Phone','Wiggle','Duck','Photographer'
+                                            ]
                                         var gis = require('g-i-s');
                                         var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
-                                        gis(randomElement, logResultsSend);
+                                        gis(randomElement.replace("s",""), logResultsSend);
             
                                         
             
