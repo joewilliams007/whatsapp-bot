@@ -53,11 +53,19 @@ timestamp int,
 PRIMARY KEY ( antilink_id )
 );
 
+CREATE TABLE Gartic (
+gartic_id INT NOT NULL AUTO_INCREMENT,
+word varchar(255),
+group_id varchar(255),
+winner_id varchar(2000),
+PRIMARY KEY ( gartic_id )
+);
+
 ALTER TABLE Messages ADD date VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Messages ADD clearnumber VARCHAR(255);
 ALTER TABLE Messages ADD isCommand VARCHAR(255) DEFAULT "false";
 
 ALTER TABLE Messages ADD country_code VARCHAR(255) DEFAULT "unknown";
-
+ALTER TABLE Gartic CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 ALTER TABLE Users CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 ALTER TABLE Messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
