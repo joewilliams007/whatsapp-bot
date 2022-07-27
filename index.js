@@ -1487,6 +1487,36 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                         sendMedia(randAsuna, msg.from, 'Hi').then(function () { });
                         break;
+                    // gartic ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    case "gartic":
+                        if (!isRegister) return reply(registerMessage)
+
+                            var gis = require('g-i-s');
+                            gis("horse", logResults);
+
+                            async function logResults(error, results) {
+                            if (error) {
+                                console.log(error);
+
+                                reply(`error uwu`)
+                            }
+                            else {
+                                console.log(JSON.stringify(results, null, '  '));
+
+    
+                                async function sendImgs(link, number, text) {
+                                    const mediaLink = await MessageMedia.fromUrl(link); 
+                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                }
+                                
+                                sendImgs(results[0].url, msg.from, `${style} guess the word :D`).then(function () { });
+
+                            }
+                            }
+
+
+
+                        break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
                         if (!isRegister) return reply(registerMessage)
