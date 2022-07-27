@@ -1495,7 +1495,6 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','NewZealand','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fireextinguisher','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
                         ]
                             var gis = require('g-i-s');
-
                             var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
                             gis(randomElement, logResultsSend);
 
@@ -1507,21 +1506,47 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             }
                             else {
                                 console.log(JSON.stringify(results, null, '  '));
-
-    
                                 async function sendImgs(link, number, text) {
                                     const mediaLink = await MessageMedia.fromUrl(link); 
                                     client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                                 }
-                                
-                                sendImgs(results[0].url, msg.from, `${style} guess the word :D`).then(function () { });
+                                sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
 
                             }
                             }
-
-
-
                         break;
+                        case "guess":
+                        case "word":
+                            if (!isRegister) return reply(registerMessage)
+    
+                            var randomArray = [
+                                'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','NewZealand','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fireextinguisher','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
+                            ]
+                                var gis = require('g-i-s');
+    
+                                var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
+                                gis(randomElement, logResultsSend);
+    
+                                async function logResultsSend(error, results) {
+                                if (error) {
+                                    console.log(error);
+    
+                                    reply(`error uwu`)
+                                }
+                                else {
+                                    console.log(JSON.stringify(results, null, '  '));
+    
+        
+                                    async function sendImgs(link, number, text) {
+                                        const mediaLink = await MessageMedia.fromUrl(link); 
+                                        client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                    }
+                                    
+                                    sendImgs(results[0].url, msg.from, `${style} guess the word :D`).then(function () { });
+    
+                                }
+                                }
+                            break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
                         if (!isRegister) return reply(registerMessage)
