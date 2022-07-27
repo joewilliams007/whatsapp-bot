@@ -1588,12 +1588,57 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         }                                    
                                     });
 
-                                connection.query( 
-                                    `DELETE FROM Gartic WHERE group_id="${group}"`
-                                    , function (error, results, fields) {
-                                        if (error) reply("there was error deleting the session\n\n" + error.message);
-                                    
-                                });
+                                    connection.query( 
+                                        `DELETE FROM Gartic WHERE group_id="${group}"`
+                                        , function (error, results, fields) {
+                                            if (error) reply("there was error deleting the session\n\n" + error.message);
+                                   
+                                    var randomArray = [
+                                        'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','president','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fire','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
+                                    ]
+                                        var gis = require('g-i-s');
+                                        var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
+                                        gis(randomElement, logResultsSend);
+            
+                                        
+            
+                                        async function logResultsSend(error, results) {
+                                        if (error) {
+                                            console.log(error);
+            
+                                            reply(`error uwu`)
+                                        }
+                                        else {
+            
+                                            var group = msg._data.id.remote
+                                   
+                                            if (group.includes("-")) {
+                                                group = msg._data.id.remote.split("-")[1]     
+                                            }
+                                      
+            
+            
+                                            connection.query( // save message
+                                            `INSERT INTO Gartic (word, group_id, winner_id) 
+                                            VALUES ("${randomElement.toLowerCase()}","${group}","none")`
+                                            , function (error, results, fields) {
+                                                if (error) {
+                                                    console.log(error.message)
+                                                    reply(`error uwu\n\n`+error.message)
+                                                }
+                                            });
+            
+                                            console.log(JSON.stringify(results, null, '  '));
+                                            async function sendImgs(link, number, text) {
+                                                const mediaLink = await MessageMedia.fromUrl(link); 
+                                                client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                            }
+                                            sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
+            
+                                        }
+                                        }
+            
+                                    });
                             }  });
                     }  });
                            
