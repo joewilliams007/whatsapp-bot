@@ -205,6 +205,10 @@ WHERE number="${number}"`
                     var date;
                     date = res[0].date
                 } catch (err) { }
+                var appLoggedIn;
+                try {
+                    date = res[0].appLoggedIn
+                } catch (err) { }
                 try {
                     var commands;
                     commands = res[0].messages
@@ -409,6 +413,14 @@ ${style} .www
 ${style} .settings
 ${style} .database
 - - - - - - - - - - - - - - - - - - 
+A P P
+- - - - - - - - - - - - - - - - - - 
+${style} .app
+- - - - - - - - - - - - - - - - - - 
+G R O U P S
+- - - - - - - - - - - - - - - - - - 
+${style} .group
+- - - - - - - - - - - - - - - - - - 
 O T H E R
 - - - - - - - - - - - - - - - - - -
 ${style} .bot
@@ -420,14 +432,48 @@ ${style} ${claim}
 - - - - - - - - - - - - - - - - - -  
 𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
                         break;
+                    case "app":
+                    case "download":
+                        reply(`F E A T U R E S
+- - - - - - - - - - - - - - - - - -     
+Look Up Accounts
+Transfer Money
+Claim 50$ Everyday
+Change Account Settings
+- - - - - - - - - - - - - - - - - - 
+D O W N L O A D
+- - - - - - - - - - - - - - - - - -   
+GOOGLE DRIVE
+
+https://drive.google.com/file/d/1ZDoeh4HqVhIotX9shOvzwkGBMnxqPO2V/view?usp=sharing
+
+MEGA DOWNLOAD
+
+https://mega.nz/file/2WQxxYSD#7CUUHSZCjrUirhAgbzH46MGxbzk8OZw50UWnCIfakcI
+- - - - - - - - - - - - - - - - - - 
+I N S T A L L A T I O N
+- - - - - - - - - - - - - - - - - -
+1. Allow unknown sources
+2. Tap on file
+3. Trust Developer
+4. Install
+- - - - - - - - - - - - - - - - - -`)
+                    break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "support":
                     case "suport":
                     case "help":
+                    case "groups":
+                    case "groups":
+
                         if (!isRegister) return reply(registerMessage);
-                        reply(style + ` Support Group
+                        reply(style + ` S U P P O R T
 - - - - - - - - - - - - - - - - - -     
 https://chat.whatsapp.com/I09F6RruESk0XimB12YlDF
+- - - - - - - - - - - - - - - - - - 
+U P D A T E S
+- - - - - - - - - - - - - - - - - -     
+https://chat.whatsapp.com/IMq2co7oKHiLrGNHYK1y3V
 - - - - - - - - - - - - - - - - - - `)
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -760,7 +806,7 @@ you have $${coins + winAmount} left!
                                 if (error) console.log(error.message);
                             });
 
-                        reply(style + " claimed 25$")
+                        reply(style + " claimed 25$\nwith the StarDash App you can get extra 50$ per day! Download with .app")
                         break;
                     // transfer ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "transfer":
@@ -997,9 +1043,11 @@ WHERE user_id=${args[1]}`
                             + "\n💳 userid: " + id
                             + "\n🗂️ status: " + status
                             + "\n📱 device: " + deviceType
-                            + "\n"+style+" gartic: " + gartic_points+" points"
+                            + "\n☄️ gartic: " + gartic_points+" points"
+                            + "\n🔓 logged into app: " + appLoggedIn
                             + "\n🗓️ account created: " + finalTime1)
                         break;
+                        
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "stardash":
                         connection.query(

@@ -17,6 +17,8 @@ messages int,
 PRIMARY KEY ( user_id )
 );
 
+ALTER TABLE Users ADD appClaimed VARCHAR(255) DEFAULT "today";
+ALTER TABLE Users ADD appLoggedIn VARCHAR(255) DEFAULT "no";
 ALTER TABLE Users ADD last_claim VARCHAR(255) DEFAULT "today";
 ALTER TABLE Users ADD status VARCHAR(255) DEFAULT "normal";
 ALTER TABLE Users ADD clearnumber VARCHAR(255);
