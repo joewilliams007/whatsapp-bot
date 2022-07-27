@@ -526,6 +526,7 @@ ${style} .delete
 ⌖ level ${level.split(".")[0]} 
 ⌖ ${xp} XP
 - - - - - - - - - - - - - - - - - - 
+${style} .gartic
 ${style} .pokemon
 ${style} .fact
 ${style} .gay
