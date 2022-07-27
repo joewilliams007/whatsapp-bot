@@ -434,7 +434,8 @@ ${style} ${claim}
                         break;
                     case "app":
                     case "download":
-                        reply(`F E A T U R E S
+                        reply(`S T A R M E A P P
+F E A T U R E S
 - - - - - - - - - - - - - - - - - -     
 Look Up Accounts
 Transfer Money
@@ -450,6 +451,10 @@ https://drive.google.com/file/d/1ZDoeh4HqVhIotX9shOvzwkGBMnxqPO2V/view?usp=shari
 MEGA DOWNLOAD
 
 https://mega.nz/file/2WQxxYSD#7CUUHSZCjrUirhAgbzH46MGxbzk8OZw50UWnCIfakcI
+
+IF APK DOES NOT INSTALL
+https://drive.google.com/file/d/1V4RsEYnEEXJiaWoYWBkylkM9BFPi05jI/view?usp=sharing
+https://apkcombo.com/de/app-bundle-installer-install-aab-apks-xapk/com.lifesavi.bundle/
 - - - - - - - - - - - - - - - - - - 
 I N S T A L L A T I O N
 - - - - - - - - - - - - - - - - - -
