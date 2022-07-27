@@ -1464,6 +1464,23 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             reply(style+" kicked user")
                         }
                         break;
+                    // sql ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    case "sql":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isVip) return reply(vipMessage)
+
+                        connection.query(
+                            `${value}`
+                            , function (error, results, fields) {
+                                if (error) {
+                                    console.log(error.message);
+                                    reply(style + " SQL command failed\n\n"+error.message)
+                                } else {
+                                    reply(style + " SQL command successfull\n\n"+fields)
+                                }
+                            });
+                       
+                        break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "group":
                         userL(msg, number)
