@@ -1295,13 +1295,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     for (const item of res.values()) {
                                         position++
                                         if (position == 1) {
-                                            leaderboard += "\n🥇 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
+                                            leaderboard += "\n🥇 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.xp) + " xp"
                                         } else if (position == 2) {
-                                            leaderboard += "\n🥈 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
+                                            leaderboard += "\n🥈 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.xp) + " xp"
                                         } else if (position == 3) {
-                                            leaderboard += "\n🥉 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp\n"
+                                            leaderboard += "\n🥉 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.xp) + " xp\n"
                                         } else {
-                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
+                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.xp) + " xp"
                                         }
                                     }
 
