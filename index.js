@@ -1283,8 +1283,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isRegister) return reply(registerMessage)
                         connection.query(
                             `SELECT *
-    FROM Users
-    ORDER BY messages DESC`
+                            FROM Users
+                            ORDER BY xp DESC`
                             , function (error, results, fields) {
                                 if (error) console.log(error.message);
                                 leaderboard(JSON.parse(JSON.stringify(results)))
@@ -1294,13 +1294,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     for (const item of res.values()) {
                                         position++
                                         if (position == 1) {
-                                            leaderboard += "\n🥇 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " commands"
+                                            leaderboard += "\n🥇 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
                                         } else if (position == 2) {
-                                            leaderboard += "\n🥈 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " commands"
+                                            leaderboard += "\n🥈 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
                                         } else if (position == 3) {
-                                            leaderboard += "\n🥉 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " commands\n"
+                                            leaderboard += "\n🥉 " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp\n"
                                         } else {
-                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " commands"
+                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " xp"
                                         }
                                     }
 
