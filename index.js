@@ -1492,9 +1492,9 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isRegister) return reply(registerMessage)
 
                             var gis = require('g-i-s');
-                            gis("horse", logResults);
+                            gis("horse", logResultsSend);
 
-                            async function logResults(error, results) {
+                            async function logResultsSend(error, results) {
                             if (error) {
                                 console.log(error);
 
