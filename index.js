@@ -1470,7 +1470,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isVip) return reply(vipMessage)
 
                         connection.query(
-                            `${value}`
+                            `${value.replace(args[0]+" ","")}`
                             , function (error, results, fields) {
                                 if (error) {
                                     console.log(error.message);
