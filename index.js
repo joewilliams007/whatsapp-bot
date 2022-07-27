@@ -193,6 +193,10 @@ WHERE number="${number}"`
                     var coins;
                     coins = res[0].coins
                 } catch (err) { }
+                var gartic_points;
+                try {
+                    gartic_points = res[0].gartic_points
+                } catch (err) { }
                 try {
                     var bio;
                     bio = res[0].bio
@@ -992,6 +996,7 @@ WHERE user_id=${args[1]}`
                             + "\n💳 userid: " + id
                             + "\n🗂️ status: " + status
                             + "\n📱 device: " + deviceType
+                            + "\n"+style+" gartic: " + gartic_points+" points"
                             + "\n🗓️ account created: " + finalTime1)
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1559,7 +1564,19 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             if (Number(results[0].RowCount) < 1) {
                                         reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .buytip")
                             } else {
-                                reply(style+" this is the correct word!\n\nearned 1 point, 10$ and 5xp!")
+                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!")
+
+                                connection.query(
+                                    `UPDATE Users
+                                    SET coins = coins + 10, xp = xp + 5, gartic_points = gartic_points + 1
+                                    WHERE number='${number}'`
+                                    , function (error, results, fields) {
+                                        if (error) {
+                                             console.log(error.message);
+                                             reply("there was error giving you the wins. please contact dev\n\n" + error.message);
+                                        }                                    
+                                    });
+
                                 connection.query( 
                                     `DELETE FROM Gartic WHERE group_id="${group}"`
                                     , function (error, results, fields) {

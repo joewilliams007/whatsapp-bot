@@ -23,7 +23,7 @@ ALTER TABLE Users ADD clearnumber VARCHAR(255);
 ALTER TABLE Users ADD deviceType VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Users ADD password VARCHAR(255) DEFAULT "none";
 ALTER TABLE Users ADD country_code VARCHAR(255) DEFAULT "unknown";
-
+ALTER TABLE Users ADD gartic_points int DEFAULT "0";
 
 ALTER TABLE Users DROP "carrier";
 ALTER TABLE Users DROP "country_name";
