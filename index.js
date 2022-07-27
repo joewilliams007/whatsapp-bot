@@ -1650,7 +1650,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             if (!isRegister) return reply(registerMessage)
                             connection.query(
                                 `SELECT *
-                                FROM Users WHERE gartic_point >= 1
+                                FROM Users WHERE gartic_point > 0
                                 ORDER BY gartic_point DESC`
                                 , function (error, results, fields) {
                                     if (error) console.log(error.message);
