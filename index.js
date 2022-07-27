@@ -1468,7 +1468,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "sql":
                         if (!isRegister) return reply(registerMessage)
                         if (!isVip) return reply(vipMessage)
-
+                        if (args.length < 1) return reply("add text")
                         connection.query(
                             `${value.replace(args[0]+" ","")}`
                             , function (error, results, fields) {
@@ -1476,7 +1476,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     console.log(error.message);
                                     reply(style + " SQL command failed\n\n"+error.message)
                                 } else {
-                                    reply(style + " SQL command successfull\n\n"+fields)
+                                    reply(style + " SQL command successfull")
                                 }
                             });
                        
