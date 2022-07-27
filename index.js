@@ -207,7 +207,7 @@ WHERE number="${number}"`
                 } catch (err) { }
                 var appLoggedIn;
                 try {
-                    date = res[0].appLoggedIn
+                    appLoggedIn = res[0].appLoggedIn
                 } catch (err) { }
                 try {
                     var commands;
