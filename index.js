@@ -1491,8 +1491,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "gartic":
                         if (!isRegister) return reply(registerMessage)
 
+                        var randomArray = [
+                            'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','NewZealand','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fireextinguisher','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
+                        ]
                             var gis = require('g-i-s');
-                            gis("horse", logResultsSend);
+
+                            var randomElement = randomArray[_.random(randomArray.length-1)];
+                            gis(randomElement, logResultsSend);
 
                             async function logResultsSend(error, results) {
                             if (error) {
