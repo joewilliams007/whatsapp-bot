@@ -464,7 +464,7 @@ I N S T A L L A T I O N
                     case "suport":
                     case "help":
                     case "groups":
-                    case "groups":
+                    case "group":
 
                         if (!isRegister) return reply(registerMessage);
                         reply(style + ` S U P P O R T
