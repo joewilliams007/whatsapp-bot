@@ -1504,6 +1504,12 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
                             gis(randomElement, logResultsSend);
 
+                            connection.query( 
+                                `DELETE FROM Gartic WHERE group_id="${group}"`
+                                , function (error, results, fields) {
+                                    if (error) reply("there was error deleting the session\n\n" + error.message);
+                           
+
                             async function logResultsSend(error, results) {
                             if (error) {
                                 console.log(error);
@@ -1539,6 +1545,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                             }
                             }
+
+                        });
                         break;
                         case "guess":
                         case "word":
