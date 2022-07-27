@@ -1508,7 +1508,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         ]
                             var gis = require('g-i-s');
                             var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
-                            gis(randomElement.replace("s",""), logResultsSend);
+                            gis(randomElement, logResultsSend);
 
                             
 
@@ -1571,7 +1571,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                 reply(style+" there is no active game in this group!\nTo start a game type: .gartic")
                     } else {
                         connection.query( // get the users stuff
-                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase().replace("s","")}"`
+                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
                         , function (error, results, fields) {
                             if (Number(results[0].RowCount) < 1) {
                                         reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .garticbuy")
@@ -1600,7 +1600,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                             ]
                                         var gis = require('g-i-s');
                                         var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
-                                        gis(randomElement.replace("s",""), logResultsSend);
+                                        gis(randomElement, logResultsSend);
             
                                         
             
