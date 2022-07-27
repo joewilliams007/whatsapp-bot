@@ -1575,7 +1575,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             if (Number(results[0].RowCount) < 1) {
                                         reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .garticbuy")
                             } else {
-                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!")
+                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.garticbuy for a tip\n.guess to guess a word\n\n(idea by Temi_dior ❤️)")
 
                                 connection.query(
                                     `UPDATE Users
@@ -1592,7 +1592,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     `DELETE FROM Gartic WHERE group_id="${group}"`
                                     , function (error, results, fields) {
                                         if (error) reply("there was error deleting the session\n\n" + error.message);
-                                        reply("G A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.garticbuy for a tip\n.guess to guess a word\n\n(idea by Temi_dior ❤️)")
+                                    
                                 });
                             }  });
                     }  });
