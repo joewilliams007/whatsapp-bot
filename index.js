@@ -1542,6 +1542,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         case "guess":
                         case "word":
                             if (!isRegister) return reply(registerMessage)
+                            if (!isGroup) return reply(groupMessage)
                             if (args.length < 2) return reply(`${style} Please enter guess.\n\nExample: .guess horse`)
                             if (args.length > 2) return reply(`${style} Please enter only 1 word.\n\nExample: .guess horse`)
 
@@ -1562,7 +1563,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
                         , function (error, results, fields) {
                             if (Number(results[0].RowCount) < 1) {
-                                        reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .buytip")
+                                        reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .garticbuy")
                             } else {
                                 reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!")
 
@@ -1581,12 +1582,82 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     `DELETE FROM Gartic WHERE group_id="${group}"`
                                     , function (error, results, fields) {
                                         if (error) reply("there was error deleting the session\n\n" + error.message);
-                                        reply("starting a new game...")
+                                        reply("G A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.garticbuy for a tip\n.guess to guess a word\n\n(idea by Temi_dior ❤️)")
                                 });
                             }  });
                     }  });
                            
                     break;
+                    case "garticbuy":
+                            if (!isRegister) return reply(registerMessage)
+                            if (!isGroup) return reply(groupMessage)
+                            if (5 > Number(coins)) return reply(style + " you dont have enough money to buy a tip. Your balence: "+coins+"$")
+                            
+                            var group = msg._data.id.remote
+                       
+                            if (group.includes("-")) {
+                                group = msg._data.id.remote.split("-")[1]     
+                            }
+
+                            connection.query( // get the users stuff
+                            `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}"`
+                            , function (error, results, fields) {
+                            if (Number(results[0].RowCount) < 1) {
+                                reply(style+" there is no active game in this group!\n\nTo start a game type: .gartic")
+                            } else {
+                        
+                                connection.query(
+                                    `UPDATE Users
+                                    SET coins = coins - 5
+                                    WHERE number='${number}'`
+                                    , function (error, results, fields) {
+                                        if (error) {
+                                             console.log(error.message);
+                                             reply("there was error. please contact dev with the error message (1)\n\n" + error.message);
+                                        } else {
+                                            connection.query( // get the users stuff
+                                            `SELECT * FROM Gartic
+                                            WHERE group_id="${group}"`
+                                            , function (error, results, fields) {
+                                                if (error) {
+                                                     console.log(error.message);
+                                                     reply("there was error. please contact dev with the error message (2)\n\n" + error.message);
+                                                } else {
+                                                    var res = JSON.parse(JSON.stringify(results))
+                                                    var word = res[0].word
+                                                    reply(style+` heres a tip! the word starts with the letter: "${word.split("")[0]}"`);
+                                                }
+                                            })
+                                        }
+
+                                });
+                               
+                           } 
+                        });
+                    break;
+                    case "garticboard":
+                    case "garticleader":
+                            if (!isRegister) return reply(registerMessage)
+                            connection.query(
+                                `SELECT *
+                                FROM Users
+                                ORDER BY gartic_points DESC`
+                                , function (error, results, fields) {
+                                    if (error) console.log(error.message);
+                                    garticLeaderboard(JSON.parse(JSON.stringify(results)))
+                                    async function garticLeaderboard(res) {
+                                        var leaderboard = style + "GARTIC LEADERBOARD\n";
+                                        var position = 0
+                                        for (const item of res.values()) {
+                                            position++
+                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.messages) + " points"
+                                        
+                                        }
+    
+                                        reply(leaderboard.replace(/["]+/g, ''));
+                                    }
+                                });
+                            break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
                         if (!isRegister) return reply(registerMessage)
