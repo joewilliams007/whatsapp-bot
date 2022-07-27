@@ -1496,7 +1496,12 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     case "gartic":
                         if (!isRegister) return reply(registerMessage)
                         if (!isGroup) return reply(groupMessage)
-
+                        
+                        connection.query( 
+                            `DELETE FROM Gartic WHERE group_id="${group}"`
+                            , function (error, results, fields) {
+                                if (error) reply("there was error deleting the session\n\n" + error.message);
+                       
                         var randomArray = [
                             'House','Spaghetti','Fryingpan','Couch','Bed','Money','Phone','Batman','Cocaine','Ball','Burger','Eggs','Bird','Bull','Lion','Door','Kite','Sand','Rainbow','Television','Table','Hockey','Golf','Alien','Cow','Lobster','Sloth','Chicken','Penguin','Fox','Elephant','Sun','Moon','Apple','Banana','Coconut','Pear','Garlic','Onions','Broccoli','Unicorn','Pizza','Owl','Ant','Koala','Tiger','Monkey','Dragon','Skunk','Winter','Summer','Bus','Car','Teddybear','Friends','School','America','Algeria','Canada','Romania','Nigeria','SouthAfrica','Ghana','NewZealand','Jamaica','Egypt','Greece','Israel','Norway','Germany','Ukraine','Russia','Wales','Morocco','Brazil','Argentina','Belgium','Croatia','India','Sweden','Switzerland','Pig','Tortise','Wolf','Bat','Crab','Girl','Boy','Woman','Man','Rocket','Bicycle','Motorcycle','Tricycle','Hacksaw','Lightbulb','X-ray','Toolbox','Scale','Ladder','Coffin','Bucket','Dynamite','Stopwatch','Magnifyingglass','Battery','Cigarettes','Discoball','Faxmachine','Laptop','Fireextinguisher','Bread','Cookies','Doughnut','Chocolate','Chips','Bacon','Pineapple'
                         ]
@@ -1504,11 +1509,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
                             gis(randomElement, logResultsSend);
 
-                            connection.query( 
-                                `DELETE FROM Gartic WHERE group_id="${group}"`
-                                , function (error, results, fields) {
-                                    if (error) reply("there was error deleting the session\n\n" + error.message);
-                           
+                            
 
                             async function logResultsSend(error, results) {
                             if (error) {
