@@ -1496,7 +1496,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         ]
                             var gis = require('g-i-s');
 
-                            var randomElement = randomArray[_.random(randomArray.length-1)];
+                            var randomElement = randomArray[Math.floor(Math.random() * randomArray.length)];
                             gis(randomElement, logResultsSend);
 
                             async function logResultsSend(error, results) {
