@@ -1790,7 +1790,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                 , function (error, results, fields) {
                                                                     if (error) reply("there was error deleting the session\n\n" + error.message);
 
-                                                                    connection.query(
+                                                                   /* connection.query(
                                                                         `SELECT * FROM Words order by rand() limit 1`
                                                                         , function (error, results, fields) {
                                                                             if (error) reply("there was error getting word\n\n" + error.message);
@@ -1839,13 +1839,15 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                                 }
                                                                             }
                                                                         });
+                                                                        */
                                                                 });
 
 
                                                         }
-                                                    });
+                                                        
+                                                    }); 
                                             }
-                                        });
+                                        }); 
                                 }
                             })
                         break;
