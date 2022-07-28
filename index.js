@@ -1750,7 +1750,6 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         else {
             
                                             var group = msg._data.id.remote
-                                            gart
                                             if (group.includes("-")) {
                                                 group = msg._data.id.remote.split("-")[1]     
                                             }
