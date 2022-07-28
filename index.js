@@ -1631,7 +1631,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         var wordsArray = value.toLowerCase().split(" ")
                         var wordsNotAllowed = 0
                         var errors = 0
-                        var success = 0
+                        var successfully = 0
                         var wordsAmount = 0
                         var existed = 0
 
@@ -1665,7 +1665,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                     console.log(error.message)
                                                     errors++
                                                 } else {
-                                                    success++
+                                                    successfully++
                                                 }
                                             });
                                         }
@@ -1675,7 +1675,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             }
                         });
 
-                        reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+success+" added successfully")
+                        reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+successfully+" added successfully")
 
 
                         break;
