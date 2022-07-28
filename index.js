@@ -1628,7 +1628,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isGroup) return reply(groupMessage)
                         if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist\nhorse\npig\nfox`)
 
-                        var wordsArray = value.split("\n")
+                        var wordsArray = value.split(" ")
                         var wordsNotAllowed = 0
                         var errors = 0
                         var success = 0
@@ -1643,7 +1643,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             } else {
                                 newword = word
                             }
-                            if (newword.includes(" ")||newword.length<1||newword.length>10) {
+                            if (newword.includes(" ")||newword.length<1||newword.length>10||newword == "addlist") {
                                 console.log("word not suitable");
                                 wordsNotAllowed++
                             } else {
