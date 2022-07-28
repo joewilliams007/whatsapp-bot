@@ -1630,7 +1630,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         case "addlist":
                         if (!isRegister) return reply(registerMessage)
                         if (!isGroup) return reply(groupMessage)
-                        if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist\nhorse\npig\nfox`)
+                        if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist horse house fox minecraft`)
 
                         var wordsArray = value.toLowerCase().split(" ")
                         var wordsNotAllowed = 0
@@ -1696,20 +1696,36 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                 group = msg._data.id.remote.split("-")[1]     
                             }
                       
-                                        
-                  connection.query( // get the users stuff
+            connection.query(
+            `SELECT * FROM Gartic WHERE group_id="${group}"`
+            , function (error, sessionRes, fields) {
+                if (error) {
+                        console.log(error.message);
+                } else {
+                    var sessionResults = JSON.parse(JSON.stringify(sessionRes))
+
+                  connection.query( 
                 `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}"`
                 , function (error, results, fields) {
                     if (Number(results[0].RowCount) < 1) {
                                 reply(style+" there is no active game in this group!\nTo start a game type: .gartic")
                     } else {
-                        connection.query( // get the users stuff
+                        connection.query( 
                         `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
                         , function (error, results, fields) {
                             if (Number(results[0].RowCount) < 1) {
-                                        reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .garticbuy")
+                                        reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .tipp")
+                                        connection.query(
+                                            `UPDATE Words
+                                            SET lost = lost + 1, usages = usages + 1
+                                            WHERE word_id='${sessionResults[0].word_id}'`
+                                            , function (error, results, fields) {
+                                                if (error) {
+                                                     console.log(error.message);
+                                                }                                    
+                                        });
                             } else {
-                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.garticbuy for a tip\n.guess to guess a word\n\n(idea by Temi_dior ❤️)")
+                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used "+sessionResults[0].usages+", guessed correctly "+Number(sessionResults[0].wins+1)+"times and failed"+Number(sessionResults[0].lost)+"\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
 
                                 connection.query(
                                     `UPDATE Users
@@ -1721,7 +1737,15 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                              reply("there was error giving you the wins. please contact dev\n\n" + error.message);
                                         }                                    
                                     });
-
+                                    connection.query(
+                                        `UPDATE Words
+                                        SET wins = wins + 1, usages = usages + 1
+                                        WHERE word_id='${sessionResults[0].word_id}'`
+                                        , function (error, results, fields) {
+                                            if (error) {
+                                                 console.log(error.message);
+                                            }                                    
+                                    });
                                     connection.query( 
                                         `DELETE FROM Gartic WHERE group_id="${group}"`
                                         , function (error, results, fields) {
@@ -1781,9 +1805,10 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                 
                             }  });
                     }  });
-                           
+                }
+            })
                     break;
-                    case "garticbuy":
+                    case "tipp":
                             if (!isRegister) return reply(registerMessage)
                             if (!isGroup) return reply(groupMessage)
                             if (5 > Number(coins)) return reply(style + " you dont have enough money to buy a tip. Your balence: "+coins+"$")
