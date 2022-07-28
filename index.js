@@ -1736,7 +1736,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                     }
                                                                 });
                                                             connection.query(
-                                                                `SELECT * FROM Words WHERE word_id=${word_id}`
+                                                                `SELECT * FROM Words WHERE word_id=${sessionResults[0].word_id}`
                                                                 , function (error, sessionResOutcome, fields) {
                                                                     if (error) {
                                                                         console.log(error.message);
