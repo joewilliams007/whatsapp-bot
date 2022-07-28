@@ -1634,6 +1634,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         var successfully = 0
                         var wordsAmount = 0
                         var existed = 0
+                        var arrayLenght = wordsArray.length
 
                         wordsArray.forEach(word => {
                             console.log(word);
@@ -1673,9 +1674,10 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
                             }
+                            if (arrayLenght+1==wordsAmount) {
+                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+successfully+" added successfully")
+                            }
                         });
-
-                        reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+successfully+" added successfully")
 
 
                         break;
