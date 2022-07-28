@@ -1726,11 +1726,48 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                     }
                                                                 });
                                                         } else {
+                                                            connection.query(
+                                                                `UPDATE Words
+                                        SET wins = wins + 1, usages = usages + 1
+                                        WHERE word_id=${sessionResults[0].word_id}`
+                                                                , function (error, results, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                    }
+                                                                });
+                                                            connection.query(
+                                                                `SELECT * FROM Words WHERE word_id=${word_id}`
+                                                                , function (error, sessionResOutcome, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                    } else {
+                                                                        var sessionResultsOutcome = JSON.parse(JSON.stringify(sessionResOutcome))
+                                                                        connection.query(
+                                                                            `SELECT * FROM Users WHERE user_id=${sessionResultsOutcome[0].creator_id}`
+                                                                            , function (error, sessionUser, fields) {
+                                                                                if (error) {
+                                                                                    console.log(error.message);
+                                                                                } else {
+                                                                                    var userInfo = JSON.parse(JSON.stringify(sessionUser))
+
                                                             reply(style + " this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used " + 
                                                             sessionResults[0].usages + ", guessed correctly " + 
-                                                            Number(sessionResults[0].wins + 1) + " times and failed " + sessionResults[0].lost + 
-                                                            " times\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
-
+                                                            sessionResultsOutcome[0].wins + " times and failed " + sessionResultsOutcome[0].lost + 
+                                                            " times\n\nThe word was uploaded by "+userInfo[0].username+" and because you won he will get 1$!\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
+                                                        }
+                                                    });
+                                                        }
+                                                                });
+                                                                connection.query(
+                                                                    `UPDATE Users
+                                        SET coins = coins + 1, xp = xp + 1
+                                        WHERE user_id=${userInfo[0].user_id}`
+                                                                    , function (error, results, fields) {
+                                                                        if (error) {
+                                                                            console.log(error.message);
+                                                                           
+                                                                        }
+                                                                    });
                                                             connection.query(
                                                                 `UPDATE Users
                                     SET coins = coins + 10, xp = xp + 5, gartic_points = gartic_points + 1
@@ -1741,15 +1778,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                         reply("there was error giving you the wins. please contact dev\n\n" + error.message);
                                                                     }
                                                                 });
-                                                            connection.query(
-                                                                `UPDATE Words
-                                        SET wins = wins + 1, usages = usages + 1
-                                        WHERE word_id=${sessionResults[0].word_id}`
-                                                                , function (error, results, fields) {
-                                                                    if (error) {
-                                                                        console.log(error.message);
-                                                                    }
-                                                                });
+
                                                             connection.query(
                                                                 `DELETE FROM Gartic WHERE group_id="${group}"`
                                                                 , function (error, results, fields) {
