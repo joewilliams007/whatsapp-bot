@@ -1740,6 +1740,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                 , function (error, sessionResOutcome, fields) {
                                                                     if (error) {
                                                                         console.log(error.message);
+                                                                        reply(error.message+"  1")
                                                                     } else {
                                                                         var sessionResultsOutcome = JSON.parse(JSON.stringify(sessionResOutcome))
                                                                         connection.query(
@@ -1747,6 +1748,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                             , function (error, sessionUser, fields) {
                                                                                 if (error) {
                                                                                     console.log(error.message);
+                                                                                    reply(error.message+"  2")
                                                                                 } else {
                                                                                     var userInfo = JSON.parse(JSON.stringify(sessionUser))
 
@@ -1754,20 +1756,24 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                             sessionResults[0].usages + ", guessed correctly " + 
                                                             sessionResultsOutcome[0].wins + " times and failed " + sessionResultsOutcome[0].lost + 
                                                             " times\n\nThe word was uploaded by "+userInfo[0].username+" and because you won he will get 1$!\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
+                                                     
+                                                     
+                                                            connection.query(
+                                                                `UPDATE Users
+                                    SET coins = coins + 1, xp = xp + 1
+                                    WHERE user_id=${userInfo[0].user_id}`
+                                                                , function (error, results, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                       
+                                                                    }
+                                                                });
+                                                     
                                                         }
                                                     });
                                                         }
                                                                 });
-                                                                connection.query(
-                                                                    `UPDATE Users
-                                        SET coins = coins + 1, xp = xp + 1
-                                        WHERE user_id=${userInfo[0].user_id}`
-                                                                    , function (error, results, fields) {
-                                                                        if (error) {
-                                                                            console.log(error.message);
-                                                                           
-                                                                        }
-                                                                    });
+                                                             
                                                             connection.query(
                                                                 `UPDATE Users
                                     SET coins = coins + 10, xp = xp + 5, gartic_points = gartic_points + 1
