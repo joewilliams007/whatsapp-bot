@@ -1606,15 +1606,16 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
 
+
                                                 connection.query( // save message
-                                                    `INSERT INTO Gartic (word, group_id, winner_id) 
-                                VALUES ("${randomElement.toLowerCase()}","${group}","none")`
-                                                    , function (error, results, fields) {
-                                                        if (error) {
-                                                            console.log(error.message)
-                                                            reply(`error uwu\n\n` + error.message)
-                                                        }
-                                                    });
+                                                `INSERT INTO Gartic (word, group_id, winner_id, word_id) 
+    VALUES ("${randomElement.toLowerCase()}","${group}","none",${res[0].word_id})`
+                                                , function (error, results, fields) {
+                                                    if (error) {
+                                                        console.log(error.message)
+                                                        reply(`error uwu\n\n` + error.message)
+                                                    }
+                                                });
 
                                                 console.log(JSON.stringify(results, null, '  '));
                                                 async function sendImgs(link, number, text) {
@@ -1788,7 +1789,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                 , function (error, results, fields) {
                                                                     if (error) reply("there was error deleting the session\n\n" + error.message);
 
-                                                                   /* connection.query(
+                                                                   connection.query(
                                                                         `SELECT * FROM Words order by rand() limit 1`
                                                                         , function (error, results, fields) {
                                                                             if (error) reply("there was error getting word\n\n" + error.message);
@@ -1837,7 +1838,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                                 }
                                                                             }
                                                                         });
-                                                                        */
+                                                                        
                                                                 });
 
 
