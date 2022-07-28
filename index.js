@@ -76,7 +76,7 @@ client.on('message_revoke_me', async (msg) => {
 
 client.on('message', async msg => {
     try {
-  
+
         msg.react("❤️")
 
     } catch (err) {
@@ -91,9 +91,9 @@ client.on('message', async msg => {
     } else {
         number = msg.author
     }
-    
- 
-  //  console.log(msg)
+
+
+    //  console.log(msg)
 
 
     var isCommand = false;
@@ -155,157 +155,158 @@ client.on('message', async msg => {
             msg.body = "banned"
         }
     }
-   
-        // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        connection.query(
-            `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
-            , function (error, results1, fields) {
-                if (error) throw error;
-                console.log(results1[0].RowCount)
 
-                if (Number(results1[0].RowCount) < 1) {
-                    isRegister = false;
-                } else {
-                    isRegister = true;
-                }
-            });
-        // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        connection.query( // get the users stuff
-            `SELECT * FROM Users
+    // register ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    connection.query(
+        `SELECT COUNT(*) AS RowCount FROM Users WHERE number='${number}'`
+        , function (error, results1, fields) {
+            if (error) throw error;
+            console.log(results1[0].RowCount)
+
+            if (Number(results1[0].RowCount) < 1) {
+                isRegister = false;
+            } else {
+                isRegister = true;
+            }
+        });
+    // user ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    connection.query( // get the users stuff
+        `SELECT * FROM Users
 WHERE number="${number}"`
-            , function (error, results, fields) {
-                if (error) console.log(error.message);
-                var res = JSON.parse(JSON.stringify(results))
+        , function (error, results, fields) {
+            if (error) console.log(error.message);
+            var res = JSON.parse(JSON.stringify(results))
 
-                var style;
-                try {
-                    style = res[0].style
-                } catch (err) { }
-                try {
-                    var username;
-                    username = res[0].username
-                } catch (err) { }
-                try {
-                    var xp;
-                    xp = res[0].xp
-                } catch (err) { }
-                try {
-                    var coins;
-                    coins = res[0].coins
-                } catch (err) { }
-                var gartic_points;
-                try {
-                    gartic_points = res[0].gartic_points
-                } catch (err) { }
-                try {
-                    var bio;
-                    bio = res[0].bio
-                } catch (err) { }
-                try {
-                    var date;
-                    date = res[0].date
-                } catch (err) { }
-                var appLoggedIn;
-                try {
-                    appLoggedIn = res[0].appLoggedIn
-                } catch (err) { }
-                try {
-                    var commands;
-                    commands = res[0].messages
-                } catch (err) { }
-                try {
-                    var id;
-                    id = res[0].user_id
-                } catch (err) { }
-                var last_claim;
-                try {
-                    last_claim = res[0].last_claim
-                } catch (err) { }
-                var status;
-                try {
-                    status = res[0].status
-                } catch (err) { }
-                var clearnumber;
-                try {
-                    clearnumber = res[0].clearnumber
-                } catch (err) { }
-                var deviceType;
-                try {
-                    deviceType = res[0].deviceType
-                } catch (err) { }
+            var style;
+            try {
+                style = res[0].style
+            } catch (err) { }
+            try {
+                var username;
+                username = res[0].username
+            } catch (err) { }
+            try {
+                var xp;
+                xp = res[0].xp
+            } catch (err) { }
+            try {
+                var coins;
+                coins = res[0].coins
+            } catch (err) { }
+            var gartic_points;
+            try {
+                gartic_points = res[0].gartic_points
+            } catch (err) { }
+            try {
+                var bio;
+                bio = res[0].bio
+            } catch (err) { }
+            try {
+                var date;
+                date = res[0].date
+            } catch (err) { }
+            var appLoggedIn;
+            try {
+                appLoggedIn = res[0].appLoggedIn
+            } catch (err) { }
+            try {
+                var commands;
+                commands = res[0].messages
+            } catch (err) { }
+            try {
+                var id;
+                id = res[0].user_id
+            } catch (err) { }
+            var last_claim;
+            try {
+                last_claim = res[0].last_claim
+            } catch (err) { }
+            var status;
+            try {
+                status = res[0].status
+            } catch (err) { }
+            var clearnumber;
+            try {
+                clearnumber = res[0].clearnumber
+            } catch (err) { }
+            var deviceType;
+            try {
+                deviceType = res[0].deviceType
+            } catch (err) { }
 
-                var country_code;
-                try {
-                    country_code = res[0].country_code
-                } catch (err) { }
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            var country_code;
+            try {
+                country_code = res[0].country_code
+            } catch (err) { }
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                var isNormal = false;
-                var isVip = false;
-                var isOwner = false;
+            var isNormal = false;
+            var isVip = false;
+            var isOwner = false;
 
-                if (status == "normal") {
-                    isNormal = true;
-                } else if (status == "vip") {
-                    isNormal = true;
-                    isVip = true;
-                } else if (status == "owner") {
-                    isNormal = true;
-                    isVip = true;
-                    isOwner = true;
-                } else if (status == "banned") {
+            if (status == "normal") {
+                isNormal = true;
+            } else if (status == "vip") {
+                isNormal = true;
+                isVip = true;
+            } else if (status == "owner") {
+                isNormal = true;
+                isVip = true;
+                isOwner = true;
+            } else if (status == "banned") {
 
+            }
+
+            if (msg.body.includes("chat.whatsapp") || msg.body.includes("bit.ly")) {
+                if (!isRegister) {
+                    kickk()
+                    async function kickk() {
+                        let chat = await msg.getChat()
+
+
+                        let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
+                        for (let user of users) chat.removeParticipants([user]).then((res) => {
+
+                        }).catch((err) => {
+
+                        })
+
+
+                    }
                 }
+            }
 
-                if (msg.body.includes("chat.whatsapp")||msg.body.includes("bit.ly")) {
-                    if (!isRegister) {
-                        kickk()
-                        async function kickk() {
-                            let chat = await msg.getChat()
-
-                          
-                            let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
-                            for (let user of users) chat.removeParticipants([user]).then((res) => {
-                            
-                            }).catch((err) => {
-                                
-                            })
-    
-
-                        }
-                    }}
-
-                if (isRegister) {
-                    connection.query(
-                        `UPDATE Users
+            if (isRegister) {
+                connection.query(
+                    `UPDATE Users
         SET messages = messages + 1
         WHERE number='${number}'`
-                        , function (error, results, fields) {
-                            if (error) console.log(error.message);
-                        });
+                    , function (error, results, fields) {
+                        if (error) console.log(error.message);
+                    });
 
-                    console.log("message: " + msg.body + " from user " + number)
+                console.log("message: " + msg.body + " from user " + number)
+
+            }
+            if (deviceType == "unknown") {
+                set("clearnumber", number.split("@")[0])
+                set("deviceType", msg.deviceType)
+            }
+
+            var isGroup = false;
+            var isAntilink = false;
+            if (msg._data.id.remote.includes("@g.us")) {
+                isGroup = true;
+
+                var group = msg._data.id.remote
+
+                if (group.includes("-")) {
+                    group = msg._data.id.remote.split("-")[1]
 
                 }
-                if (deviceType == "unknown") {
-                    set("clearnumber", number.split("@")[0])
-                    set("deviceType", msg.deviceType)
-                }
 
-                var isGroup = false;
-                var isAntilink = false;
-                if (msg._data.id.remote.includes("@g.us")) {
-                    isGroup = true;
 
-                    var group = msg._data.id.remote
-                       
-                    if (group.includes("-")) {
-                        group = msg._data.id.remote.split("-")[1]
-                    
-                    }
-            
-
-                    connection.query( // get the users stuff
+                connection.query( // get the users stuff
                     `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
                     , function (error, results, fields) {
                         if (Number(results[0].RowCount) < 1) {
@@ -314,64 +315,64 @@ WHERE number="${number}"`
 
                         } else {
                             isAntilink = true;
-                    
-        
-                            if (msg.body.includes("http") || msg.body.includes("bit.ly") ||  msg.body.includes(".com")) {
+
+
+                            if (msg.body.includes("http") || msg.body.includes("bit.ly") || msg.body.includes(".com")) {
 
                                 if (!isRegister) {
-                                kickAnti(msg, number)
-                                async function kickAnti(msg, number) {
-                                    let chat = await msg.getChat()
+                                    kickAnti(msg, number)
+                                    async function kickAnti(msg, number) {
+                                        let chat = await msg.getChat()
 
-                                    
-            
-                                    let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
-                                    for (let user of users) chat.removeParticipants([user]).then((res) => {
-                                        msg.reply(res)
-                                    }).catch((err) => {
-                                        msg.reply(err)
-                                    })
-            
-                                    
-                                    msg.reply("🌪️ kicked due to antilink")
 
-                                }
+
+                                        let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
+                                        for (let user of users) chat.removeParticipants([user]).then((res) => {
+                                            msg.reply(res)
+                                        }).catch((err) => {
+                                            msg.reply(err)
+                                        })
+
+
+                                        msg.reply("🌪️ kicked due to antilink")
+
+                                    }
                                 } else {
                                     msg.reply("💎 registered users are safe from antilink")
-                                  
+
                                 }
 
-                        
+
                             } else if (msg.body.includes("chat.whatsapp")) {
                                 if (!isRegister) {
                                     kickk()
                                     async function kickk() {
                                         let chat = await msg.getChat()
-    
-                                      
+
+
                                         let users = [number.replace(/[^0-9]/g, '') + "@c.us"]
                                         for (let user of users) chat.removeParticipants([user]).then((res) => {
-                                        
+
                                         }).catch((err) => {
-                                            
+
                                         })
-                
-                                        
-    
-    
+
+
+
+
                                     }
                                 }
                             }
-    
+
                         }
-           
+
 
                     });
 
-                }
+            }
 
-                
- if (msg.body.split("")[0] == "." || msg.body.split("")[0] == "#" || msg.body.split("")[0] == "$" || msg.body.split("")[0] == "!") {
+
+            if (msg.body.split("")[0] == "." || msg.body.split("")[0] == "#" || msg.body.split("")[0] == "$" || msg.body.split("")[0] == "!") {
                 switch (switchMsg) {
                     // cases ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "bot":
@@ -398,7 +399,7 @@ WHERE number="${number}"`
                         var level0 = Number(xp) / 100 + 1
                         var level = level0 + "."
                         reply(
-                    // Menus ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                            // Menus ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                             `𝑀𝑒𝑛𝑢 ☁️
 - - - - - - - - - - - - - - - - - -  
 ⌖ ${username} 
@@ -463,7 +464,7 @@ I N S T A L L A T I O N
 3. Trust Developer
 4. Install
 - - - - - - - - - - - - - - - - - -`)
-                    break;
+                        break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "support":
                     case "suport":
@@ -639,22 +640,22 @@ ${style} .leaderboard
                         gis(value, logResults);
 
                         async function logResults(error, results) {
-                        if (error) {
-                            console.log(error);
-                            reply("error lol\n\n"+error.message)
-                        }
-                        else {
-                            console.log(JSON.stringify(results, null, '  '));
-
-
-                            async function sendImgsS(link, number, text) {
-                                const mediaLink = await MessageMedia.fromUrl(link); 
-                                client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                            if (error) {
+                                console.log(error);
+                                reply("error lol\n\n" + error.message)
                             }
-                            
-                            sendImgsS(results[0].url, msg.from, `${style} _${value}_`).then(function () { });
+                            else {
+                                console.log(JSON.stringify(results, null, '  '));
 
-                        }
+
+                                async function sendImgsS(link, number, text) {
+                                    const mediaLink = await MessageMedia.fromUrl(link);
+                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                }
+
+                                sendImgsS(results[0].url, msg.from, `${style} _${value}_`).then(function () { });
+
+                            }
                         }
 
                         break
@@ -877,40 +878,40 @@ you have $${coins + winAmount} left!
                                 });
                         }
                         break;
-                        // Antilink ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                        case "antilink":
-                            if (!isRegister) return reply(registerMessage)
-                            if (!isGroup) return reply(groupMessage)
+                    // Antilink ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    case "antilink":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isGroup) return reply(groupMessage)
 
-                            var group = msg._data.id.remote
-                       
-                                if (group.includes("-")) {
-                                    group = msg._data.id.remote.split("-")[1]     
-                                }
-                          
-                                            
-                      connection.query( // get the users stuff
-                    `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
-                    , function (error, results, fields) {
-                        if (Number(results[0].RowCount) < 1) {
-                            connection.query( 
-                                `INSERT INTO Antilink (group_id, timestamp, active) 
-                                VALUES ("${group}",${dateInSec},"true")`
-                                , function (error, results, fields) {
-                                    if (error) reply("there was error\n\n" + error.message);
-                                    reply("antilink activated ✅ ")
-                            });
-                        } else {
-                            connection.query( 
-                                `DELETE FROM Antilink WHERE group_id="${group}"`
-                                , function (error, results, fields) {
-                                    if (error) reply("there was error\n\n" + error.message);
-                                    reply("antilink deactivated ❎")
-                            });
+                        var group = msg._data.id.remote
+
+                        if (group.includes("-")) {
+                            group = msg._data.id.remote.split("-")[1]
                         }
 
-           
-                        });
+
+                        connection.query( // get the users stuff
+                            `SELECT COUNT(*) AS RowCount FROM Antilink WHERE group_id="${group}"`
+                            , function (error, results, fields) {
+                                if (Number(results[0].RowCount) < 1) {
+                                    connection.query(
+                                        `INSERT INTO Antilink (group_id, timestamp, active) 
+                                VALUES ("${group}",${dateInSec},"true")`
+                                        , function (error, results, fields) {
+                                            if (error) reply("there was error\n\n" + error.message);
+                                            reply("antilink activated ✅ ")
+                                        });
+                                } else {
+                                    connection.query(
+                                        `DELETE FROM Antilink WHERE group_id="${group}"`
+                                        , function (error, results, fields) {
+                                            if (error) reply("there was error\n\n" + error.message);
+                                            reply("antilink deactivated ❎")
+                                        });
+                                }
+
+
+                            });
                         break;
                     // account ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "user":
@@ -1048,11 +1049,11 @@ WHERE user_id=${args[1]}`
                             + "\n💳 userid: " + id
                             + "\n🗂️ status: " + status
                             + "\n📱 device: " + deviceType
-                            + "\n☄️ gartic: " + gartic_points+" points"
+                            + "\n☄️ gartic: " + gartic_points + " points"
                             + "\n🔓 logged into app: " + appLoggedIn
                             + "\n🗓️ account created: " + finalTime1)
                         break;
-                        
+
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "stardash":
                         connection.query(
@@ -1285,7 +1286,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (args.length < 2) return reply(style + " please enter a strong password\nExample .password 12345")
                         if (args.length > 2) return reply(style + " password cant contain spaces")
                         set("password", args[1])
-                        reply(style+" password has been updated to: "+args[1]+"\n\nuse this password to log into the StarMe App")
+                        reply(style + " password has been updated to: " + args[1] + "\n\nuse this password to log into the StarMe App")
                         break;
                     // set username ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "username":
@@ -1459,14 +1460,14 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             let chat = await msg.getChat()
                             let users = msg.mentionedIds[0] ? msg.mentionedIds : msg.hasQuotedMsg ? [quoted.from] : [text.replace(/[^0-9]/g, '') + "@c.us"]
                             for (let user of users) chat.removeParticipants([user]).then((res) => {
-                               
+
                             }).catch((err) => {
                                 if (err) {
                                     msg.reply("admin is needed")
                                 }
                             })
 
-                            reply(style+" kicked user")
+                            reply(style + " kicked user")
                         }
                         break;
                     // sql ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1475,11 +1476,11 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isVip) return reply(vipMessage)
                         if (args.length < 1) return reply("add text")
                         connection.query(
-                            `${value.replace(args[0]+" ","")}`
+                            `${value.replace(args[0] + " ", "")}`
                             , function (error, results, fields) {
                                 if (error) {
                                     console.log(error.message);
-                                    reply(style + " SQL command failed\n\n"+error.message)
+                                    reply(style + " SQL command failed\n\n" + error.message)
                                 } else {
                                     reply(style + " SQL command successfull")
                                     var res = JSON.parse(JSON.stringify(results))
@@ -1487,7 +1488,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     reply(sending)
                                 }
                             });
-                       
+
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "group":
@@ -1560,7 +1561,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                         }
 
-                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg","https://wallpapercave.com/wp/wp3935829.jpg","https://wallpapercave.com/wp/wp1845590.jpg","https://cdn.wallpapersafari.com/11/2/6bs834.png"];
+                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg", "https://wallpapercave.com/wp/wp3935829.jpg", "https://wallpapercave.com/wp/wp1845590.jpg", "https://cdn.wallpapersafari.com/11/2/6bs834.png"];
                         var randAsuna = asunas[Math.floor(Math.random() * asunas.length)];
 
                         sendMedia(randAsuna, msg.from, 'Hi').then(function () { });
@@ -1570,64 +1571,64 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isRegister) return reply(registerMessage)
                         if (!isGroup) return reply(groupMessage)
 
-                        connection.query( 
+                        connection.query(
                             `DELETE FROM Gartic WHERE group_id="${group}"`
                             , function (error, results, fields) {
                                 if (error) reply("there was error deleting the session\n\n" + error.message);
-                       
-                                connection.query( 
+
+                                connection.query(
                                     `SELECT * FROM Words order by rand() limit 1`
                                     , function (error, results, fields) {
                                         if (error) reply("there was error getting word\n\n" + error.message);
-                     
+
                                         var gis = require('g-i-s');
-                        
+
                                         var res = JSON.parse(JSON.stringify(results))
 
                                         var randomElement = res[0].word
 
 
-                            gis(randomElement, logResultsSend);
+                                        gis(randomElement, logResultsSend);
 
-                            async function logResultsSend(error, results) {
-                            if (error) {
-                                console.log(error);
+                                        async function logResultsSend(error, results) {
+                                            if (error) {
+                                                console.log(error);
 
-                                reply(`error uwu`)
-                            }
-                            else {
+                                                reply(`error uwu`)
+                                            }
+                                            else {
 
-                                var group = msg._data.id.remote
-                       
-                                if (group.includes("-")) {
-                                    group = msg._data.id.remote.split("-")[1]     
-                                }
-                          
+                                                var group = msg._data.id.remote
+
+                                                if (group.includes("-")) {
+                                                    group = msg._data.id.remote.split("-")[1]
+                                                }
 
 
-                                connection.query( // save message
-                                `INSERT INTO Gartic (word, group_id, winner_id) 
+
+                                                connection.query( // save message
+                                                    `INSERT INTO Gartic (word, group_id, winner_id) 
                                 VALUES ("${randomElement.toLowerCase()}","${group}","none")`
-                                , function (error, results, fields) {
-                                    if (error) {
-                                        console.log(error.message)
-                                        reply(`error uwu\n\n`+error.message)
-                                    }
-                                });
+                                                    , function (error, results, fields) {
+                                                        if (error) {
+                                                            console.log(error.message)
+                                                            reply(`error uwu\n\n` + error.message)
+                                                        }
+                                                    });
 
-                                console.log(JSON.stringify(results, null, '  '));
-                                async function sendImgs(link, number, text) {
-                                    const mediaLink = await MessageMedia.fromUrl(link); 
-                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
-                                }
-                                sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
+                                                console.log(JSON.stringify(results, null, '  '));
+                                                async function sendImgs(link, number, text) {
+                                                    const mediaLink = await MessageMedia.fromUrl(link);
+                                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                                }
+                                                sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
 
-                            }
-                            }
-                        });
-                        });
+                                            }
+                                        }
+                                    });
+                            });
                         break;
-                        case "addlist":
+                    case "addlist":
                         if (!isRegister) return reply(registerMessage)
                         if (!isGroup) return reply(groupMessage)
                         if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist horse house fox minecraft`)
@@ -1642,11 +1643,11 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             wordsAmount++
                             var newword;
                             if (word.includes(" ")) {
-                                newword = word.replace(" ","")
+                                newword = word.replace(" ", "")
                             } else {
                                 newword = word
                             }
-                            if (newword.includes(" ")||newword.length<1||newword.length>10||newword == "addlist") {
+                            if (newword.includes(" ") || newword.length < 1 || newword.length > 10 || newword == "addlist") {
                                 console.log("word not suitable");
                                 wordsNotAllowed++
                             } else {
@@ -1656,228 +1657,233 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     , function (error, results, fields) {
                                         console.log(results[0].RowCount)
                                         var amount = results[0].RowCount
-                                        if(amount>0){
+                                        if (amount > 0) {
 
                                         } else {
                                             connection.query( // save message
-                                            `INSERT INTO Words (word, creator_id) 
+                                                `INSERT INTO Words (word, creator_id) 
                                             VALUES ("${newword}","${id}")`
-                                            , function (error, results, fields) {
-                                                if (error) {
-                                                    console.log(error.message)
-                                      
-                                                } else {
-                         
-                                                }
-                                            });
+                                                , function (error, results, fields) {
+                                                    if (error) {
+                                                        console.log(error.message)
+
+                                                    } else {
+
+                                                    }
+                                                });
                                         }
-                                });
+                                    });
 
 
                             }
 
-                            if (arrayLenght==wordsAmount) {
-                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+wordsNotAllowed+" were not allowed")
+                            if (arrayLenght == wordsAmount) {
+                                reply(style + " proccessing...\n\n" + wordsAmount + " tried to add\n" + wordsNotAllowed + " were not allowed")
                             }
                         });
 
 
                         break;
-                        case "guess":
-                        case "word":
-                            if (!isRegister) return reply(registerMessage)
-                            if (!isGroup) return reply(groupMessage)
-                            if (args.length < 2) return reply(`${style} Please enter guess.\n\nExample: .guess horse`)
-                            if (args.length > 2) return reply(`${style} Please enter only 1 word.\n\nExample: .guess horse`)
+                    case "guess":
+                    case "word":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isGroup) return reply(groupMessage)
+                        if (args.length < 2) return reply(`${style} Please enter guess.\n\nExample: .guess horse`)
+                        if (args.length > 2) return reply(`${style} Please enter only 1 word.\n\nExample: .guess horse`)
 
-                            var group = msg._data.id.remote
-                       
-                            if (group.includes("-")) {
-                                group = msg._data.id.remote.split("-")[1]     
-                            }
-                      
-            connection.query(
-            `SELECT * FROM Gartic WHERE group_id="${group}"`
-            , function (error, sessionRes, fields) {
-                if (error) {
-                        console.log(error.message);
-                } else {
-                    var sessionResults = JSON.parse(JSON.stringify(sessionRes))
+                        var group = msg._data.id.remote
 
-                  connection.query( 
-                `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}"`
-                , function (error, results, fields) {
-                    if (Number(results[0].RowCount) < 1) {
-                                reply(style+" there is no active game in this group!\nTo start a game type: .gartic")
-                    } else {
-                        connection.query( 
-                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
-                        , function (error, results, fields) {
-                            if (Number(results[0].RowCount) < 1) {
-                                        reply(style+" this is the wrong word :(\n\nyou can buy a tip for 5$ with .tipp")
-                                        connection.query(
-                                            `UPDATE Words
+                        if (group.includes("-")) {
+                            group = msg._data.id.remote.split("-")[1]
+                        }
+
+                        connection.query(
+                            `SELECT * FROM Gartic WHERE group_id="${group}"`
+                            , function (error, sessionRes, fields) {
+                                if (error) {
+                                    console.log(error.message);
+                                } else {
+                                    var sessionResults = JSON.parse(JSON.stringify(sessionRes))
+
+                                    connection.query(
+                                        `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}"`
+                                        , function (error, results, fields) {
+                                            if (Number(results[0].RowCount) < 1) {
+                                                reply(style + " there is no active game in this group!\nTo start a game type: .gartic")
+                                            } else {
+                                                connection.query(
+                                                    `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}" AND word="${args[1].toLowerCase()}"`
+                                                    , function (error, results, fields) {
+                                                        if (Number(results[0].RowCount) < 1) {
+                                                            reply(style + " this is the wrong word :(\n\nyou can buy a tip for 5$ with .tipp")
+                                                            connection.query(
+                                                                `UPDATE Words
                                             SET lost = lost + 1, usages = usages + 1
-                                            WHERE word_id='${sessionResults[0].word_id}'`
-                                            , function (error, results, fields) {
-                                                if (error) {
-                                                     console.log(error.message);
-                                                }                                    
-                                        });
-                            } else {
-                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used "+sessionResults[0].usages+", guessed correctly "+Number(sessionResults[0].wins+1)+" times and failed "+Number(sessionResults[0].lost)+" times\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
+                                            WHERE word_id=${sessionResults[0].word_id}`
+                                                                , function (error, results, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                    }
+                                                                });
+                                                        } else {
+                                                            reply(style + " this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used " + 
+                                                            sessionResults[0].usages + ", guessed correctly " + 
+                                                            Number(sessionResults[0].wins + 1) + " times and failed " + sessionResults[0].lost + 
+                                                            " times\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
 
-                                connection.query(
-                                    `UPDATE Users
+                                                            connection.query(
+                                                                `UPDATE Users
                                     SET coins = coins + 10, xp = xp + 5, gartic_points = gartic_points + 1
                                     WHERE number='${number}'`
-                                    , function (error, results, fields) {
-                                        if (error) {
-                                             console.log(error.message);
-                                             reply("there was error giving you the wins. please contact dev\n\n" + error.message);
-                                        }                                    
-                                    });
-                                    connection.query(
-                                        `UPDATE Words
+                                                                , function (error, results, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                        reply("there was error giving you the wins. please contact dev\n\n" + error.message);
+                                                                    }
+                                                                });
+                                                            connection.query(
+                                                                `UPDATE Words
                                         SET wins = wins + 1, usages = usages + 1
-                                        WHERE word_id='${sessionResults[0].word_id}'`
-                                        , function (error, results, fields) {
-                                            if (error) {
-                                                 console.log(error.message);
-                                            }                                    
-                                    });
-                                    connection.query( 
-                                        `DELETE FROM Gartic WHERE group_id="${group}"`
-                                        , function (error, results, fields) {
-                                            if (error) reply("there was error deleting the session\n\n" + error.message);
-                                   
-                                            connection.query( 
-                                                `SELECT * FROM Words order by rand() limit 1`
-                                                , function (error, results, fields) {
-                                                    if (error) reply("there was error getting word\n\n" + error.message);
-                                 
-                                                    var gis = require('g-i-s');
-                                    
-                                                    var res = JSON.parse(JSON.stringify(results))
-            
-                                                    var randomElement = res[0].word
-            
-            
-                                        gis(randomElement, logResultsSend);
-            
-                                        async function logResultsSend(error, results) {
-                                        if (error) {
-                                            console.log(error);
-            
-                                            reply(`error uwu`)
-                                        }
-                                        else {
-            
-                                            var group = msg._data.id.remote
-                                            if (group.includes("-")) {
-                                                group = msg._data.id.remote.split("-")[1]     
-                                            }
-                                      
-            
-            
-                                            connection.query( // save message
-                                            `INSERT INTO Gartic (word, group_id, winner_id) 
-                                            VALUES ("${randomElement.toLowerCase()}","${group}","none")`
-                                            , function (error, results, fields) {
-                                                if (error) {
-                                                    console.log(error.message)
-                                                    reply(`error uwu\n\n`+error.message)
-                                                }
-                                            });
-            
-                                            console.log(JSON.stringify(results, null, '  '));
-                                            async function sendImgs(link, number, text) {
-                                                const mediaLink = await MessageMedia.fromUrl(link); 
-                                                client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
-                                            }
-                                            sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
-            
-                                        }
-                                        }
-                                    });
-                                    });
-            
-                
-                            }  });
-                    }  });
-                }
-            })
-                    break;
-                    case "tipp":
-                            if (!isRegister) return reply(registerMessage)
-                            if (!isGroup) return reply(groupMessage)
-                            if (5 > Number(coins)) return reply(style + " you dont have enough money to buy a tip. Your balence: "+coins+"$")
-                            
-                            var group = msg._data.id.remote
-                       
-                            if (group.includes("-")) {
-                                group = msg._data.id.remote.split("-")[1]     
-                            }
+                                        WHERE word_id=${sessionResults[0].word_id}`
+                                                                , function (error, results, fields) {
+                                                                    if (error) {
+                                                                        console.log(error.message);
+                                                                    }
+                                                                });
+                                                            connection.query(
+                                                                `DELETE FROM Gartic WHERE group_id="${group}"`
+                                                                , function (error, results, fields) {
+                                                                    if (error) reply("there was error deleting the session\n\n" + error.message);
 
-                            connection.query( // get the users stuff
+                                                                    connection.query(
+                                                                        `SELECT * FROM Words order by rand() limit 1`
+                                                                        , function (error, results, fields) {
+                                                                            if (error) reply("there was error getting word\n\n" + error.message);
+
+                                                                            var gis = require('g-i-s');
+
+                                                                            var res = JSON.parse(JSON.stringify(results))
+
+                                                                            var randomElement = res[0].word
+
+
+                                                                            gis(randomElement, logResultsSend);
+
+                                                                            async function logResultsSend(error, results) {
+                                                                                if (error) {
+                                                                                    console.log(error);
+
+                                                                                    reply(`error uwu`)
+                                                                                }
+                                                                                else {
+
+                                                                                    var group = msg._data.id.remote
+                                                                                    if (group.includes("-")) {
+                                                                                        group = msg._data.id.remote.split("-")[1]
+                                                                                    }
+
+
+
+                                                                                    connection.query( // save message
+                                                                                        `INSERT INTO Gartic (word, group_id, winner_id, word_id) 
+                                            VALUES ("${randomElement.toLowerCase()}","${group}","none",${res[0].word_id})`
+                                                                                        , function (error, results, fields) {
+                                                                                            if (error) {
+                                                                                                console.log(error.message)
+                                                                                                reply(`error uwu\n\n` + error.message)
+                                                                                            }
+                                                                                        });
+
+                                                                                    console.log(JSON.stringify(results, null, '  '));
+                                                                                    async function sendImgs(link, number, text) {
+                                                                                        const mediaLink = await MessageMedia.fromUrl(link);
+                                                                                        client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                                                                    }
+                                                                                    sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
+
+                                                                                }
+                                                                            }
+                                                                        });
+                                                                });
+
+
+                                                        }
+                                                    });
+                                            }
+                                        });
+                                }
+                            })
+                        break;
+                    case "tipp":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isGroup) return reply(groupMessage)
+                        if (5 > Number(coins)) return reply(style + " you dont have enough money to buy a tip. Your balence: " + coins + "$")
+
+                        var group = msg._data.id.remote
+
+                        if (group.includes("-")) {
+                            group = msg._data.id.remote.split("-")[1]
+                        }
+
+                        connection.query( // get the users stuff
                             `SELECT COUNT(*) AS RowCount FROM Gartic WHERE group_id="${group}"`
                             , function (error, results, fields) {
-                            if (Number(results[0].RowCount) < 1) {
-                                reply(style+" there is no active game in this group!\n\nTo start a game type: .gartic")
-                            } else {
-                        
-                                connection.query(
-                                    `UPDATE Users
+                                if (Number(results[0].RowCount) < 1) {
+                                    reply(style + " there is no active game in this group!\n\nTo start a game type: .gartic")
+                                } else {
+
+                                    connection.query(
+                                        `UPDATE Users
                                     SET coins = coins - 5
                                     WHERE number='${number}'`
-                                    , function (error, results, fields) {
-                                        if (error) {
-                                             console.log(error.message);
-                                             reply("there was error. please contact dev with the error message (1)\n\n" + error.message);
-                                        } else {
-                                            connection.query( // get the users stuff
-                                            `SELECT * FROM Gartic
+                                        , function (error, results, fields) {
+                                            if (error) {
+                                                console.log(error.message);
+                                                reply("there was error. please contact dev with the error message (1)\n\n" + error.message);
+                                            } else {
+                                                connection.query( // get the users stuff
+                                                    `SELECT * FROM Gartic
                                             WHERE group_id="${group}"`
-                                            , function (error, results, fields) {
-                                                if (error) {
-                                                     console.log(error.message);
-                                                     reply("there was error. please contact dev with the error message (2)\n\n" + error.message);
-                                                } else {
-                                                    var res = JSON.parse(JSON.stringify(results))
-                                                    var word = res[0].word
-                                                    reply(style+` heres a tip! the word starts with the letter: "${word.split("")[0]}"`);
-                                                }
-                                            })
-                                        }
+                                                    , function (error, results, fields) {
+                                                        if (error) {
+                                                            console.log(error.message);
+                                                            reply("there was error. please contact dev with the error message (2)\n\n" + error.message);
+                                                        } else {
+                                                            var res = JSON.parse(JSON.stringify(results))
+                                                            var word = res[0].word
+                                                            reply(style + ` heres a tip! the word starts with the letter: "${word.split("")[0]}"`);
+                                                        }
+                                                    })
+                                            }
 
-                                });
-                               
-                           } 
-                        });
-                    break;
+                                        });
+
+                                }
+                            });
+                        break;
                     case "garticboard":
                     case "garticleader":
-                            if (!isRegister) return reply(registerMessage)
-                            connection.query(
-                                `SELECT *
+                        if (!isRegister) return reply(registerMessage)
+                        connection.query(
+                            `SELECT *
                                 FROM Users WHERE gartic_points > 0
                                 ORDER BY gartic_points DESC`
-                                , function (error, results, fields) {
-                                    if (error) console.log(error.message);
-                                    garticLeaderboard(JSON.parse(JSON.stringify(results)))
-                                    async function garticLeaderboard(res) {
-                                        var leaderboard = style + "GARTIC LEADERBOARD\n";
-                                        var position = 0
-                                        for (const item of res.values()) {
-                                            position++
-                                            leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.gartic_points) + " points"
-                                        
-                                        }
-    
-                                        reply(leaderboard.replace(/["]+/g, ''));
+                            , function (error, results, fields) {
+                                if (error) console.log(error.message);
+                                garticLeaderboard(JSON.parse(JSON.stringify(results)))
+                                async function garticLeaderboard(res) {
+                                    var leaderboard = style + "GARTIC LEADERBOARD\n";
+                                    var position = 0
+                                    for (const item of res.values()) {
+                                        position++
+                                        leaderboard += "\n " + position + ". " + JSON.stringify(item.style) + " " + JSON.stringify(item.username) + " " + JSON.stringify(item.gartic_points) + " points"
+
                                     }
-                                });
-                            break;
+
+                                    reply(leaderboard.replace(/["]+/g, ''));
+                                }
+                            });
+                        break;
                     // song ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "song":
                         if (!isRegister) return reply(registerMessage)
@@ -1893,30 +1899,30 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
                             var gis = require('g-i-s');
-                            gis("album cover "+value, logResults);
+                            gis("album cover " + value, logResults);
 
                             async function logResults(error, results) {
-                            if (error) {
-                                console.log(error);
+                                if (error) {
+                                    console.log(error);
 
-                                reply(`${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`)
-                            }
-                            else {
-                                console.log(JSON.stringify(results, null, '  '));
-
-
-                                var yt = require('youtube-search-without-api-key');
-                                var videos = await yt.search(`${value}`);
-    
-
-                                async function sendImgs(link, number, text) {
-                                    const mediaLink = await MessageMedia.fromUrl(link); 
-                                    client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                    reply(`${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`)
                                 }
-                                
-                                sendImgs(results[0].url, msg.from, `${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`).then(function () { });
+                                else {
+                                    console.log(JSON.stringify(results, null, '  '));
 
-                            }
+
+                                    var yt = require('youtube-search-without-api-key');
+                                    var videos = await yt.search(`${value}`);
+
+
+                                    async function sendImgs(link, number, text) {
+                                        const mediaLink = await MessageMedia.fromUrl(link);
+                                        client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
+                                    }
+
+                                    sendImgs(results[0].url, msg.from, `${style} _${videos[0].title}_\n💎 _${videos[0].duration_raw}_ min`).then(function () { });
+
+                                }
                             }
 
 
@@ -2025,14 +2031,14 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         break;
                     // default ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     default:
-                       // if (!isRegister) return reply(registerMessage)
-                      //  reply(style + " what even is this command")
+                    // if (!isRegister) return reply(registerMessage)
+                    //  reply(style + " what even is this command")
                 }
                 function reply(message) {
                     try {
-             
+
                         msg.reply(message)
-                       
+
 
                     } catch (err) {
                         msg.reply(message)
@@ -2041,13 +2047,13 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                         }
 
-                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg", 
-                        "https://preview.redd.it/razgxg2a9z351.jpg?auto=webp&s=9b0ade413fa0047e7fcec52176b98daf90f94e8f",
-                        "https://wallpapercave.com/wp/wp3935829.jpg", 
-                        "https://wallpapercave.com/wp/wp1845590.jpg", 
-                        "https://www.teahub.io/photos/full/251-2512969_sword-art-online-kirito-and-asuna.jpg",
-                        "https://pbs.twimg.com/media/B19F934CQAAfA2R.png",
-                        "https://cdn.wallpapersafari.com/11/2/6bs834.png"];
+                        var asunas = ["https://cdn.wallpapersafari.com/76/86/itDHrR.jpg",
+                            "https://preview.redd.it/razgxg2a9z351.jpg?auto=webp&s=9b0ade413fa0047e7fcec52176b98daf90f94e8f",
+                            "https://wallpapercave.com/wp/wp3935829.jpg",
+                            "https://wallpapercave.com/wp/wp1845590.jpg",
+                            "https://www.teahub.io/photos/full/251-2512969_sword-art-online-kirito-and-asuna.jpg",
+                            "https://pbs.twimg.com/media/B19F934CQAAfA2R.png",
+                            "https://cdn.wallpapersafari.com/11/2/6bs834.png"];
                         var randAsuna = asunas[Math.floor(Math.random() * asunas.length)];
 
                         sendMediaAsuna(randAsuna, msg.from, message).then(function () { });
@@ -2068,8 +2074,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
             }
 
         }
-        )
-   
+    )
+
 });
 
 
