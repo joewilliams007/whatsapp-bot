@@ -1618,7 +1618,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                                                 console.log(JSON.stringify(results, null, '  '));
                                                 async function sendImgs(link, number, text) {
-                                                    const mediaLink = await MessageMedia.fromUrl(link);
+                                                    const mediaLink = await MessageMedia.fromUrl(link, unsafeMime|true);
                                                     client.sendMessage(number, mediaLink, { caption: text }).then(function (res) { }).catch(function (err) { });
                                                 }
                                                 sendImgs(results[0].url, msg.from, `${style} guess the word!\n\nto submit type: .guess`).then(function () { });
