@@ -1725,7 +1725,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                 }                                    
                                         });
                             } else {
-                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used "+sessionResults[0].usages+", guessed correctly "+Number(sessionResults[0].wins+1)+"times and failed"+Number(sessionResults[0].lost)+"\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
+                                reply(style+" this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used "+sessionResults[0].usages+", guessed correctly "+Number(sessionResults[0].wins+1)+" times and failed "+Number(sessionResults[0].lost)+" times\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
 
                                 connection.query(
                                     `UPDATE Users
