@@ -1755,7 +1755,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                             reply(style + " this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used " + 
                                                             sessionResultsOutcome[0].usages + " times, guessed correctly " + 
                                                             sessionResultsOutcome[0].wins + " times and failed " + sessionResultsOutcome[0].lost + 
-                                                            " times\n\nThe word was uploaded by "+userInfo[0].username+" and because you won, he will get 1$!\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n(idea by Temi_dior ❤️)")
+                                                            " times\n\nThe word was uploaded by "+userInfo[0].username+" and because you won, he will get 1$!\n\nG A R T I C\n\n.gartic for a new game\n.garticboard for the leaderboard\n.tipp for a tip\n.guess to guess a word\n.addlist to add words!\n\n(idea by Temi_dior)")
 
                                                             connection.query(
                                                                 `UPDATE Users
