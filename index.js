@@ -93,7 +93,7 @@ client.on('message', async msg => {
     }
     
  
-    console.log(msg)
+  //  console.log(msg)
 
 
     var isCommand = false;
@@ -1628,11 +1628,12 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isGroup) return reply(groupMessage)
                         if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist\nhorse\npig\nfox`)
 
-                        var wordsArray = value.split(" ")
+                        var wordsArray = value.toLowerCase().split(" ")
                         var wordsNotAllowed = 0
                         var errors = 0
                         var success = 0
-                        var wordsAmount
+                        var wordsAmount = 0
+                        var existed = 0
 
                         wordsArray.forEach(word => {
                             console.log(word);
@@ -1647,21 +1648,34 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                 console.log("word not suitable");
                                 wordsNotAllowed++
                             } else {
-                                connection.query( // save message
-                                `INSERT INTO Words (word, creator_id) 
-                                VALUES ("${word}","${id}")`
-                                , function (error, results, fields) {
-                                    if (error) {
-                                        console.log(error.message)
-                                        errors++
-                                    } else {
-                                        success++
-                                    }
+
+                                connection.query(
+                                    `SELECT COUNT(*) AS RowCount FROM Words WHERE word='${newword}'`
+                                    , function (error, results, fields) {
+                                        console.log(results[0].RowCount)
+                                        var amount = results[0].RowCount
+                                        if(amount>0){
+                                            existed++
+                                        } else {
+                                            connection.query( // save message
+                                            `INSERT INTO Words (word, creator_id) 
+                                            VALUES ("${newword}","${id}")`
+                                            , function (error, results, fields) {
+                                                if (error) {
+                                                    console.log(error.message)
+                                                    errors++
+                                                } else {
+                                                    success++
+                                                }
+                                            });
+                                        }
                                 });
+
+
                             }
                         });
 
-                        reply(style+" Thanks. Outcome below.\n\nfrom: "+wordsAmount+" words\nto long/short words: "+wordsNotAllowed+"\nfailed to add: "+errors)
+                        reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+success+" added successfully")
 
 
                         break;
