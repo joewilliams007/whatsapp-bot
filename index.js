@@ -1677,7 +1677,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             }
 
                             if (arrayLenght==wordsAmount) {
-                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+wordsNotAllowed+" were not allowed\n"+wordsAmount-wordsNotAllowed+" added successfully")
+                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+wordsNotAllowed+" were not allowed")
                             }
                         });
 
@@ -1750,7 +1750,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         else {
             
                                             var group = msg._data.id.remote
-                                   
+                                            gart
                                             if (group.includes("-")) {
                                                 group = msg._data.id.remote.split("-")[1]     
                                             }
