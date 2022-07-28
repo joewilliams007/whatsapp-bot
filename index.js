@@ -1674,7 +1674,8 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
                             }
-                            if (arrayLenght+1==wordsAmount) {
+                            console.log(wordsAmount+" "+arrayLenght)
+                            if (arrayLenght==wordsAmount) {
                                 reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+successfully+" added successfully")
                             }
                         });
