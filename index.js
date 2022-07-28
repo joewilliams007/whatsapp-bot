@@ -1094,7 +1094,7 @@ WHERE user_id=${args[1]}`
                                                                 var media = results[0].RowCount
 
                                                                 connection.query(
-                                                                    `SELECT COUNT(*) AS RowCount FROM Messages WHERE number='${number.split("@")[0]}@c.us'`
+                                                                    `T COUNT(*) AS RowCount FROM Messages WHERE number='${number.split("@")[0]}@c.us'`
                                                                     , function (error, results, fields) {
 
                                                                         console.log(results[0].RowCount)
@@ -1482,6 +1482,9 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                     reply(style + " SQL command failed\n\n"+error.message)
                                 } else {
                                     reply(style + " SQL command successfull")
+                                    var res = JSON.parse(JSON.stringify(results))
+                                    var sending = res[0]
+                                    reply(sending)
                                 }
                             });
                        
