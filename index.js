@@ -1751,7 +1751,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                                     reply(error.message+"  2")
                                                                                 } else {
                                                                                     var userInfo = JSON.parse(JSON.stringify(sessionUser))
-
+                                                                                    reply("  u won")
                                                             reply(style + " this is the correct word!\n\nwon 1 point, 10$ and 5xp!\nthe word was used " + 
                                                             sessionResults[0].usages + " times, guessed correctly " + 
                                                             sessionResultsOutcome[0].wins + " times and failed " + sessionResultsOutcome[0].lost + 
@@ -1765,7 +1765,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                                                 , function (error, results, fields) {
                                                                     if (error) {
                                                                         console.log(error.message);
-                                                                       
+                                                                        reply(error.message+"  3")
                                                                     }
                                                                 });
                                                      
