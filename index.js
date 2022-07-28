@@ -1630,10 +1630,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                         var wordsArray = value.toLowerCase().split(" ")
                         var wordsNotAllowed = 0
-                        var errors = 0
-                        var successfully = 0
                         var wordsAmount = 0
-                        var existed = 0
                         var arrayLenght = wordsArray.length
 
                         wordsArray.forEach(word => {
@@ -1656,7 +1653,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                         console.log(results[0].RowCount)
                                         var amount = results[0].RowCount
                                         if(amount>0){
-                                            existed++
+
                                         } else {
                                             connection.query( // save message
                                             `INSERT INTO Words (word, creator_id) 
@@ -1664,9 +1661,9 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                                             , function (error, results, fields) {
                                                 if (error) {
                                                     console.log(error.message)
-                                                    errors++
+                                      
                                                 } else {
-                                                    successfully++
+                         
                                                 }
                                             });
                                         }
@@ -1674,9 +1671,9 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
 
                             }
-                            console.log(wordsAmount+" "+arrayLenght)
+
                             if (arrayLenght==wordsAmount) {
-                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+errors+" failed \n"+wordsNotAllowed+" were not allowed\n"+existed+" already existed\n"+successfully+" added successfully")
+                                reply(style+" proccessing...\n\n"+wordsAmount+" tried to add\n"+wordsNotAllowed+" were not allowed\n"+wordsAmount-wordsNotAllowed+" added successfully")
                             }
                         });
 
