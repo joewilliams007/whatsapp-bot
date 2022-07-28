@@ -1628,8 +1628,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (!isGroup) return reply(groupMessage)
                         if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist\nhorse\npig\nfox`)
 
-                        var words = value.split("\n",1)[1]
-                        var wordsArray = words.split("\n")
+                        var wordsArray = value.split("\n")
                         var wordsNotAllowed = 0
                         var errors = 0
                         var success = 0
