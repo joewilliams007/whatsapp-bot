@@ -1623,6 +1623,49 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
 
                         });
                         break;
+                        case "addlist":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isGroup) return reply(groupMessage)
+                        if (args.length < 2) return reply(`${style} Please add a list. Example:\n\n.addlist\nhorse\npig\nfox`)
+
+                        var words = value.split("\n",1)[1]
+                        var wordsArray = words.split("\n")
+                        var wordsNotAllowed = 0
+                        var errors = 0
+                        var success = 0
+                        var wordsAmount
+
+                        wordsArray.forEach(word => {
+                            console.log(word);
+                            wordsAmount++
+                            var newword;
+                            if (word.includes(" ")) {
+                                newword = word.replace(" ","")
+                            } else {
+                                newword = word
+                            }
+                            if (newword.includes(" ")||newword.length<1||newword.length>10) {
+                                console.log("word not suitable");
+                                wordsNotAllowed++
+                            } else {
+                                connection.query( // save message
+                                `INSERT INTO Words (word, creator_id) 
+                                VALUES ("${word}","${id}")`
+                                , function (error, results, fields) {
+                                    if (error) {
+                                        console.log(error.message)
+                                        errors++
+                                    } else {
+                                        success++
+                                    }
+                                });
+                            }
+                        });
+
+                        reply(style+" Thanks. Outcome below.\n\nfrom: "+wordsAmount+" words\nto long/short words: "+wordsNotAllowed+"\nfailed to add: "+errors)
+
+
+                        break;
                         case "guess":
                         case "word":
                             if (!isRegister) return reply(registerMessage)

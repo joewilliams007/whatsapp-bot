@@ -63,11 +63,27 @@ winner_id varchar(2000),
 PRIMARY KEY ( gartic_id )
 );
 
+ALTER TABLE Gartic ADD word_id int;
+ALTER TABLE Gartic ADD winrate int;
+
+CREATE TABLE Words (
+word_id INT NOT NULL AUTO_INCREMENT,
+word varchar(255),
+creator_id varchar(255),
+lost int DEFAULT 0,
+wins int DEFAULT 0,
+reports int DEFAULT 0,
+winrate int DEFAULT 0,
+usages int DEFAULT 0,
+PRIMARY KEY ( word_id )
+);
+
 ALTER TABLE Messages ADD date VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Messages ADD clearnumber VARCHAR(255);
 ALTER TABLE Messages ADD isCommand VARCHAR(255) DEFAULT "false";
 
 ALTER TABLE Messages ADD country_code VARCHAR(255) DEFAULT "unknown";
 ALTER TABLE Gartic CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+ALTER TABLE Words CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 ALTER TABLE Users CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 ALTER TABLE Messages CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
