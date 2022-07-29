@@ -1692,7 +1692,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                         if (args.length < 2) return reply(`${style} Please enter word.\n\nExample: .removeword horse`)
                         if (args.length > 2) return reply(`${style} Please enter only 1 word.\n\nExample: .removeword horse`)
                         connection.query(
-                            `DELETE FROM Words WHERE word="${args[1]}"`
+                            `DELETE FROM Words WHERE word="${args[1].toLowerCase()}"`
                             , function (error, results, fields) {
                                 if (error) reply("there was error\n\n" + error.message);
                                 reply("word removed ❎")
