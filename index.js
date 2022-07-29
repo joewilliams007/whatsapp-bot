@@ -1649,7 +1649,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             } else {
                                 newword = word
                             }
-                            if (newword.includes(" ") || newword.length < 1 || newword.length > 10 || newword == "addlist") {
+                            if (newword.includes(" ") || newword.length < 4 || newword.length > 10 || newword == "addlist") {
                                 console.log("word not suitable");
                                 wordsNotAllowed++
                             } else {
