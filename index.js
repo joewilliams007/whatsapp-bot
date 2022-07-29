@@ -1473,7 +1473,7 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                     // sql ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "sql":
                         if (!isRegister) return reply(registerMessage)
-                        if (!isVip) return reply(vipMessage)
+                        if (!isOwner) return reply(ownerMessage)
                         if (args.length < 1) return reply("add text")
                         connection.query(
                             `${value.replace(args[0] + " ", "")}`
