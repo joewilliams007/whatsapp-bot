@@ -1680,12 +1680,24 @@ WHERE number="${number}" ORDER BY timestamp DESC limit 1`
                             }
 
                             if (arrayLenght == wordsAmount) {
-                                reply(style + " proccessing...\n\n" + wordsAmount + " tried to add\n" + wordsNotAllowed + " were not allowed")
+                                reply(style + " proccessing...\n\n" + wordsAmount + " tried to add\n" + wordsNotAllowed + " were not allowed\n\nto remove a word again type .removeword")
                             }
                         });
 
 
                         break;
+                    case "removeword":
+                        if (!isRegister) return reply(registerMessage)
+                        if (!isGroup) return reply(groupMessage)
+                        if (args.length < 2) return reply(`${style} Please enter word.\n\nExample: .removeword horse`)
+                        if (args.length > 2) return reply(`${style} Please enter only 1 word.\n\nExample: .removeword horse`)
+                        connection.query(
+                            `DELETE FROM Words WHERE word="${args[1]}"`
+                            , function (error, results, fields) {
+                                if (error) reply("there was error\n\n" + error.message);
+                                reply("word removed ❎")
+                        });
+                    break;
                     case "guess":
                     case "word":
                         if (!isRegister) return reply(registerMessage)
