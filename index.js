@@ -430,6 +430,20 @@ ${style} .transfer
 ${style} .leaderboard
 ${style} .support
 ${style} ${claim}
+- - - - - - - - - - - - - - - - - - 
+M I N E C R A F T
+- - - - - - - - - - - - - - - - - -
+StarDash Minecraft Server Crossplay
+Java AND Bedrock 
+Version 1.19
+- - - - - - - - - - - - - - - - - -
+Java: 
+stardash.hopto.org
+port 1111
+- - - - - - - - - - - - - - - - - -
+Bedrock/pocket edition:
+stardash.hopto.org
+port 2556
 - - - - - - - - - - - - - - - - - -  
 𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
                         break;
@@ -480,7 +494,11 @@ https://chat.whatsapp.com/I09F6RruESk0XimB12YlDF
 U P D A T E S
 - - - - - - - - - - - - - - - - - -     
 https://chat.whatsapp.com/IMq2co7oKHiLrGNHYK1y3V
-- - - - - - - - - - - - - - - - - - `)
+- - - - - - - - - - - - - - - - - -
+M I N E C R A F T
+- - - - - - - - - - - - - - - - - -     
+https://chat.whatsapp.com/LWzBH1Refcf3TppohX25LQ
+- - - - - - - - - - - - - - - - - -`)
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "settings":
