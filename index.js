@@ -45,6 +45,7 @@ app.get("/minecraftmessage/:message", (req, res) => {
     console.log("receiving message ...")
     const { message } = req.params;
     console.log("received "+message)
+    client.sendMessage('120363027172171573@g.us', message);
 
     try {
 
