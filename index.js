@@ -31,6 +31,32 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
+const express = require('express');
+const app = express()
+const PORT = 00001;
+app.use(express.json())
+
+app.listen(
+    PORT,
+    () => console.log("Its alive on http://localhost:"+PORT+"")
+)
+
+app.get("/minecraftmessage/:message", (req, res) => {
+    console.log("receiving message ...")
+    const { message } = req.params;
+    console.log("received "+message)
+
+    try {
+
+        res.status(200).send({
+            success: "true"
+        })
+
+    } catch (err) {
+
+    }
+
+})
 
 client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
