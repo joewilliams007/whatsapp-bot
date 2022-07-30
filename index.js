@@ -77,7 +77,7 @@ app.get("/minecraftgetmessages/:message", (req, res) => {
                         var position = 0
                         for (const item of ress.values()) {
                             position++
-                            mcMessages += "\n<" + JSON.stringify(item.username) + "> " + JSON.stringify(item.message)
+                            mcMessages += "<" + JSON.stringify(item.username) + "> " + JSON.stringify(item.message)
 
                             connection.query(
                                 `DELETE FROM MinecraftMessages WHERE message_id=${JSON.stringify(item.message_id)}`
