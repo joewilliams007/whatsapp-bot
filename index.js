@@ -72,10 +72,10 @@ app.get("/minecraftgetmessages/:message", (req, res) => {
                 , function (error, results, fields) {
                     if (error) console.log(error.message);
                     mcMessage(JSON.parse(JSON.stringify(results)))
-                    async function mcMessage(res) {
+                    async function mcMessage(ress) {
                         var mcMessages = "";
                         var position = 0
-                        for (const item of res.values()) {
+                        for (const item of ress.values()) {
                             position++
                             mcMessages += "\n" + JSON.stringify(item.username) + " " + JSON.stringify(item.message)
 
@@ -91,9 +91,6 @@ app.get("/minecraftgetmessages/:message", (req, res) => {
                         })
                     }
             });
-
-
-
 
 
     } catch (err) {
