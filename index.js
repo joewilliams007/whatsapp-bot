@@ -59,6 +59,52 @@ app.get("/minecraftmessage/:message", (req, res) => {
 
 })
 
+app.get("/minecraftgetmessages/:message", (req, res) => {
+    console.log("sending messages to minecraft server ...")
+
+
+    try {
+
+            connection.query(
+                `SELECT *
+                    FROM MinecraftMessages
+                    ORDER BY timestamp ASC`
+                , function (error, results, fields) {
+                    if (error) console.log(error.message);
+                    mcMessage(JSON.parse(JSON.stringify(results)))
+                    async function mcMessage(res) {
+                        var mcMessages = "";
+                        var position = 0
+                        for (const item of res.values()) {
+                            position++
+                            mcMessages += "\n" + JSON.stringify(item.username) + " " + JSON.stringify(item.message)
+
+                            connection.query(
+                                `DELETE FROM MinecraftMessages WHERE message_id=${JSON.stringify(item.message_id)}`
+                                , function (error, results, fields) {
+                                    if (error) console.log(error.message)
+                            });
+                        }
+
+                        res.status(200).send({
+                            success: mcMessages.replace(/["]+/g, '')
+                        })
+                    }
+            });
+
+
+
+
+
+    } catch (err) {
+
+        res.status(200).send({
+            success: "error"
+        })
+    }
+
+})
+
 client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
     console.log('QR RECEIVED', qr);
@@ -398,6 +444,27 @@ WHERE number="${number}"`
 
             }
 
+            if(isGroup) {
+                if (msg._data.id.remote == "120363027172171573@g.us") {
+                    if (isRegister) {
+                    var yourDate = new Date()
+                
+                    codeMessage()
+                    async function codeMessage() {
+                        const codeM = await client.getCountryCode(number)
+                        
+                            connection.query( // save message
+                                `INSERT INTO MinecraftMessages (username, message, timestamp) 
+                        VALUES ("${username}","${msg.body}",${msg.timestamp})`
+                                , function (error, results, fields) {
+                                    if (error) console.log(error.message)
+                                });
+        
+                    }
+                 }
+                }
+            }
+
 
             if (msg.body.split("")[0] == "." || msg.body.split("")[0] == "#" || msg.body.split("")[0] == "$" || msg.body.split("")[0] == "!") {
                 switch (switchMsg) {
@@ -610,6 +677,7 @@ ${style} .delete
 - - - - - - - - - - - - - - - - - -  
 𝑌𝑜𝑢𝑟 𝑀𝑜𝑛𝑒𝑦 ⌖ _${coins}$_`);
                         break;
+                        
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "games":
                         if (!isRegister) return reply(registerMessage);

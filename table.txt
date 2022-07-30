@@ -55,6 +55,14 @@ timestamp int,
 PRIMARY KEY ( antilink_id )
 );
 
+CREATE TABLE MinecraftMessages (
+message_id INT NOT NULL AUTO_INCREMENT,
+username varchar(255),
+message TEXT,
+timestamp int,
+PRIMARY KEY ( message_id )
+);
+
 CREATE TABLE Gartic (
 gartic_id INT NOT NULL AUTO_INCREMENT,
 word varchar(255),
