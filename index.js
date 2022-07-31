@@ -65,7 +65,6 @@ app.get("/minecraftmessage/:message", (req, res) => {
 })
 
 app.get("/minecraftgetmessages/:message", (req, res) => {
-    console.log("sending messages to minecraft server ...")
 
 
     try {
