@@ -45,7 +45,7 @@ app.get("/minecraftmessage/:message", (req, res) => {
     console.log("receiving message ...")
     const { message } = req.params;
     console.log("received "+message)
-    client.sendMessage('120363027172171573@g.us', message);
+    client.sendMessage('120363027172171573@g.us', replaceAll(message,"---","\n"));
 
     try {
 
@@ -101,6 +101,11 @@ app.get("/minecraftgetmessages/:message", (req, res) => {
     }
 
 })
+
+function replaceAll(str, find, replace) {
+    var escapedFind=find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    return str.replace(new RegExp(escapedFind, 'g'), replace);
+}
 
 client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
