@@ -45,7 +45,12 @@ app.get("/minecraftmessage/:message", (req, res) => {
     console.log("receiving message ...")
     const { message } = req.params;
     console.log("received "+message)
-    client.sendMessage('120363027172171573@g.us', replaceAll(message,"---","\n"));
+    if (message.includes("got an advancement")) {
+
+    } else {
+        client.sendMessage('120363027172171573@g.us', replaceAll(replaceAll(message,"---","\n"),"0 ms",""));
+    }
+    
 
     try {
 
