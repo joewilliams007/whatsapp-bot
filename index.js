@@ -114,6 +114,7 @@ function replaceAll(str, find, replace) {
 client.on('qr', (qr) => {
     // NOTE: This event will not be fired if a session is specified.
     console.log('QR RECEIVED', qr);
+    qrcode.generate(qr, {small: true});
 });
 
 process.on('uncaughtException', err => {

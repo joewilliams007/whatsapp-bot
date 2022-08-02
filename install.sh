@@ -8,3 +8,4 @@ npm i chartjs-node
 npm install weather-js
 npm i g-i-s
 npm i express
+npm i qrcode-terminal
