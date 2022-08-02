@@ -33,7 +33,7 @@ connection.connect();
 
 const express = require('express');
 const app = express()
-const PORT = 2311;
+const PORT = 1020;
 app.use(express.json())
 
 app.listen(
