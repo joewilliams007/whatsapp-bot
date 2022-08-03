@@ -122,6 +122,12 @@ app.get("/minecraftmessage/:message", (req, res) => {
                                         client.sendMessage(res[0].number, "There was an error linking "+mc_args[1]+" to your account.\n\n"+error.message);     
                                     } else {
                                         client.sendMessage(res[0].number, "✅ successfully linked your minecraft account "+mc_args[1]+" to this number.");     
+
+                                        connection.query(
+                                            `DELETE FROM MinecraftVerify WHERE code=${mc_args[4]}`
+                                            , function (error, results, fields) {
+                         
+                                            });
                                     }
                                 });
 
@@ -1271,6 +1277,34 @@ WHERE user_id=${args[1]}`
                             , function (error, results, fields) {
                                 if (error) reply(style + " error\n\n" + error.message)
                             });
+                        break;
+                        case "mc":
+                        case"minecraft":
+
+                        connection.query(
+                            `SELECT COUNT(*) AS RowCount FROM Minecraft
+                            WHERE user_id="${id}"`
+                            , function (error, results, fields) {
+                                if (Number(results[0].RowCount) < 1) {
+                                   reply(style+" you have not yet linked your Whatsapp account to a Minecraft Account.\nYou can link your accounts via .link")
+                                } else {
+                                    connection.query( // get the users stuff
+                        `SELECT * FROM Minecraft
+                        WHERE user_id="${id}"`
+                        , function (error, results, fields) {
+                            if (error) reply("error\n\n" + error.message);
+                            var res = JSON.parse(JSON.stringify(results))
+                            
+                                reply(style+" ign: "+res[0].username
+                                    + "\ndeaths: " + res[0].deaths
+                                    + "\nkills: " + res[0].kills
+                                    + "\nigmessages: " + res[0].messages)
+
+                        });
+                                }
+
+                        });
+                        
                         break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "stardash":
