@@ -63,6 +63,26 @@ timestamp int,
 PRIMARY KEY ( message_id )
 );
 
+CREATE TABLE MinecraftVerify (
+verify_id INT NOT NULL AUTO_INCREMENT,
+code int,
+user_id int,
+number varchar(200),
+PRIMARY KEY ( verify_id )
+);
+
+CREATE TABLE Minecraft (
+minecraft_user_id INT NOT NULL AUTO_INCREMENT,
+user_id int DEFAULT 0,
+uuid varchar(1000),
+username varchar(1000),
+deaths int DEFAULT 0,
+kills int DEFAULT 0,
+messages int DEFAULT 0,
+timestamp int,
+PRIMARY KEY ( minecraft_user_id )
+);
+
 CREATE TABLE Gartic (
 gartic_id INT NOT NULL AUTO_INCREMENT,
 word varchar(255),

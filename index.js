@@ -45,13 +45,96 @@ app.get("/minecraftmessage/:message", (req, res) => {
     console.log("receiving message ...")
     const { message } = req.params;
     console.log("received "+message)
-    if (message.includes("got an advancement")) {
+    var mc_args = message.split(" ")
 
-    } else {
+    switch(mc_args[0]) {
+        case "join":
+            connection.query(
+            `SELECT COUNT(*) AS RowCount FROM Minecraft WHERE uuid="${mc_args[1]}"`
+            , function (error, join_results, fields) {
+                if (Number(join_results[0].RowCount) < 1) {
+                    const mc_dateInSec = Math.floor(new Date().getTime() / 1000) // in seconds
+
+                    connection.query(
+                        `INSERT INTO Minecraft (uuid, timestamp, username) 
+                VALUES ("${mc_args[1]}",${mc_dateInSec},"${mc_args[2]}")`
+                        , function (error, results, fields) {
+                            client.sendMessage('120363027172171573@g.us', "⭐ "+mc_args[2]+" has joined the server for the first time!");
+                        });
+                } else {
+                    client.sendMessage('120363027172171573@g.us', "✅ "+mc_args[2]+" has joined the server.");     
+                }
+            });
+        break;
+        case "death":
+
+            connection.query(
+                `UPDATE Minecraft
+    SET deaths = deaths + 1
+    WHERE uuid="${mc_args[1]}"`
+                , function (error, results, fields) {
+                    if (error) console.log(error.message);
+                });
+
+            if (mc_args.length>2) {
+                connection.query(
+                    `UPDATE Minecraft
+        SET kills = kills + 1
+        WHERE uuid="${mc_args[2]}"`
+                    , function (error, results, fields) {
+                        if (error) console.log(error.message);
+                    });
+            }
+
+        break;
+        case "message":
+            connection.query(
+                `UPDATE Minecraft
+    SET messages = messages + 1
+    WHERE uuid="${mc_args[1]}"`
+                , function (error, results, fields) {
+                    if (error) console.log(error.message);
+                });
+        break;
+        case "code":
+        connection.query(
+            `SELECT COUNT(*) AS RowCount FROM MinecraftVerify WHERE code=${mc_args[3]}`
+            , function (error, results, fields) {
+                if (Number(results[0].RowCount) < 1) {
+                    client.sendMessage('120363027172171573@g.us', mc_args[1]+" entered the wrong verify code");   
+                } else {
+
+                    connection.query(
+                        `SELECT *
+                            FROM Minecraft
+                            WHERE code=${mc_args[4]}`
+                        , function (error, results, fields) {
+                            if (error) console.log(error.message);
+                            var res = JSON.parse(JSON.stringify(results))
+
+                            connection.query(
+                                `UPDATE Minecraft
+                    SET user_id = ${res[0].user_id}
+                    WHERE uuid="${mc_args[2]}"`
+                                , function (error, results, fields) {
+                                    if (error) {
+                                        console.log(error.message);
+                                        client.sendMessage(res[0].number, "There was an error linking "+mc_args[1]+" to your account.\n\n"+error.message);     
+                                    } else {
+                                        client.sendMessage(res[0].number, "✅ successfully linked your minecraft account "+mc_args[1]+" to this number.");     
+                                    }
+                                });
+
+                          
+                        });
+                }
+            });
+        break;
+        default: 
         client.sendMessage('120363027172171573@g.us', replaceAll(replaceAll(message,"---","\n"),"0 ms",""));
     }
-    
 
+    
     try {
 
         res.status(200).send({
@@ -65,10 +148,7 @@ app.get("/minecraftmessage/:message", (req, res) => {
 })
 
 app.get("/minecraftgetmessages/:message", (req, res) => {
-
-
     try {
-
             connection.query(
                 `SELECT *
                     FROM MinecraftMessages
@@ -95,8 +175,6 @@ app.get("/minecraftgetmessages/:message", (req, res) => {
                         })
                     }
             });
-
-
     } catch (err) {
 
         res.status(200).send({
@@ -1173,7 +1251,27 @@ WHERE user_id=${args[1]}`
                             + "\n🔓 logged into app: " + appLoggedIn
                             + "\n🗓️ account created: " + finalTime1)
                         break;
+                        case "verify":
+                        case"link":
 
+                        function getRandomInt(max) {
+                            return Math.floor(Math.random() * max);
+                        }
+                        var code = getRandomInt(900000)
+
+                        if (isGroup) {
+                            reply("⚔️ A message was sent to you privately with a code. Please paste the code into the Stardash Minecraft server chat to link your Minecraft account to your Whatsapp Account.")
+                        }
+                        client.sendMessage(number, "⚔️ Heyy its StarDash!\n\nTo link your Minecraft account to your Whatsapp Account, copy the following message to the Stardash Minecraft server chat (including the text).");   
+                        client.sendMessage(number, "CODE "+code);   
+                       
+                        connection.query(
+                            `INSERT INTO MinecraftVerify (code, user_id, number) 
+                    VALUES (${code},${id},"${number}")`
+                            , function (error, results, fields) {
+                                if (error) reply(style + " error\n\n" + error.message)
+                            });
+                        break;
                     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                     case "stardash":
                         connection.query(
