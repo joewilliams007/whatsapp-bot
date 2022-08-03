@@ -122,12 +122,6 @@ app.get("/minecraftmessage/:message", (req, res) => {
                                         client.sendMessage(res[0].number, "There was an error linking "+mc_args[1]+" to your account.\n\n"+error.message);     
                                     } else {
                                         client.sendMessage(res[0].number, "✅ successfully linked your minecraft account "+mc_args[1]+" to this number.");     
-
-                                        connection.query(
-                                            `DELETE FROM MinecraftVerify WHERE code=${mc_args[4]}`
-                                            , function (error, results, fields) {
-                         
-                                            });
                                     }
                                 });
 
