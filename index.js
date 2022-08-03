@@ -106,7 +106,7 @@ app.get("/minecraftmessage/:message", (req, res) => {
 
                     connection.query(
                         `SELECT *
-                            FROM Minecraft
+                            FROM MinecraftVerify
                             WHERE code=${mc_args[4]}`
                         , function (error, results, fields) {
                             if (error) console.log(error.message);
